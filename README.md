@@ -23,6 +23,9 @@ Project will consists of three major applications for different types of actors.
 - It also contains log files from played games.
 - A few simple controller, database should not be needed.
 
+## Use case diagram
+
+![UseCase](https://github.com/sbojnak/si-game/blob/master/SI_usecase.png)
 
 ## Notes
 
