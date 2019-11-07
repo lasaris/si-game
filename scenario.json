@@ -1,0 +1,126 @@
+{
+  "name": "testgame",
+  "authorId": 1,
+  "gameId": 1,
+  "events": [
+    {
+      "eventId": 1,
+      "eventTypeId": 1,
+      "eventName": "Introduction",
+      "headline": "Welcome in the game",
+      "text": "Here we are.",
+      "next_event":  2
+    },
+    {
+      "eventId": 2,
+      "eventTypeId": 1,
+      "eventName": "Introduction2",
+      "headline": "Fun is beginning!",
+      "text": "We can start",
+      "next_event": 3
+    },
+    {
+      "eventId": 3,
+      "eventTypeId": 2,
+      "questions": [
+        {
+          "questionType": "Quiz",
+          "questionText": "How are you today?",
+          "possibleAnswers": [
+            {
+              "answerText": "Good",
+              "correctness": 0,
+              "next_event": 4
+            },
+            {
+              "answerText": "Not so good",
+              "correctness": 1,
+              "next_event": 4
+            },
+            {
+              "answerText": "Terrible",
+              "correctness": 0,
+              "next_event": 4
+            }
+          ]
+        },
+        {
+          "questionType": "Open",
+          "questionText": "Is there something you want to say?",
+          "correct_answers": [
+            "No",
+            "Yes"
+          ]
+        }
+      ]
+    },
+    {
+      //this is master action, always first action for simulated computer enviroment
+      "eventId": 4,
+      "eventTypeId": 3,
+      "actionId": 0
+    },
+    {
+      "eventId": 5,
+      "eventTypeId": 3,
+      "actionId": 1,
+      "reactions": [
+        {
+          "onComponentId": 3, //id of a component from config list components
+          "onCustomComponentId": 13, //you can assign action to specific component view (like not just to all basicMailOverviews, but to spacific mail overview from basicMailOverviews)
+          "onPlayerEventId": 1, //user event
+          "doEventId": 6 //where to go when three attributes above are fulfilled
+        }
+      ],
+      "components": [
+        {
+          "componentId": 1,
+          "customComponentId": 15,
+          "title":  "outlook simulation",
+          "subcomponents": 
+          {
+            "componentId": 2,
+            "customComponentId": 1,
+            "subcomponents": [
+              {
+                "componentId": 3,
+                "customComponentId": 2,
+                "text": "Hello, John, I am writing you...",
+                "subcomponents": [
+                  {
+                    "componentId": 4,
+                    "customComponentId": 4
+                  }
+                ]
+              },
+              {
+                "componentId": 3,
+                "customComponentId": 3,
+                "text": "Thank you for replying me...",
+                "subcomponents": [
+                  {
+                    "componentId": 4,
+                    "customComponentId": 4
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "eventId": 6,
+      "eventTypeId": 3,
+      "actionId": 4,
+      "reactions": [
+        {
+          "onComponentId": 9,
+          "onCustomComponentId": 8,
+          "onPlayerEventId": 1,
+          "eventId": 5
+        }
+      ]
+    }
+  ]
+}
