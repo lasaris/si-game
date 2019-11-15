@@ -1,0 +1,5 @@
+Context pri rozhodovani (aj na zaklade minulych rozhodnuti).
+Lokalna databaza.
+TODO v dokumentoch.
+Asynchronne casove udalosti.
+Data nezavisle na eventoch, eventy by mali iba menit data.

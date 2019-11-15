@@ -30,7 +30,7 @@
             {
               "answerText": "Good",
               "correctness": 0,
-              "next_event": 4
+              "next_event": 1
             },
             {
               "answerText": "Not so good",
@@ -50,11 +50,13 @@
           "correct_answers": [
             "No",
             "Yes"
-          ]
+          ],
+          "next_event": 4
         }
       ]
     },
     {
+      //TODO: make this init event with initialized data (like mails etc)
       //this is master action, always first action for simulated computer enviroment
       "eventId": 4,
       "eventTypeId": 3,
@@ -69,13 +71,14 @@
           "onComponentId": 3, //id of a component from config list components
           "onCustomComponentId": 13, //you can assign action to specific component view (like not just to all basicMailOverviews, but to spacific mail overview from basicMailOverviews)
           "onPlayerEventId": 1, //user event
+          //TODO: array of event, because of time events
           "doEventId": 6 //where to go when three attributes above are fulfilled
         }
       ],
       "components": [
         {
           "componentId": 1,
-          "customComponentId": 15,
+          "customComponentId": 7,
           "title":  "outlook simulation",
           "subcomponents": 
           {
@@ -84,12 +87,13 @@
             "subcomponents": [
               {
                 "componentId": 3,
+                //TODO: rename to uniqueComponentId
                 "customComponentId": 2,
                 "text": "Hello, John, I am writing you...",
                 "subcomponents": [
                   {
                     "componentId": 4,
-                    "customComponentId": 4
+                    "customComponentId": 5
                   }
                 ]
               },
