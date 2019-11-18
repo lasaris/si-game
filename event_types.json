@@ -1,133 +1,86 @@
 {
   //TODO: names of events and actions
-  "eventTypes": [
+  "actions": [ //TODO make this specific for component, maybe put this inside components, these four actions maybe should exist for each
     {
       "id": 1,
-      "name": "Text"
+      "name": "AddChildComponent"
     },
     {
       "id": 2,
-      "name": "Questionnare"
+      "name": "RemoveChildComponent"
     },
     {
       "id": 3,
-      "name": "Action",
-      "actionTypes": [
-        {
-          "id": 0,
-          "name": "master"
-        },
-        {
-          "id": 1,
-          "name": "open_mail_box",
-          "componentId": 1 //component that will appear after action is done (subcomponents defined)
-        },
-        {
-          "id": 4,
-          "name": "open_specific_mail",
-          "componentId": 6
-        },
-        {
-          "id": 2,
-          "name": "open_web_link"
-        },
-        {
-          "id": 5,
-          "name": "open_page_view"
-        },
-        {
-          "id": 3,
-          "name": "open_instant_messanger"
-        },
-        {
-          "id": 6,
-          "name": "open_specific_messenger_conversation"
-        },
-        {
-          "id": 7,
-          "name": "write_messenger_message"
-        },
-        {
-          "id": 8,
-          "name": "ransomware_all"
-        },
-        {
-          "id": 9,
-          "name": "show_dialog"
-        },
-        {
-          "id": 10,
-          "name": "open_excel"
-        },
-        {
-          "id": 11,
-          "name": "open_notepad"
-        }
-      ]
+      "name": "UpdateComponentData"
+    },
+    {
+      "id": 4,
+      "name": "ChangeSubcomponentsVisibility"
     }
   ],
   "components": [
     {
       "id": 1,
       "name": "mailBox",
-      "children": [ 2, 4 ], //these children are children in the way of visibility (they can be inside this component) TODO: childrenIds
-      "createdAfterAction": 1 //TODO: createdAfterActionId, maybe array of actions
+      "visible": true,
+      "open": true,
+      "highlightIfClicked": true,
+      "possibleActions": [ 1, 2 ],
+      "childrenIds": [ 2, 4 ], //child components
     },
     {
       "id": 2,
       "name": "mailCollection",
-      "children": [ 3 ],
-      "createdAfterAction": 1
+      "children": [ 3 ]
     },
     {
       "id": 3,
       "name": "basicMailOverview",
-      "children": [ 5 ],
-      "createdAfterAction": 1
+      "children": [ 5 ]
     },
     {
       "id": 4,
-      "name": "spamButton",
-      "createdAfterAction": 1
+      "name": "spamButton"
     },
     {
       "id": 5,
-      "name": "mailOverviewRemoveButton",
-      "createdAfterAction": 1
+      "name": "mailOverviewRemoveButton"
     },
     {
       "id": 6,
       "name": "mailDetail",
-      "children": [ 8, 9 ],
-      "createdAfterAction": 4
+      "children": [ 8, 9 ]
     },
     {
       "id": 7,
-      "name": "mailText",
-      "createdAfterAction": 4
+      "name": "mailText"
     },
     {
       "id": 8,
-      "name": "replyButton",
-      "createdAfterAction": 4
-    }
-  ],
-  "playerEvents": [
-    {
-      "id": 1,
-      "name": "clickLeft"
+      "name": "replyButton"
     },
     {
-      "id": 2,
-      "name": "mouseOver"
+      "id": 9,
+      "name": "text",
+      "data": "somerandomdata" //data are always in form of string
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "name": "clickedLeft"
     },
     {
       "id": 3,
-      "name": "writeAndEnter"
+      "name": "written"
+    },
+    {
+      "id": 3,
+      "name": "enterPushed"
     },
     {
       "id": 4,
-      "name": "clickRight"
+      "name": "clickedRight"
     }
   ]
 }
