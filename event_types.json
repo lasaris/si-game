@@ -64,23 +64,5 @@
       "name": "text",
       "data": "somerandomdata" //data are always in form of string
     }
-  ],
-  "events": [
-    {
-      "id": 1,
-      "name": "clickedLeft"
-    },
-    {
-      "id": 3,
-      "name": "written"
-    },
-    {
-      "id": 3,
-      "name": "enterPushed"
-    },
-    {
-      "id": 4,
-      "name": "clickedRight"
-    }
   ]
 }
