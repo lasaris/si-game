@@ -22,8 +22,6 @@
     {
       "id": 1,
       "name": "mailBox",
-      "visible": true,
-      "open": true,
       "highlightIfClicked": true,
       "possibleActions": [ 1, 2 ],
       "childrenIds": [ 2, 4 ], //child components
