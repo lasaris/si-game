@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Prom.Game.Business
+namespace Seng.Game.Business
 {
     public class Class1
     {
