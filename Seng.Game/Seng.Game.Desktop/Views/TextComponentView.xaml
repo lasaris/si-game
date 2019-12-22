@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Seng.Game.Desktop.Views.TextComponentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="Blue">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   FontSize="40"
+                   Text="TEXT COMPONENT" />
+        
+        <Button Grid.Row="1"
+                Command="{Binding ConfirmationCommand}"
+                Content="OK"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="50"
+                Width="100"/>
+    </Grid>
+
+</UserControl>
