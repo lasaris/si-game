@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Seng.Game.Business.DTOs.Components.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Seng.Game.Business.DTOs.Components.Common
+namespace Seng.Game.Business.DTOs.Components.IntermissionModule
 {
-    public class ButtonComponent : IComponentDto
+    public class QuestionComponentDto : IComponentDto
     {
         public ComponentBasicInfoDto ComponentBasicInfo { get; set; }
+        
         public IEnumerable<IComponentDto> ChildComponents { get; set; }
 
         public string Text { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Seng.Game.Business.DTOs.Components.Common
 {
-    public class TextComponent : IComponentDto
+    public class ButtonComponentDto : IComponentDto
     {
         public ComponentBasicInfoDto ComponentBasicInfo { get; set; }
 
