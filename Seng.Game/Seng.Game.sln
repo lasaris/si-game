@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seng.Game.Business", "Seng.Game.Business\Seng.Game.Business.csproj", "{FAB73E7E-662C-42E2-95D1-63E88A7DA7BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seng.Game.Desktop", "Seng.Game.Desktop\Seng.Game.Desktop.csproj", "{8EAF0DFE-002D-4B7D-8493-483857873209}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seng.Game.Desktop", "Seng.Game.Desktop\Seng.Game.Desktop.csproj", "{8EAF0DFE-002D-4B7D-8493-483857873209}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seng.Game.Entities", "Seng.Game.Entities\Seng.Game.Entities.csproj", "{D0349B94-E704-4458-B10E-B98862A04E10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seng.Game.Infrastructure", "Seng.Game.Infrastructure\Seng.Game.Infrastructure.csproj", "{94DC9C61-1CD3-48BA-A3CB-983F556D4372}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{8EAF0DFE-002D-4B7D-8493-483857873209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EAF0DFE-002D-4B7D-8493-483857873209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EAF0DFE-002D-4B7D-8493-483857873209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0349B94-E704-4458-B10E-B98862A04E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0349B94-E704-4458-B10E-B98862A04E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0349B94-E704-4458-B10E-B98862A04E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0349B94-E704-4458-B10E-B98862A04E10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94DC9C61-1CD3-48BA-A3CB-983F556D4372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94DC9C61-1CD3-48BA-A3CB-983F556D4372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94DC9C61-1CD3-48BA-A3CB-983F556D4372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94DC9C61-1CD3-48BA-A3CB-983F556D4372}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

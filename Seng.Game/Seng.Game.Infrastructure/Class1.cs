@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Seng.Scenario.Business
+namespace Seng.Game.Infrastructure
 {
     public class Class1
     {
