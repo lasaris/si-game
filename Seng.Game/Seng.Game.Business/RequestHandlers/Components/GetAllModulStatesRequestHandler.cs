@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Business.RequestHandlers.Components
 {
-    class GetAllModulStatesRequestHandler : IRequestHandler<GetAllModulStatesRequest, ModulBasicStateCollectionDto>
+    class GetAllModulStatesRequestHandler : IRequestHandler<GetAllModulStatesRequest, ModulesBasicInfoDto>
     {
-        public Task<ModulBasicStateCollectionDto> Handle(GetAllModulStatesRequest request, CancellationToken cancellationToken)
+        public Task<ModulesBasicInfoDto> Handle(GetAllModulStatesRequest request, CancellationToken cancellationToken)
         {
-            return Task.Run(() => new ModulBasicStateCollectionDto
+            return Task.Run(() => new ModulesBasicInfoDto
             {
-                ModulsWithStates = new List<ModulBasicStateDto>
+                Modules = new List<ComponentBasicInfoDto>
                 {
                     
                 }

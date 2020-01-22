@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Seng.Game.Entities
 {
-    public class Game : BasicEntity
+    public abstract class BasicEntity : IEntity
     {
-        public string Name { get; set; }
-        
+        public Guid Id { get; set; }
     }
 }

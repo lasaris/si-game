@@ -9,6 +9,7 @@ namespace Seng.Game.Business.Enums
         IntermissionModule,
         IntermissionFrame,
         Text,
-        Question
+        Question,
+        Button
     }
 }

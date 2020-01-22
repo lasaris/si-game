@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Seng.Game.Business.DTOs.Components.IntermissionModule
 {
-    public class IntermissionModuleDto : IComponentDto
+    public class IntermissionModuleDto : BasicComponentDto
     {
-        public ComponentBasicInfoDto ComponentBasicInfo { get; set; }
-
-        public IEnumerable<IComponentDto> ChildComponents { get; set; }
+        public IEnumerable<IntermissionFrameComponentDto> Frames { get; set; }
     }
 }

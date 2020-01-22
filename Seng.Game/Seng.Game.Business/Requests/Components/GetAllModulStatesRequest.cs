@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Seng.Game.Business.Requests.Components
 {
-    public class GetAllModulStatesRequest : IRequest<ModulBasicStateCollectionDto>
+    public class GetAllModulStatesRequest : IRequest<ModulesBasicInfoDto>
     {
         public Guid GameId { get; set; }
     }
