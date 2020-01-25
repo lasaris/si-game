@@ -29,7 +29,7 @@ namespace Seng.Game.Examples
             RunActionRequest runActionRequest = new RunActionRequest
             {
                 CurrentGameState = new GameDto(),
-                TriggeredComponentId = 1
+                TriggeredComponentId = 4
             };
             GameDto gameState = await mediator.Send(runActionRequest);
         }
