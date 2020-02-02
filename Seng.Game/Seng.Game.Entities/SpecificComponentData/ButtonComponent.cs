@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Seng.Game.Entities
+namespace Seng.Game.Entities.SpecificComponentData
 {
-    class ActionInContext
+    class ButtonComponent
     {
     }
 }

@@ -7,6 +7,9 @@ namespace Seng.Game.Entities
     public class Game : BasicEntity
     {
         public string Name { get; set; }
-        
+
+        public Author Author { get; set; }
+
+        public List<Component> Components { get; set; }
     }
 }

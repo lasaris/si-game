@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Seng.Game.Entities
 {
-    class OnClickOption
+    public class OnClickOption
     {
+        public ComponentsStatesCondition OtherComponentsStates { get; set; }
+        public ContextActionCondition Context { get; set; }
+        public Action ResultAction { get; set; }
     }
 }

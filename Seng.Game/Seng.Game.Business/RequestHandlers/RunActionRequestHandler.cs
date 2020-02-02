@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Seng.Game.Business.DTOs;
+using Seng.Game.Business.DTOs.Components;
 using Seng.Game.Business.DTOs.Components.Common;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.Requests.Components;
@@ -22,7 +23,6 @@ namespace Seng.Game.Business.RequestHandlers
                     new IntermissionModuleDto
                     {
                         ComponentId = 1,
-                        ComponentName = "FirstInfo",
                         IsRunning = true,
                         IsVisible = true,
                         Frames = new List<IntermissionFrameComponentDto>
@@ -30,7 +30,6 @@ namespace Seng.Game.Business.RequestHandlers
                             new IntermissionFrameComponentDto
                             {
                                 ComponentId = 2,
-                                ComponentName = "FirstFrame",
                                 IsRunning = true,
                                 IsVisible = true,
                                 TextParagraphs = new List<TextComponentDto>

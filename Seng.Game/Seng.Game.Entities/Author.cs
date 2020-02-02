@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Seng.Game.Entities
 {
-    class Author
+    public class Author
     {
     }
 }

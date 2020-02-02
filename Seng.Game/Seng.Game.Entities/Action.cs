@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Seng.Game.Entities.SpecificComponentData
+namespace Seng.Game.Entities
 {
-    class Question
+    public class Action : BasicEntity
     {
     }
 }
