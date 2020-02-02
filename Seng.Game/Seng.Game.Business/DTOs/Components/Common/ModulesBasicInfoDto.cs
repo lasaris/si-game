@@ -6,6 +6,6 @@ namespace Seng.Game.Business.DTOs.Components.Common
 {
     public class ModulesBasicInfoDto
     {
-        public IEnumerable<ComponentBasicInfoDto> Modules { get; set; }
+        public IEnumerable<BasicComponentDto> Modules { get; set; }
     }
 }

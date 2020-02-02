@@ -21,45 +21,33 @@ namespace Seng.Game.Business.RequestHandlers
                 {
                     new IntermissionModuleDto
                     {
-                        ComponentBasicInfo = new ComponentBasicInfoDto
-                        {
-                            ComponentId = 1,
-                            ComponentName = "FirstInfo",
-                            IsRunning = true,
-                            IsVisible = true
-                        },
+                        ComponentId = 1,
+                        ComponentName = "FirstInfo",
+                        IsRunning = true,
+                        IsVisible = true,
                         Frames = new List<IntermissionFrameComponentDto>
                         {
                             new IntermissionFrameComponentDto
                             {
-                                ComponentBasicInfo = new ComponentBasicInfoDto
-                                {
-                                    ComponentId = 2,
-                                    ComponentName = "FirstFrame",
-                                    IsRunning = true,
-                                    IsVisible = true
-                                },
+                                ComponentId = 2,
+                                ComponentName = "FirstFrame",
+                                IsRunning = true,
+                                IsVisible = true,
                                 TextParagraphs = new List<TextComponentDto>
                                 {
                                     new TextComponentDto
                                     {
-                                        ComponentBasicInfo = new ComponentBasicInfoDto
-                                        {
-                                            ComponentId = 3,
-                                            IsRunning = true,
-                                            IsVisible = true
-                                        },
+                                        ComponentId = 3,
+                                        IsRunning = true,
+                                        IsVisible = true,
                                         Text = "Hello, this is our demo game"
                                     }
                                 },
                                 Button = new ButtonComponentDto
                                 {
-                                    ComponentBasicInfo = new ComponentBasicInfoDto
-                                    {
-                                        ComponentId = 4,
-                                        IsRunning = true,
-                                        IsVisible = true
-                                    },
+                                    ComponentId = 4,
+                                    IsRunning = true,
+                                    IsVisible = true,
                                     Text = "Next"
                                 }
                             }

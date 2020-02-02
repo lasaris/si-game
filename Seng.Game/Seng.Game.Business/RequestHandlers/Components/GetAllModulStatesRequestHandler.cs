@@ -15,7 +15,7 @@ namespace Seng.Game.Business.RequestHandlers.Components
         {
             return Task.Run(() => new ModulesBasicInfoDto
             {
-                Modules = new List<ComponentBasicInfoDto>
+                Modules = new List<BasicComponentDto>
                 {
                     
                 }
