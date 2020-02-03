@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Seng.Game.Entities
 {
-    public class Game : BasicEntity
+    public class Scenario : BasicEntity
     {
         public string Name { get; set; }
 
