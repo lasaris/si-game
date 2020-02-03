@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Seng.Game.Entities.SpecificComponentData
 {
-    public class QuestionComponent : BasicEntity
+    public class IntermissionModule : BasicEntity
     {
+        public IEnumerable<IntermissionFrameComponent> Frames { get; set; }
     }
 }

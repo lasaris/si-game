@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Seng.Game.Entities.SpecificComponentData;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,6 +11,6 @@ namespace Seng.Game.Entities
 
         public Author Author { get; set; }
 
-        public List<Component> Components { get; set; }
+        public IEnumerable<IntermissionModule> IntermissionModules { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Seng.Game.Entities
 {
-    public class Component
+    public class Component : BasicEntity
     {
         public Guid ComponentId { get; set; }
         public ComponentType Type { get; set; }

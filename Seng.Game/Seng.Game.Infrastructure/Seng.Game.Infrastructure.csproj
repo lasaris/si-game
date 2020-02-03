@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Seng.Game.Entities\Seng.Game.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

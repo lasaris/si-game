@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Seng.Game.Entities.SpecificComponentData
 {
-    class ButtonComponent
+    public class ButtonComponent : BasicEntity
     {
     }
 }
