@@ -6,5 +6,6 @@ namespace Seng.Game.Entities.SpecificComponentData
 {
     public class TextComponent : BasicEntity
     {
+        public ComponentInfo BasicComponentInfo { get; set; }
     }
 }

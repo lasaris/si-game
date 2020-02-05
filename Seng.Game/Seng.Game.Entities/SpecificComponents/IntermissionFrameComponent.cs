@@ -6,6 +6,8 @@ namespace Seng.Game.Entities.SpecificComponentData
 {
     public class IntermissionFrameComponent : BasicEntity
     {
+        public ComponentInfo BasicComponentInfo { get; set; }
+
         public IEnumerable<TextComponent> TextParagraphs { get; set; }
 
         public IEnumerable<QuestionComponent> Questions { get; set; }

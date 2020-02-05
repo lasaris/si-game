@@ -7,6 +7,6 @@ namespace Seng.Game.Business.DTOs
 {
     public class GameDto
     {
-        public IEnumerable<IntermissionModuleDto> IntermissionModules { get; set; }
+        public IntermissionModuleDto IntermissionModule { get; set; }
     }
 }

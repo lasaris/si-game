@@ -7,6 +7,6 @@ namespace Seng.Game.Entities
     public class ComponentsStatesCondition : BasicEntity
     {
         //List of ids, or whole components?
-        public List<Component> ClickedComponents { get; set; }
+        public List<ComponentInfo> ClickedComponents { get; set; }
     }
 }
