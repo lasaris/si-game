@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
+    <ProjectReference Include="..\Seng.Game.Entities\Seng.Game.Entities.csproj" />
   </ItemGroup>
 
 </Project>

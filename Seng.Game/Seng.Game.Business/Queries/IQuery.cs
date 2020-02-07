@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Seng.Game.Infrastructure.Queries
+namespace Seng.Game.Business.Queries
 {
     public class IQuery<TResponse> where TResponse : IEntity
     {

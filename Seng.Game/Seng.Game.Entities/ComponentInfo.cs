@@ -9,7 +9,7 @@ namespace Seng.Game.Entities
     {
         public ComponentType Type { get; set; }
         public List<ComponentInfo> ChildComponents { get; set; }
-        public Action OnClickAction { get; set; }
+        public ActionInfo OnClickAction { get; set; }
         public List<OnClickOption> OnClickOptions { get; set; }
     }
 }

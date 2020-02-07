@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Seng.Game.Entities
 {
-    public class Action : BasicEntity
+    public class ActionInfo : BasicEntity
     {
         public ActionType ActionType { get; set; }
     }
