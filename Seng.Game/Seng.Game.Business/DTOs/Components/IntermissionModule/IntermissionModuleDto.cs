@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Seng.Game.Business.DTOs.Components.IntermissionModule
 {
-    public class IntermissionModuleDto : BasicComponentDto
+    public class IntermissionModuleDto : BasicModuleDto
     {
         public IEnumerable<IntermissionFrameComponentDto> Frames { get; set; }
     }

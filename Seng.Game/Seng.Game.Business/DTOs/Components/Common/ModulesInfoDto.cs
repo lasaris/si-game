@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Seng.Game.Business.DTOs.Components.Common
 {
-    public class ModulesBasicInfoDto
+    public class ModulesInfoDto
     {
-        public IEnumerable<BasicComponentDto> Modules { get; set; }
+        public IEnumerable<BasicModuleDto> Modules { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Seng.Game.Business.DependencyInjection;
 using Seng.Game.Business.DTOs;
+using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.Requests.Components;
 
 namespace Seng.Game.Examples
@@ -26,12 +27,13 @@ namespace Seng.Game.Examples
 
             //creating request and fetching data
             //this is the way you should call Business layer
-            RunActionRequest runActionRequest = new RunActionRequest
+            var runActionRequest = new GetModuleAfterActionRequest<IntermissionModuleDto>
             {
-                CurrentGameState = new GameDto(),
+                Module = new IntermissionModuleDto(),
                 TriggeredComponentId = 4
             };
-            GameDto gameState = await mediator.Send(runActionRequest);
+            ModuleAfterActionDto<IntermissionModuleDto> gameState = await mediator.Send(runActionRequest);
+            Console.WriteLine(gameState.CurrentModule.GetType());
         }
     }
 }

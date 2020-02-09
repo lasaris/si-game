@@ -6,7 +6,6 @@ namespace Seng.Game.Entities.Enum
 {
     public enum ComponentType
     {
-        IntermissionModule,
         IntermissionFrame,
         Text,
         Question,
