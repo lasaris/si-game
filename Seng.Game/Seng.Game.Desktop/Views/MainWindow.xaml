@@ -4,8 +4,11 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="Social Engineering Game"
-        MinWidth="1024"
-        MinHeight="768">
+        WindowStartupLocation="CenterScreen"
+        MinWidth="1366"
+        MinHeight="768"
+        Width="1366"
+        Height="768">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,12 +24,8 @@
                     Height="50">
             <Button Content="Desktop"
                     Width="100"
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="DesktopComponentView" />
-            <Button Content="Text"
-                    Width="100"
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="TextComponentView" />
+                    Command="{Binding NavigateCommand, Mode=OneWay}"
+                    CommandParameter="DesktopModuleView" />
         </StackPanel>
     </Grid>
 

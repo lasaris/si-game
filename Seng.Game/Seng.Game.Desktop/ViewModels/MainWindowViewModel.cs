@@ -1,11 +1,10 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Regions;
-using Seng.Game.Desktop.Views;
+using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop.ViewModels
 {
-	public class MainWindowViewModel : BindableBase
+	public class MainWindowViewModel : BaseViewModel
 	{
 		private readonly IRegionManager _regionManager;
 
@@ -16,6 +15,11 @@ namespace Seng.Game.Desktop.ViewModels
 			_regionManager = regionManager;
 
 			NavigateCommand = new DelegateCommand<string>(Navigate);
+
+			if (IntermissionModule.IsRunning)
+			{
+				ShowIntermission();
+			}
 		}
 
 		private void Navigate(string navigatePath)

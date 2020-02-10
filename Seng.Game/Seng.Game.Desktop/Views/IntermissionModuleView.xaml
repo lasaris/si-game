@@ -1,0 +1,39 @@
+﻿<Window x:Class="Seng.Game.Desktop.Views.IntermissionModuleView"
+        x:Name="IntermissionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        WindowStartupLocation="CenterScreen"
+        Width="1024"
+        Height="576"
+        MinWidth="1024"
+        MinHeight="576">
+
+    <Window.Resources>
+        <ResourceDictionary  Source="../Views/Styles/IntermissionModule.xaml" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+
+        <ItemsControl Grid.Row="0"
+                      ItemsSource="{Binding CurrentTexts}"
+                      ItemTemplate="{StaticResource TextComponentDataTemplate}" />
+
+        <ItemsControl Grid.Row="1"
+                      ItemsSource="{Binding CurrentQuestions}"
+                      ItemTemplate="{StaticResource QuestionComponentDataTemplate}" />
+
+        <Button Grid.Row="2"
+                Command="{Binding CloseCommand, Mode=OneWay}"
+                CommandParameter="{Binding ElementName=IntermissionWindow}"
+                Content="{Binding CurrentButton.Text}"
+                FontSize="20" />
+    </Grid>
+
+</Window>

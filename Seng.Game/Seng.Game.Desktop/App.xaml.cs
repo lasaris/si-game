@@ -13,8 +13,8 @@ namespace Seng.Game.Desktop
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
-			containerRegistry.RegisterForNavigation<TextComponentView>();
-			containerRegistry.RegisterForNavigation<DesktopComponentView>();
+			containerRegistry.RegisterForNavigation<IntermissionModuleView>();
+			containerRegistry.RegisterForNavigation<DesktopModuleView>();
 		}
 	}
 }
