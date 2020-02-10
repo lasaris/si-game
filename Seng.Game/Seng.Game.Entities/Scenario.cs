@@ -1,4 +1,4 @@
-﻿using Seng.Game.Entities.SpecificComponentData;
+﻿using Seng.Game.Entities.Modules;
 using System;
 using System.Collections.Generic;
 using System.Text;

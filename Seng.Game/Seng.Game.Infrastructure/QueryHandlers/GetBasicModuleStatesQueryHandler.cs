@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Seng.Game.Business.Queries;
+﻿using Seng.Game.Business.Queries;
 using Seng.Game.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.QueryHandlers
 {
-    public class GetActionByComponentQueryHandler : IQueryHandler<GetActionByComponentQuery, GameAction>
+    class GetBasicModuleStatesQueryHandler : IQueryHandler<GetBasicModuleStatesQuery, GameInstance>
     {
-        public Task<GameAction> Handle(GetActionByComponentQuery query, CancellationToken cancellationToken)
+        public Task<GameInstance> Handle(GetBasicModuleStatesQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

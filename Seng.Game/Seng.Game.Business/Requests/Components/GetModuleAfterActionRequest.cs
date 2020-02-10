@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Seng.Game.Business.DTOs;
 using Seng.Game.Business.DTOs.Components.Common;
+using Seng.Game.Business.DTOs.Modules;
 using System;
 using System.Collections.Generic;
 using System.Text;

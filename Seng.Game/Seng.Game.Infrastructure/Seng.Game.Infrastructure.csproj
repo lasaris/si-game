@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Seng.Game.Entities\Seng.Game.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CommandExecutors\" />
-  </ItemGroup>
-
 </Project>

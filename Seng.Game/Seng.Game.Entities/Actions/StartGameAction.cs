@@ -1,4 +1,4 @@
-﻿namespace Seng.Game.Entities.SpecificActions
+﻿namespace Seng.Game.Entities.Actions
 {
     public class StartGameAction : BasicEntity
     {

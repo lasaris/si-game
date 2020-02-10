@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Seng.Game.Entities.Components;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Seng.Game.Entities.SpecificComponentData
+namespace Seng.Game.Entities.Modules
 {
     public class IntermissionModule : BasicEntity
     {
-        public ComponentInfo BasicComponentInfo { get; set; }
+        public Component BasicComponentInfo { get; set; }
 
         public IEnumerable<IntermissionFrameComponent> Frames { get; set; }
     }

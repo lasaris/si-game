@@ -8,6 +8,6 @@ namespace Seng.Game.Entities
     {
         public ComponentsStatesCondition OtherComponentsStates { get; set; }
         public ContextActionCondition Context { get; set; }
-        public ActionInfo ResultAction { get; set; }
+        public GameAction ResultAction { get; set; }
     }
 }

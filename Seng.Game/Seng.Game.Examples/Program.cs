@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Seng.Game.Business.DependencyInjection;
 using Seng.Game.Business.DTOs;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
+using Seng.Game.Business.DTOs.Modules;
 using Seng.Game.Business.Requests.Components;
 
 namespace Seng.Game.Examples

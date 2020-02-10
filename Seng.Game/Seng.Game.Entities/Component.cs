@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Seng.Game.Entities
 {
-    public class ComponentInfo : BasicEntity
+    public class Component : BasicEntity
     {
         public ComponentType Type { get; set; }
-        public List<ComponentInfo> ChildComponents { get; set; }
-        public ActionInfo OnClickAction { get; set; }
+        public List<Component> ChildComponents { get; set; }
+        public GameAction OnClickAction { get; set; }
         public List<OnClickOption> OnClickOptions { get; set; }
     }
 }

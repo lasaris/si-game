@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Seng.Game.Entities.SpecificComponentData
+namespace Seng.Game.Entities.Components
 {
     public class IntermissionFrameComponent : BasicEntity
     {
-        public ComponentInfo BasicComponentInfo { get; set; }
+        public Component BasicComponentInfo { get; set; }
 
         public IEnumerable<TextComponent> TextParagraphs { get; set; }
 
