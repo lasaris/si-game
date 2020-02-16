@@ -2,7 +2,7 @@
 
 namespace Seng.Game.Business.DTOs.Components.IntermissionModule
 {
-	public class AnswerComponentDto : BasicComponentDto
+	public class OptionComponentDto : BasicComponentDto
 	{
 		public string Text { get; set; }
 	}

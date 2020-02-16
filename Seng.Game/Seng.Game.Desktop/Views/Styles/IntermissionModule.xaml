@@ -32,7 +32,7 @@
                 Value="OrangeRed" />
     </Style>
 
-    <Style x:Key="AnswerStyle"
+    <Style x:Key="OptionStyle"
            TargetType="{x:Type TextBlock}"
            BasedOn="{StaticResource QuestionStyle}">
         <Style.Triggers>

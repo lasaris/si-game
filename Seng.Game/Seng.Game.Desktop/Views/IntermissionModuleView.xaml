@@ -47,11 +47,11 @@
                     <StackPanel>
                         <TextBlock Text="{Binding Text}"
                                    Style="{StaticResource QuestionStyle}" />
-                        <ItemsControl ItemsSource="{Binding Answers}">
+                        <ItemsControl ItemsSource="{Binding Options}">
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type intermissionModule:AnswerComponentDto}">
+                                <DataTemplate DataType="{x:Type intermissionModule:OptionComponentDto}">
                                     <TextBlock Text="{Binding Text}"
-                                               Style="{StaticResource AnswerStyle}">
+                                               Style="{StaticResource OptionStyle}">
                                         <TextBlock.InputBindings>
                                             <MouseBinding MouseAction="LeftClick"
                                                           Command="{Binding DataContext.AnswerSelectCommand, 

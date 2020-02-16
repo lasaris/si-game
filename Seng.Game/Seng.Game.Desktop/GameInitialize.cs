@@ -33,14 +33,14 @@ namespace Seng.Game.Desktop
 								{
 									Text = "Question ?",
 									ComponentId = 4,
-									Answers = new List<AnswerComponentDto>
+									Options = new List<OptionComponentDto>
 									{
-										new AnswerComponentDto()
+										new OptionComponentDto()
 										{
 											ComponentId = 8,
 											Text = "First Answer"
 										},
-										new AnswerComponentDto()
+										new OptionComponentDto()
 										{
 											ComponentId = 9,
 											Text = "Second Answer"
@@ -75,24 +75,24 @@ namespace Seng.Game.Desktop
 								{
 									ComponentId = 11,
 									Text = "Slide with another question ?",
-									Answers = new List<AnswerComponentDto>
+									Options = new List<OptionComponentDto>
 									{
-										new AnswerComponentDto()
+										new OptionComponentDto()
 										{
 											ComponentId = 12,
 											Text = "Definitely yes"
 										},
-										new AnswerComponentDto()
+										new OptionComponentDto()
 										{
 											ComponentId = 13,
 											Text = "Probably yes"
 										},
-										new AnswerComponentDto()
+										new OptionComponentDto()
 										{
 											ComponentId = 14,
 											Text = "Probably no"
 										},
-										new AnswerComponentDto()
+										new OptionComponentDto()
 										{
 											ComponentId = 15,
 											Text = "Definitely no"

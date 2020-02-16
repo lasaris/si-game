@@ -7,6 +7,6 @@ namespace Seng.Game.Business.DTOs.Components.IntermissionModule
     {
         public string Text { get; set; }
 
-        public IEnumerable<AnswerComponentDto> Answers { get; set; }
+        public IEnumerable<OptionComponentDto> Options { get; set; }
     }
 }

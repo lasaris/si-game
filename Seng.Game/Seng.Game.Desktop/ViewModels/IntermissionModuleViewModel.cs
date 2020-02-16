@@ -38,7 +38,7 @@ namespace Seng.Game.Desktop.ViewModels
 
 		public DelegateCommand NextFrameOrCloseCommand { get; set; }
 
-		public DelegateCommand<AnswerComponentDto> AnswerSelectCommand { get; set; }
+		public DelegateCommand<OptionComponentDto> AnswerSelectCommand { get; set; }
 
 		public IntermissionModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
@@ -48,10 +48,10 @@ namespace Seng.Game.Desktop.ViewModels
 			UpdateFrameContent();
 
 			NextFrameOrCloseCommand = new DelegateCommand(NextFrameOrCloseCommandExecute, CanNextFrameOrCloseCommandExecute);
-			AnswerSelectCommand = new DelegateCommand<AnswerComponentDto>(AnswerSelectCommandExecute);
+			AnswerSelectCommand = new DelegateCommand<OptionComponentDto>(AnswerSelectCommandExecute);
 		}
 
-		private void AnswerSelectCommandExecute(AnswerComponentDto selectedAnswer)
+		private void AnswerSelectCommandExecute(OptionComponentDto selectedAnswer)
 		{
 			// Manipulate with selected answer
 
