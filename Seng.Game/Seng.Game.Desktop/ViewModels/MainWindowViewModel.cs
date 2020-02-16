@@ -1,29 +1,28 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
+using Prism.Events;
 using Prism.Regions;
-using Seng.Game.Desktop.Views;
+using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop.ViewModels
 {
-	public class MainWindowViewModel : BindableBase
+	public class MainWindowViewModel : BaseViewModel
 	{
-		private readonly IRegionManager _regionManager;
+		public DelegateCommand<ICloseable> ExitApplicationCommand { get; set; }
 
-		public DelegateCommand<string> NavigateCommand { get; set; }
-
-		public MainWindowViewModel(IRegionManager regionManager)
+		public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
+			: base(regionManager, eventAggregator, gameState)
 		{
-			_regionManager = regionManager;
+			ExitApplicationCommand = new DelegateCommand<ICloseable>(ExitApplicationCommandExecute);
 
-			NavigateCommand = new DelegateCommand<string>(Navigate);
+			RegionManager.RegisterViewWithRegion(Regions.ApplicationRegion,
+				GameState.IntermissionModule.IsRunning ? Regions.IntermissionModuleViewType : Regions.GameViewType);
 		}
 
-		private void Navigate(string navigatePath)
+		private void ExitApplicationCommandExecute(ICloseable window)
 		{
-			if (navigatePath != null)
-			{
-				_regionManager.RequestNavigate(RegionNames.MainRibbonRegion, navigatePath);
-			}
+			//Add exit confirmation, probably by Intermission
+
+			window?.Close();
 		}
 	}
 }

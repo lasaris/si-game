@@ -1,8 +1,8 @@
 ﻿namespace Seng.Game.Desktop.Views
 {
-	public partial class TextComponentView
+	public partial class DesktopModuleView
 	{
-		public TextComponentView()
+		public DesktopModuleView()
 		{
 			InitializeComponent();
 		}

@@ -8,13 +8,18 @@ namespace Seng.Game.Desktop
 	{
 		protected override Window CreateShell()
 		{
+			Container.Resolve<GameState>();
+
 			return Container.Resolve<MainWindow>();
 		}
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
-			containerRegistry.RegisterForNavigation<TextComponentView>();
-			containerRegistry.RegisterForNavigation<DesktopComponentView>();
+			containerRegistry.RegisterSingleton<GameState>();
+
+			containerRegistry.RegisterForNavigation<GameView>();
+			containerRegistry.RegisterForNavigation<IntermissionModuleView>();
+			containerRegistry.RegisterForNavigation<DesktopModuleView>();
 		}
 	}
 }

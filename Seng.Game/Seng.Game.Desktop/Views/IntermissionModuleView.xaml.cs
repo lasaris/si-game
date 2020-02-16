@@ -1,8 +1,8 @@
 ﻿namespace Seng.Game.Desktop.Views
 {
-	public partial class DesktopComponentView
+	public partial class IntermissionModuleView
 	{
-		public DesktopComponentView()
+		public IntermissionModuleView()
 		{
 			InitializeComponent();
 		}
