@@ -1,6 +1,8 @@
-﻿namespace Seng.Game.Desktop.Views
+﻿using Seng.Game.Desktop.ViewModels.Base;
+
+namespace Seng.Game.Desktop.Views
 {
-	public partial class MainWindow
+	public partial class MainWindow : ICloseable
 	{
 		public MainWindow()
 		{

@@ -31,14 +31,22 @@ namespace Seng.Game.Desktop
 							{
 								new QuestionComponentDto
 								{
-									ComponentId = 9,
-									Text = "Example question ?"
+									Text = "Question ?",
+									ComponentId = 4,
+									Answers = new List<AnswerComponentDto>
+									{
+										new AnswerComponentDto()
+										{
+											ComponentId = 8,
+											Text = "First Answer"
+										},
+										new AnswerComponentDto()
+										{
+											ComponentId = 9,
+											Text = "Second Answer"
+										}
+									}
 								}
-							},
-							Button = new ButtonComponentDto
-							{
-								ComponentId = 4,
-								Text = "Next"
 							}
 						},
 						new IntermissionFrameComponentDto
@@ -56,11 +64,41 @@ namespace Seng.Game.Desktop
 									ComponentId = 7,
 									Text = "Another paragraph"
 								}
-							},
-							Button = new ButtonComponentDto
+							}
+						},
+						new IntermissionFrameComponentDto
+						{
+							ComponentId = 10,
+							Questions = new List<QuestionComponentDto>
 							{
-								ComponentId = 8,
-								Text = "Close"
+								new QuestionComponentDto
+								{
+									ComponentId = 11,
+									Text = "Slide with another question ?",
+									Answers = new List<AnswerComponentDto>
+									{
+										new AnswerComponentDto()
+										{
+											ComponentId = 12,
+											Text = "Definitely yes"
+										},
+										new AnswerComponentDto()
+										{
+											ComponentId = 13,
+											Text = "Probably yes"
+										},
+										new AnswerComponentDto()
+										{
+											ComponentId = 14,
+											Text = "Probably no"
+										},
+										new AnswerComponentDto()
+										{
+											ComponentId = 15,
+											Text = "Definitely no"
+										}
+									}
+								}
 							}
 						}
 					}

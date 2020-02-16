@@ -1,39 +1,73 @@
-﻿<Window x:Class="Seng.Game.Desktop.Views.IntermissionModuleView"
-        x:Name="IntermissionWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:prism="http://prismlibrary.com/"
-        prism:ViewModelLocator.AutoWireViewModel="True"
-        WindowStartupLocation="CenterScreen"
-        Width="1024"
-        Height="576"
-        MinWidth="1024"
-        MinHeight="576">
+﻿<UserControl x:Class="Seng.Game.Desktop.Views.IntermissionModuleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:components="clr-namespace:Seng.Game.Business.DTOs.Components;assembly=Seng.Game.Business"
+             xmlns:intermissionModule="clr-namespace:Seng.Game.Business.DTOs.Components.IntermissionModule;assembly=Seng.Game.Business"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="Black">
 
-    <Window.Resources>
-        <ResourceDictionary  Source="../Views/Styles/IntermissionModule.xaml" />
-    </Window.Resources>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="../Views/Styles/IntermissionModule.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
-        </Grid.RowDefinitions>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-        <ItemsControl Grid.Row="0"
-                      ItemsSource="{Binding CurrentTexts}"
-                      ItemTemplate="{StaticResource TextComponentDataTemplate}" />
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown" >
+            <i:InvokeCommandAction Command="{Binding NextFrameOrCloseCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
-        <ItemsControl Grid.Row="1"
+    <DockPanel HorizontalAlignment="Center"
+               VerticalAlignment="Center">
+
+        <ItemsControl DockPanel.Dock="Top"
+                      ItemsSource="{Binding CurrentTexts}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type components:TextComponentDto}">
+                    <TextBlock Text="{Binding Text}"
+                               Style="{StaticResource TextParagraphStyle}">
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ItemsControl DockPanel.Dock="Top"
+                      Visibility="{Binding IsQuestionOnCurrentFrame, Converter={StaticResource BooleanToVisibilityConverter}}"
                       ItemsSource="{Binding CurrentQuestions}"
-                      ItemTemplate="{StaticResource QuestionComponentDataTemplate}" />
+                      Margin="0 25 0 0">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type intermissionModule:QuestionComponentDto}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Text}"
+                                   Style="{StaticResource QuestionStyle}" />
+                        <ItemsControl ItemsSource="{Binding Answers}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type intermissionModule:AnswerComponentDto}">
+                                    <TextBlock Text="{Binding Text}"
+                                               Style="{StaticResource AnswerStyle}">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding MouseAction="LeftClick"
+                                                          Command="{Binding DataContext.AnswerSelectCommand, 
+                                                                    RelativeSource={RelativeSource FindAncestor, 
+                                                                    AncestorType={x:Type UserControl}}}"
+                                                          CommandParameter="{Binding}" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
-        <Button Grid.Row="2"
-                Command="{Binding CloseCommand, Mode=OneWay}"
-                CommandParameter="{Binding ElementName=IntermissionWindow}"
-                Content="{Binding CurrentButton.Text}"
-                FontSize="20" />
-    </Grid>
+    </DockPanel>
 
-</Window>
+</UserControl>

@@ -3,74 +3,101 @@ using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Desktop.ViewModels.Base;
 using System.Collections.Generic;
 using System.Linq;
+using Prism.Events;
+using Prism.Regions;
 using Seng.Game.Business.DTOs.Components;
 
 namespace Seng.Game.Desktop.ViewModels
 {
-	public class IntermissionModuleViewModel : BaseViewModel
+	public class IntermissionModuleViewModel : BaseViewModel, INavigationAware
 	{
-		private readonly List<IntermissionFrameComponentDto> _frames;
-		private int _currentFrame;
-		
-		private List<TextComponentDto> _currentTexts;
-		private List<QuestionComponentDto> _currentQuestions;
-		private ButtonComponentDto _currentButton;
+		private readonly List<IntermissionFrameComponentDto> frames;
+		private int currentFrame;
+		private bool isQuestionOnCurrentFrame;
+
+		private List<TextComponentDto> currentTexts;
+		private List<QuestionComponentDto> currentQuestions;
 
 		public List<TextComponentDto> CurrentTexts
 		{
-			get => _currentTexts;
-			set => SetProperty(ref _currentTexts, value);
+			get => currentTexts;
+			set => SetProperty(ref currentTexts, value);
+		}
+
+		public bool IsQuestionOnCurrentFrame
+		{
+			get => isQuestionOnCurrentFrame;
+			set => SetProperty(ref isQuestionOnCurrentFrame, value);
 		}
 
 		public List<QuestionComponentDto> CurrentQuestions
 		{
-			get => _currentQuestions;
-			set => SetProperty(ref _currentQuestions, value);
+			get => currentQuestions;
+			set => SetProperty(ref currentQuestions, value);
 		}
 
-		public ButtonComponentDto CurrentButton
-		{
-			get => _currentButton;
-			set => SetProperty(ref _currentButton, value);
-		}
+		public DelegateCommand NextFrameOrCloseCommand { get; set; }
 
-		public DelegateCommand<ICloseable> CloseCommand { get; set; }
+		public DelegateCommand<AnswerComponentDto> AnswerSelectCommand { get; set; }
 
-		public IntermissionModuleViewModel()
+		public IntermissionModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
+			: base(regionManager, eventAggregator, gameState)
 		{
-			_currentFrame = 0;
-			_frames = IntermissionModule.Frames.ToList();
+			frames = GameState.IntermissionModule.Frames.ToList();
 
 			UpdateFrameContent();
 
-			CloseCommand = new DelegateCommand<ICloseable>(NextOrClose);
+			NextFrameOrCloseCommand = new DelegateCommand(NextFrameOrCloseCommandExecute, CanNextFrameOrCloseCommandExecute);
+			AnswerSelectCommand = new DelegateCommand<AnswerComponentDto>(AnswerSelectCommandExecute);
 		}
 
-		private void NextOrClose(ICloseable window)
+		private void AnswerSelectCommandExecute(AnswerComponentDto selectedAnswer)
 		{
-			var lastFrame = _currentFrame + 1 == _frames.Count;
+			// Manipulate with selected answer
 
-			if (lastFrame) window?.Close();
+			NextFrameOrCloseCommandExecute();
+		}
+		 
+		private bool CanNextFrameOrCloseCommandExecute()
+		{
+			return !IsQuestionOnCurrentFrame;
+		}
+
+		private void NextFrameOrCloseCommandExecute()
+		{
+			var lastFrame = currentFrame + 1 == frames.Count;
+
+			if (lastFrame)
+			{
+				RegionManager.RequestNavigate(Regions.ApplicationRegion, Regions.GameView);
+			}
 			else
 			{
-				_currentFrame += 1;
+				currentFrame += 1;
 				UpdateFrameContent();
 			}
 		}
 
 		private void UpdateFrameContent()
 		{
-			CurrentTexts = _frames[_currentFrame].TextParagraphs == null
+			CurrentTexts = frames[currentFrame].TextParagraphs == null
 				? new List<TextComponentDto>()
-				: _frames[_currentFrame].TextParagraphs.ToList();
+				: frames[currentFrame].TextParagraphs.ToList();
 
-			CurrentQuestions = _frames[_currentFrame].Questions == null
-				? new List<QuestionComponentDto>()
-				: _frames[_currentFrame].Questions.ToList();
-
-			CurrentButton = _frames[_currentFrame].Button == null
-				? new ButtonComponentDto { Text = string.Empty }
-				: _frames[_currentFrame].Button;
+			if (frames[currentFrame].Questions != null)
+			{
+				IsQuestionOnCurrentFrame = true;
+				CurrentQuestions = frames[currentFrame].Questions.ToList();
+			}
+			else
+			{
+				IsQuestionOnCurrentFrame = false;
+			}
 		}
+
+		public bool IsNavigationTarget(NavigationContext navigationContext) => false;
+
+		public void OnNavigatedTo(NavigationContext navigationContext) { }
+		public void OnNavigatedFrom(NavigationContext navigationContext) { }
 	}
 }

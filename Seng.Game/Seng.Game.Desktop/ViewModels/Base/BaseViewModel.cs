@@ -1,33 +1,32 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
-using Seng.Game.Business.DTOs.Modules;
-using Seng.Game.Desktop.Views;
+using Prism.Regions;
 
 namespace Seng.Game.Desktop.ViewModels.Base
 {
-	public abstract class BaseViewModel : BindableBase, IControlable
+	public abstract class BaseViewModel : BindableBase
 	{
-		private IntermissionModuleDto _intermissionModule;
+		protected IRegionManager RegionManager;
+		protected IEventAggregator EventAggregator;
 
-		public IntermissionModuleDto IntermissionModule
+		protected GameState GameState;
+
+		public DelegateCommand ShowIntermissionCommand { get; set; }
+
+		protected BaseViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 		{
-			get => _intermissionModule;
-			set => SetProperty(ref _intermissionModule, value);
+			RegionManager = regionManager;
+			EventAggregator = eventAggregator;
+
+			GameState = gameState;
+
+			ShowIntermissionCommand = new DelegateCommand(ShowIntermissionCommandExecute);
 		}
 
-		public DelegateCommand IntermissionCommand { get; set; }
-
-		protected BaseViewModel()
+		private void ShowIntermissionCommandExecute()
 		{
-			_intermissionModule = GameInitialize.IntermissionModuleGet();
-
-			IntermissionCommand = new DelegateCommand(ShowIntermission);
-		}
-
-		public void ShowIntermission()
-		{
-			IntermissionModuleView intermissionWindow = new IntermissionModuleView();
-			intermissionWindow.ShowDialog();	
+			RegionManager.RequestNavigate(Regions.ApplicationRegion, Regions.IntermissionModuleView);
 		}
 	}
 }

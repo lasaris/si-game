@@ -13,4 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Seng.Game.Business\Seng.Game.Business.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Events\" />
+  </ItemGroup>
 </Project>
