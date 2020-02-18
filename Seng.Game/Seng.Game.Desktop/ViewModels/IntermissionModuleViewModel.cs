@@ -14,6 +14,7 @@ namespace Seng.Game.Desktop.ViewModels
 		private readonly List<IntermissionFrameComponentDto> frames;
 		private int currentFrame;
 		private bool isQuestionOnCurrentFrame;
+		private bool isNavigationTarget = true;
 
 		private List<TextComponentDto> currentTexts;
 		private List<QuestionComponentDto> currentQuestions;
@@ -69,6 +70,7 @@ namespace Seng.Game.Desktop.ViewModels
 
 			if (lastFrame)
 			{
+				isNavigationTarget = false;
 				RegionManager.RequestNavigate(Regions.ApplicationRegion, Regions.GameView);
 			}
 			else
@@ -95,7 +97,7 @@ namespace Seng.Game.Desktop.ViewModels
 			}
 		}
 
-		public bool IsNavigationTarget(NavigationContext navigationContext) => false;
+		public bool IsNavigationTarget(NavigationContext navigationContext) => isNavigationTarget;
 
 		public void OnNavigatedTo(NavigationContext navigationContext) { }
 		public void OnNavigatedFrom(NavigationContext navigationContext) { }

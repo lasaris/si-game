@@ -14,14 +14,25 @@
         <ContentControl Grid.Row="0"
                         prism:RegionManager.RegionName="{x:Static desktop:Regions.MainRibbonRegion}" />
 
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal"
-                    Height="50">
-            <Button Content="Desktop"
+        <DockPanel Grid.Row="1"
+                   Height="50"
+                   LastChildFill="False">
+            <Button DockPanel.Dock="Right"
+                    Content="Desktop"
                     Width="100"
                     Command="{Binding NavigateCommand, Mode=OneWay}"
                     CommandParameter="{x:Static desktop:Regions.DesktopModuleView}" />
-        </StackPanel>
+            <Button DockPanel.Dock="Left"
+                    Content="Browser"
+                    Width="100"
+                    Command="{Binding NavigateCommand, Mode=OneWay}"
+                    CommandParameter="{x:Static desktop:Regions.BrowserModuleView}" />
+            <Button DockPanel.Dock="Left"
+                    Content="Email"
+                    Width="100"
+                    Command="{Binding NavigateCommand, Mode=OneWay}"
+                    CommandParameter="{x:Static desktop:Regions.EmailModuleView}" />
+        </DockPanel>
     </Grid>
 
 </UserControl>
