@@ -1,5 +1,5 @@
-﻿using Seng.Game.Business.Queries;
-using Seng.Game.Entities;
+﻿using Seng.Common.Entities.Modules;
+using Seng.Game.Business.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.QueryHandlers
 {
-    class GetBasicModuleStatesQueryHandler : IQueryHandler<GetBasicModuleStatesQuery, GameInstance>
+    class GetBasicModuleStatesQueryHandler : IQueryHandler<GetBasicModuleStatesQuery, IEnumerable<Module>>
     {
-        public Task<GameInstance> Handle(GetBasicModuleStatesQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<Module>> Handle(GetBasicModuleStatesQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

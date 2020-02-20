@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Seng.Game.Business.Queries;
-using Seng.Game.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Seng.Common.Entities.Actions;
 
 namespace Seng.Game.Infrastructure.QueryHandlers
 {

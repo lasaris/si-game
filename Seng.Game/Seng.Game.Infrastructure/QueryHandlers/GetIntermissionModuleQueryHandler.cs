@@ -1,5 +1,5 @@
-﻿using Seng.Game.Business.Queries;
-using Seng.Game.Entities.Modules;
+﻿using Seng.Common.Entities.Modules;
+using Seng.Game.Business.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
