@@ -10,7 +10,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     class GetBasicModuleStatesQueryHandler : IQueryHandler<GetBasicModuleStatesQuery, IEnumerable<Module>>
     {
-        public Task<IEnumerable<Module>> Handle(GetBasicModuleStatesQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<Module>> Handle(GetBasicModuleStatesQuery query, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

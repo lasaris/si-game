@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Seng.Game.Business.DTOs;
 using Seng.Game.Business.DTOs.Components.Common;
@@ -19,6 +20,7 @@ namespace Seng.Game.Business.DependencyInjection
         {
             services.AddMediatRGenericHandlers<IntermissionModuleDto>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
 
         private static void AddMediatRGenericHandlers<TModuleDto>(this IServiceCollection services) where TModuleDto : BasicModuleDto

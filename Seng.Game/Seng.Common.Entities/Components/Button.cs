@@ -7,5 +7,7 @@ namespace Seng.Common.Entities.Components
     public class Button : BasicEntity
     {
         public string Text { get; set; }
+
+        public int ComponentId { get; set; }
     }
 }
