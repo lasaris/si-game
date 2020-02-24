@@ -18,7 +18,7 @@ namespace Seng.Game.Examples
         {
             //dependency injection configuration
             var serviceCollection = new ServiceCollection();
-            //serviceCollection.AddInfrastructure();
+            serviceCollection.AddInfrastructure();
             serviceCollection.AddBusiness();
 
             //resolve manually dependency injection
@@ -29,11 +29,11 @@ namespace Seng.Game.Examples
             //this should be done through constructor injection automatically
             IMediator mediator = serviceProvider.GetService<IMediator>();
 
-            /*var retrieveScenarioRequest = new RetrieveScenarioRequest
+            var retrieveScenarioRequest = new RetrieveScenarioRequest
             {
                 GameToken = "abcd"
             };
-            RetrieveScenarioResultDto state = await mediator.Send(retrieveScenarioRequest);*/
+            RetrieveScenarioResultDto state = await mediator.Send(retrieveScenarioRequest);
 
             //creating request and fetching data
             //this is the way you should call Business layer
