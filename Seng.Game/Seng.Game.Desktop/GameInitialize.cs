@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Seng.Game.Business.DTOs.Components;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
 
@@ -19,12 +18,8 @@ namespace Seng.Game.Desktop
 						new IntermissionFrameComponentDto
 						{
 							ComponentId = 2,
-								TextParagraph = new TextComponentDto()
-							{
-								ComponentId = 3,
-								Text = "Hello, this is our demo game"
-							},
-							Question = new QuestionComponentDto()
+								TextParagraph = "Hello, this is our demo game",
+								Question = new QuestionComponentDto()
 							{
 								ComponentId = 4,
 								Text = "Example question ?",
@@ -48,11 +43,7 @@ namespace Seng.Game.Desktop
 						new IntermissionFrameComponentDto
 						{
 							ComponentId = 7,
-							TextParagraph = new TextComponentDto()
-							{
-								ComponentId = 8,
-								Text = "Second page\nAnother row"
-							}
+							TextParagraph = "Second page\nAnother row",
 						},
 						new IntermissionFrameComponentDto
 						{

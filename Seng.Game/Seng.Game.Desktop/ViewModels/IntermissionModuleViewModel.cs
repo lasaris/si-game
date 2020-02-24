@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Prism.Events;
 using Prism.Regions;
-using Seng.Game.Business.DTOs.Components;
 
 namespace Seng.Game.Desktop.ViewModels
 {
@@ -16,7 +15,7 @@ namespace Seng.Game.Desktop.ViewModels
 		private bool isNavigationTarget = true;
 
 		private int currentFrame;
-		private TextComponentDto currentText;
+		private string currentText;
 		private QuestionComponentDto currentQuestion;
 
 		public int CurrentFrame
@@ -25,7 +24,7 @@ namespace Seng.Game.Desktop.ViewModels
 			set => SetProperty(ref currentFrame, value);
 		}
 
-		public TextComponentDto CurrentText
+		public string CurrentText
 		{
 			get => currentText;
 			set => SetProperty(ref currentText, value);
@@ -62,13 +61,15 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void OptionSelectCommandExecute(OptionComponentDto selectedOption)
 		{
+			var option = currentQuestion.Options.First(x => x == selectedOption);
+
 			if (currentQuestion.Multichoice)
 			{
-				// Manipulate with selected answer
+				option.Clicked = !option.Clicked;
 			}
 			else
 			{
-				// Manipulate with selected answer
+				option.Clicked = true;
 
 				NextFrameOrCloseCommandExecute();
 			}

@@ -4,7 +4,7 @@ namespace Seng.Game.Business.DTOs.Components.IntermissionModule
 {
     public class IntermissionFrameComponentDto : BasicComponentDto
     {
-        public TextComponentDto TextParagraph { get; set; }
+        public string TextParagraph { get; set; }
 
         public QuestionComponentDto Question { get; set; }
 

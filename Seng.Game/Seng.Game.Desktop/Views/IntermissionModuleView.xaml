@@ -62,7 +62,7 @@
 
         <TextBlock DockPanel.Dock="Top"
                    Visibility="{Binding CurrentText, Converter={StaticResource NullToVisibilityConverter}}"
-                   Text="{Binding CurrentText.Text}"
+                   Text="{Binding CurrentText}"
                    Style="{StaticResource TextStyle}">
         </TextBlock>
 

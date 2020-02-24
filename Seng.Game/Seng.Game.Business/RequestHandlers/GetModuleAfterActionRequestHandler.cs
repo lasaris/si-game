@@ -48,11 +48,7 @@ namespace Seng.Game.Business.RequestHandlers
                         new IntermissionFrameComponentDto
                         {
                             ComponentId = 2,
-                            TextParagraph = new TextComponentDto()
-                            {
-	                            ComponentId = 3,
-	                            Text = "Hello, this is our demo game"
-                            },
+                            TextParagraph = "Hello, this is our demo game",
                             Button = new ButtonComponentDto
                             {
                                 ComponentId = 4,
