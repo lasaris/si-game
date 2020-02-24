@@ -48,13 +48,10 @@ namespace Seng.Game.Business.RequestHandlers
                         new IntermissionFrameComponentDto
                         {
                             ComponentId = 2,
-                            TextParagraphs = new List<TextComponentDto>
+                            TextParagraph = new TextComponentDto()
                             {
-                                new TextComponentDto
-                                {
-                                    ComponentId = 3,
-                                    Text = "Hello, this is our demo game"
-                                }
+	                            ComponentId = 3,
+	                            Text = "Hello, this is our demo game"
                             },
                             Button = new ButtonComponentDto
                             {

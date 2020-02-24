@@ -8,5 +8,7 @@ namespace Seng.Game.Business.DTOs.Components.IntermissionModule
         public string Text { get; set; }
 
         public IEnumerable<OptionComponentDto> Options { get; set; }
+
+        public bool Multichoice { get; set; } = false;
     }
 }

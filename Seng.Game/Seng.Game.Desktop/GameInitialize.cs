@@ -19,84 +19,70 @@ namespace Seng.Game.Desktop
 						new IntermissionFrameComponentDto
 						{
 							ComponentId = 2,
-							TextParagraphs = new List<TextComponentDto>
+								TextParagraph = new TextComponentDto()
 							{
-								new TextComponentDto
-								{
-									ComponentId = 3,
-									Text = "Hello, this is our demo game"
-								}
+								ComponentId = 3,
+								Text = "Hello, this is our demo game"
 							},
-							Questions = new List<QuestionComponentDto>
+							Question = new QuestionComponentDto()
 							{
-								new QuestionComponentDto
+								ComponentId = 4,
+								Text = "Example question ?",
+								Options = new List<OptionComponentDto>()
 								{
-									Text = "Question ?",
-									ComponentId = 4,
-									Options = new List<OptionComponentDto>
+									new OptionComponentDto()
 									{
-										new OptionComponentDto()
-										{
-											ComponentId = 8,
-											Text = "First Answer"
-										},
-										new OptionComponentDto()
-										{
-											ComponentId = 9,
-											Text = "Second Answer"
-										}
+										ComponentId = 5,
+										Text = "First option",
+										Clicked = false
+									},
+									new OptionComponentDto()
+									{
+										ComponentId = 6,
+										Text = "Second option",
+										Clicked = false
 									}
 								}
 							}
 						},
 						new IntermissionFrameComponentDto
 						{
-							ComponentId = 5,
-							TextParagraphs = new List<TextComponentDto>
+							ComponentId = 7,
+							TextParagraph = new TextComponentDto()
 							{
-								new TextComponentDto()
-								{
-									ComponentId = 6,
-									Text = "Second page"
-								},
-								new TextComponentDto()
-								{
-									ComponentId = 7,
-									Text = "Another paragraph"
-								}
+								ComponentId = 8,
+								Text = "Second page\nAnother row"
 							}
 						},
 						new IntermissionFrameComponentDto
 						{
-							ComponentId = 10,
-							Questions = new List<QuestionComponentDto>
+							ComponentId = 9,
+							Question = new QuestionComponentDto()
 							{
-								new QuestionComponentDto
+								ComponentId = 10,
+								Text = "Slide with multichoice question ?",
+								Multichoice = true,
+								Options = new List<OptionComponentDto>()
 								{
-									ComponentId = 11,
-									Text = "Slide with another question ?",
-									Options = new List<OptionComponentDto>
+									new OptionComponentDto()
 									{
-										new OptionComponentDto()
-										{
-											ComponentId = 12,
-											Text = "Definitely yes"
-										},
-										new OptionComponentDto()
-										{
-											ComponentId = 13,
-											Text = "Probably yes"
-										},
-										new OptionComponentDto()
-										{
-											ComponentId = 14,
-											Text = "Probably no"
-										},
-										new OptionComponentDto()
-										{
-											ComponentId = 15,
-											Text = "Definitely no"
-										}
+										ComponentId = 11,
+										Text = "Definitely yes"
+									},
+									new OptionComponentDto()
+									{
+										ComponentId = 12,
+										Text = "Probably yes"
+									},
+									new OptionComponentDto()
+									{
+										ComponentId = 13,
+										Text = "Probably no"
+									},
+									new OptionComponentDto()
+									{
+										ComponentId = 14,
+										Text = "Definitely no"
 									}
 								}
 							}

@@ -16,7 +16,7 @@
             <Style.Triggers>
                 <Trigger Property="TextBlock.IsMouseOver"
                          Value="True">
-                    <Setter Property="TextBlock.Foreground" Value="OrangeRed" />
+                    <Setter Property="TextBlock.Foreground" Value="#ff5719" />
                 </Trigger>
             </Style.Triggers>
         </Style>

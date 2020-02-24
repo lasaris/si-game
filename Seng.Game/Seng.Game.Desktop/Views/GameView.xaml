@@ -5,31 +5,69 @@
              xmlns:desktop="clr-namespace:Seng.Game.Desktop"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
+    <UserControl.Resources>
+
+        <Style x:Key="RibbonButtonStyle"
+               TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"                
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#7f7f7f" />
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#7f7f7f" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type RadioButton}"
+               BasedOn="{StaticResource RibbonButtonStyle}">
+            <Setter Property="Background"
+                    Value="#323232" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
         <ContentControl Grid.Row="0"
                         prism:RegionManager.RegionName="{x:Static desktop:Regions.MainRibbonRegion}" />
 
         <DockPanel Grid.Row="1"
-                   Height="50"
-                   LastChildFill="False">
-            <Button DockPanel.Dock="Right"
+                   LastChildFill="False"
+                   Background="#323232">
+            <RadioButton DockPanel.Dock="Right"
                     Content="Desktop"
-                    Width="100"
+                    Width="120"
                     Command="{Binding NavigateCommand, Mode=OneWay}"
                     CommandParameter="{x:Static desktop:Regions.DesktopModuleView}" />
-            <Button DockPanel.Dock="Left"
+            <RadioButton DockPanel.Dock="Left"
                     Content="Browser"
-                    Width="100"
+                    Width="120"
                     Command="{Binding NavigateCommand, Mode=OneWay}"
                     CommandParameter="{x:Static desktop:Regions.BrowserModuleView}" />
-            <Button DockPanel.Dock="Left"
+            <RadioButton DockPanel.Dock="Left"
                     Content="Email"
-                    Width="100"
+                    Width="120"
                     Command="{Binding NavigateCommand, Mode=OneWay}"
                     CommandParameter="{x:Static desktop:Regions.EmailModuleView}" />
         </DockPanel>

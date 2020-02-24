@@ -12,34 +12,34 @@ namespace Seng.Game.Desktop.ViewModels
 	public class IntermissionModuleViewModel : BaseViewModel, INavigationAware
 	{
 		private readonly List<IntermissionFrameComponentDto> frames;
-		private int currentFrame;
 		private bool isQuestionOnCurrentFrame;
 		private bool isNavigationTarget = true;
 
-		private List<TextComponentDto> currentTexts;
-		private List<QuestionComponentDto> currentQuestions;
+		private int currentFrame;
+		private TextComponentDto currentText;
+		private QuestionComponentDto currentQuestion;
 
-		public List<TextComponentDto> CurrentTexts
+		public int CurrentFrame
 		{
-			get => currentTexts;
-			set => SetProperty(ref currentTexts, value);
+			get => currentFrame;
+			set => SetProperty(ref currentFrame, value);
 		}
 
-		public bool IsQuestionOnCurrentFrame
+		public TextComponentDto CurrentText
 		{
-			get => isQuestionOnCurrentFrame;
-			set => SetProperty(ref isQuestionOnCurrentFrame, value);
+			get => currentText;
+			set => SetProperty(ref currentText, value);
 		}
 
-		public List<QuestionComponentDto> CurrentQuestions
+		public QuestionComponentDto CurrentQuestion
 		{
-			get => currentQuestions;
-			set => SetProperty(ref currentQuestions, value);
+			get => currentQuestion;
+			set => SetProperty(ref currentQuestion, value);
 		}
 
 		public DelegateCommand NextFrameOrCloseCommand { get; set; }
-
-		public DelegateCommand<OptionComponentDto> AnswerSelectCommand { get; set; }
+		public DelegateCommand<OptionComponentDto> OptionSelectCommand { get; set; }
+		public DelegateCommand MultichoiceConfirmCommand { get; set; }
 
 		public IntermissionModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
@@ -49,19 +49,34 @@ namespace Seng.Game.Desktop.ViewModels
 			UpdateFrameContent();
 
 			NextFrameOrCloseCommand = new DelegateCommand(NextFrameOrCloseCommandExecute, CanNextFrameOrCloseCommandExecute);
-			AnswerSelectCommand = new DelegateCommand<OptionComponentDto>(AnswerSelectCommandExecute);
+			OptionSelectCommand = new DelegateCommand<OptionComponentDto>(OptionSelectCommandExecute);
+			MultichoiceConfirmCommand = new DelegateCommand(MultichoiceConfirmCommandExecute);
+
+			CurrentFrame = 0;
 		}
 
-		private void AnswerSelectCommandExecute(OptionComponentDto selectedAnswer)
+		private void MultichoiceConfirmCommandExecute()
 		{
-			// Manipulate with selected answer
-
 			NextFrameOrCloseCommandExecute();
+		}
+
+		private void OptionSelectCommandExecute(OptionComponentDto selectedOption)
+		{
+			if (currentQuestion.Multichoice)
+			{
+				// Manipulate with selected answer
+			}
+			else
+			{
+				// Manipulate with selected answer
+
+				NextFrameOrCloseCommandExecute();
+			}
 		}
 		 
 		private bool CanNextFrameOrCloseCommandExecute()
 		{
-			return !IsQuestionOnCurrentFrame;
+			return !isQuestionOnCurrentFrame;
 		}
 
 		private void NextFrameOrCloseCommandExecute()
@@ -75,26 +90,17 @@ namespace Seng.Game.Desktop.ViewModels
 			}
 			else
 			{
-				currentFrame += 1;
+				CurrentFrame += 1;
 				UpdateFrameContent();
 			}
 		}
 
 		private void UpdateFrameContent()
 		{
-			CurrentTexts = frames[currentFrame].TextParagraphs == null
-				? new List<TextComponentDto>()
-				: frames[currentFrame].TextParagraphs.ToList();
+			CurrentText = frames[currentFrame].TextParagraph;
 
-			if (frames[currentFrame].Questions != null)
-			{
-				IsQuestionOnCurrentFrame = true;
-				CurrentQuestions = frames[currentFrame].Questions.ToList();
-			}
-			else
-			{
-				IsQuestionOnCurrentFrame = false;
-			}
+			CurrentQuestion = frames[currentFrame].Question;
+			isQuestionOnCurrentFrame = CurrentQuestion != null;
 		}
 
 		public bool IsNavigationTarget(NavigationContext navigationContext) => isNavigationTarget;
