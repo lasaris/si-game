@@ -5,40 +5,40 @@ using System.Collections.Generic;
 using System.Linq;
 using Prism.Events;
 using Prism.Regions;
-using Seng.Game.Business.DTOs.Components;
 
 namespace Seng.Game.Desktop.ViewModels
 {
 	public class IntermissionModuleViewModel : BaseViewModel, INavigationAware
 	{
 		private readonly List<IntermissionFrameComponentDto> frames;
-		private int currentFrame;
 		private bool isQuestionOnCurrentFrame;
+		private bool isNavigationTarget = true;
 
-		private List<TextComponentDto> currentTexts;
-		private List<QuestionComponentDto> currentQuestions;
+		private int currentFrame;
+		private string currentText;
+		private QuestionComponentDto currentQuestion;
 
-		public List<TextComponentDto> CurrentTexts
+		public int CurrentFrame
 		{
-			get => currentTexts;
-			set => SetProperty(ref currentTexts, value);
+			get => currentFrame;
+			set => SetProperty(ref currentFrame, value);
 		}
 
-		public bool IsQuestionOnCurrentFrame
+		public string CurrentText
 		{
-			get => isQuestionOnCurrentFrame;
-			set => SetProperty(ref isQuestionOnCurrentFrame, value);
+			get => currentText;
+			set => SetProperty(ref currentText, value);
 		}
 
-		public List<QuestionComponentDto> CurrentQuestions
+		public QuestionComponentDto CurrentQuestion
 		{
-			get => currentQuestions;
-			set => SetProperty(ref currentQuestions, value);
+			get => currentQuestion;
+			set => SetProperty(ref currentQuestion, value);
 		}
 
 		public DelegateCommand NextFrameOrCloseCommand { get; set; }
-
-		public DelegateCommand<OptionComponentDto> AnswerSelectCommand { get; set; }
+		public DelegateCommand<OptionComponentDto> OptionSelectCommand { get; set; }
+		public DelegateCommand MultichoiceConfirmCommand { get; set; }
 
 		public IntermissionModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
@@ -48,19 +48,36 @@ namespace Seng.Game.Desktop.ViewModels
 			UpdateFrameContent();
 
 			NextFrameOrCloseCommand = new DelegateCommand(NextFrameOrCloseCommandExecute, CanNextFrameOrCloseCommandExecute);
-			AnswerSelectCommand = new DelegateCommand<OptionComponentDto>(AnswerSelectCommandExecute);
+			OptionSelectCommand = new DelegateCommand<OptionComponentDto>(OptionSelectCommandExecute);
+			MultichoiceConfirmCommand = new DelegateCommand(MultichoiceConfirmCommandExecute);
+
+			CurrentFrame = 0;
 		}
 
-		private void AnswerSelectCommandExecute(OptionComponentDto selectedAnswer)
+		private void MultichoiceConfirmCommandExecute()
 		{
-			// Manipulate with selected answer
-
 			NextFrameOrCloseCommandExecute();
+		}
+
+		private void OptionSelectCommandExecute(OptionComponentDto selectedOption)
+		{
+			var option = currentQuestion.Options.First(x => x == selectedOption);
+
+			if (currentQuestion.Multichoice)
+			{
+				option.Clicked = !option.Clicked;
+			}
+			else
+			{
+				option.Clicked = true;
+
+				NextFrameOrCloseCommandExecute();
+			}
 		}
 		 
 		private bool CanNextFrameOrCloseCommandExecute()
 		{
-			return !IsQuestionOnCurrentFrame;
+			return !isQuestionOnCurrentFrame;
 		}
 
 		private void NextFrameOrCloseCommandExecute()
@@ -69,33 +86,25 @@ namespace Seng.Game.Desktop.ViewModels
 
 			if (lastFrame)
 			{
+				isNavigationTarget = false;
 				RegionManager.RequestNavigate(Regions.ApplicationRegion, Regions.GameView);
 			}
 			else
 			{
-				currentFrame += 1;
+				CurrentFrame += 1;
 				UpdateFrameContent();
 			}
 		}
 
 		private void UpdateFrameContent()
 		{
-			CurrentTexts = frames[currentFrame].TextParagraphs == null
-				? new List<TextComponentDto>()
-				: frames[currentFrame].TextParagraphs.ToList();
+			CurrentText = frames[currentFrame].TextParagraph;
 
-			if (frames[currentFrame].Questions != null)
-			{
-				IsQuestionOnCurrentFrame = true;
-				CurrentQuestions = frames[currentFrame].Questions.ToList();
-			}
-			else
-			{
-				IsQuestionOnCurrentFrame = false;
-			}
+			CurrentQuestion = frames[currentFrame].Question;
+			isQuestionOnCurrentFrame = CurrentQuestion != null;
 		}
 
-		public bool IsNavigationTarget(NavigationContext navigationContext) => false;
+		public bool IsNavigationTarget(NavigationContext navigationContext) => isNavigationTarget;
 
 		public void OnNavigatedTo(NavigationContext navigationContext) { }
 		public void OnNavigatedFrom(NavigationContext navigationContext) { }

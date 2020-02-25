@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:components="clr-namespace:Seng.Game.Business.DTOs.Components;assembly=Seng.Game.Business"
+             xmlns:converters="clr-namespace:Seng.Game.Desktop.Views.Converters"
              xmlns:intermissionModule="clr-namespace:Seng.Game.Business.DTOs.Components.IntermissionModule;assembly=Seng.Game.Business"
              prism:ViewModelLocator.AutoWireViewModel="True"
              Background="Black">
@@ -14,8 +14,39 @@
                 <ResourceDictionary  Source="../Views/Styles/IntermissionModule.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:NullVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToInvertedVisibilityConverter"
+                                                     True="Collapsed"
+                                                     False="Visible" />
+
+            <DataTemplate x:Key="OptionsDataTemplate"
+                          DataType="{x:Type intermissionModule:OptionComponentDto}">
+                <TextBlock Text="{Binding Text}"
+                           Style="{StaticResource OptionStyle}">
+                    <TextBlock.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding DataContext.OptionSelectCommand,
+                                                        RelativeSource={RelativeSource FindAncestor,
+                                                        AncestorType={x:Type UserControl}}}"
+                                      CommandParameter="{Binding}" />
+                    </TextBlock.InputBindings>
+                </TextBlock>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MultichoiceOptionsDataTemplate"
+                          DataType="{x:Type intermissionModule:OptionComponentDto}">
+                <ToggleButton Content="{Binding Text}"
+                              Style="{StaticResource MultichoiceOptionStyle}"
+                              Command="{Binding DataContext.OptionSelectCommand,
+                                                RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType={x:Type UserControl}}}"
+                              CommandParameter="{Binding}">
+                </ToggleButton>
+            </DataTemplate>
+
         </ResourceDictionary>
+
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -25,48 +56,43 @@
     </i:Interaction.Triggers>
 
     <DockPanel HorizontalAlignment="Center"
-               VerticalAlignment="Center">
+               VerticalAlignment="Center"
+               Style="{StaticResource OpacityAnimationStyle}"
+               Effect="{Binding CurrentFrame, NotifyOnTargetUpdated=True}"> <!--a temporary solution before I find a better way-->
 
-        <ItemsControl DockPanel.Dock="Top"
-                      ItemsSource="{Binding CurrentTexts}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type components:TextComponentDto}">
-                    <TextBlock Text="{Binding Text}"
-                               Style="{StaticResource TextParagraphStyle}">
-                    </TextBlock>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <TextBlock DockPanel.Dock="Top"
+                   Visibility="{Binding CurrentText, Converter={StaticResource NullToVisibilityConverter}}"
+                   Text="{Binding CurrentText}"
+                   Style="{StaticResource TextStyle}">
+        </TextBlock>
 
-        <ItemsControl DockPanel.Dock="Top"
-                      Visibility="{Binding IsQuestionOnCurrentFrame, Converter={StaticResource BooleanToVisibilityConverter}}"
-                      ItemsSource="{Binding CurrentQuestions}"
-                      Margin="0 25 0 0">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type intermissionModule:QuestionComponentDto}">
-                    <StackPanel>
-                        <TextBlock Text="{Binding Text}"
-                                   Style="{StaticResource QuestionStyle}" />
-                        <ItemsControl ItemsSource="{Binding Options}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type intermissionModule:OptionComponentDto}">
-                                    <TextBlock Text="{Binding Text}"
-                                               Style="{StaticResource OptionStyle}">
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding MouseAction="LeftClick"
-                                                          Command="{Binding DataContext.AnswerSelectCommand, 
-                                                                    RelativeSource={RelativeSource FindAncestor, 
-                                                                    AncestorType={x:Type UserControl}}}"
-                                                          CommandParameter="{Binding}" />
-                                        </TextBlock.InputBindings>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <StackPanel DockPanel.Dock="Top"
+                    Visibility="{Binding CurrentQuestion, Converter={StaticResource NullToVisibilityConverter}}"
+                    Margin="0 25 0 0">
+
+            <TextBlock Text="{Binding CurrentQuestion.Text}"
+                       Style="{StaticResource TextStyle}" />
+
+            <ItemsControl Visibility="{Binding CurrentQuestion.Multichoice, Converter={StaticResource BooleanToInvertedVisibilityConverter}}"
+                          ItemsSource="{Binding CurrentQuestion.Options}"
+                          ItemTemplate="{StaticResource OptionsDataTemplate}"
+                          Margin="0 5 0 0" />
+
+            <StackPanel Visibility="{Binding CurrentQuestion.Multichoice, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0 5 0 0">
+
+                <ItemsControl ItemsSource="{Binding CurrentQuestion.Options}"
+                              ItemTemplate="{StaticResource MultichoiceOptionsDataTemplate}"
+                              Margin="0 5 0 0" />
+
+                <Button Content="Confirm"
+                        Style="{StaticResource ConfirmationButtonStyle}"
+                        Command="{Binding MultichoiceConfirmCommand, Mode=OneWay}"
+                        Margin="0 40 0 0"
+                        HorizontalAlignment="Center" />
+
+            </StackPanel>
+        </StackPanel>
 
     </DockPanel>
 
