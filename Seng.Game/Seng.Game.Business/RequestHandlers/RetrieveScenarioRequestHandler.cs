@@ -25,10 +25,9 @@ namespace Seng.Game.Business.RequestHandlers
         public async Task<RetrieveScenarioResultDto> Handle(RetrieveScenarioRequest request, CancellationToken cancellationToken)
         {
             RetrieveScenarioFromServerQuery query = _mapper.Map<RetrieveScenarioRequest, RetrieveScenarioFromServerQuery>(request);
-            bool result = await _mediator.Send(query);
+            await _mediator.Send(query);
             return new RetrieveScenarioResultDto
             {
-                IsRetrievedFromServer = result
             };
         }
     }

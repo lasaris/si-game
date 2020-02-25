@@ -7,7 +7,6 @@ using System.Text;
 namespace Seng.Game.Business.Commands
 {
     public class ICommand<TResponse> : IRequest<TResponse>
-        where TResponse : IEntity
     {
     }
 }

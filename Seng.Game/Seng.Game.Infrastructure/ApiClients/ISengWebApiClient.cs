@@ -1,4 +1,5 @@
-﻿using Seng.Game.Business.Queries;
+﻿using Seng.Common.Entities;
+using Seng.Game.Business.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Seng.Game.Infrastructure.ApiClients
 {
     interface ISengWebApiClient
     {
-        Task<DbContext> GetScenario(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken);
+        Task<GameDbContext> GetScenario(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken);
     }
 }

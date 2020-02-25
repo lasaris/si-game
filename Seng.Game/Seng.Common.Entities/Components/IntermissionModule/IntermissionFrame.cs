@@ -10,5 +10,6 @@ namespace Seng.Common.Entities.Components.IntermissionModule
         public int ComponentId { get; set; }
         public int ButtonId { get; set; }
         public bool IsCurrentlyVisible { get; set; }
+        public string TextParagraph { get; set; }
     }
 }

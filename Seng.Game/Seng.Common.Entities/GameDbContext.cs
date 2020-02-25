@@ -7,16 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Seng.Game.Infrastructure
+namespace Seng.Common.Entities
 {
-    class DbContext
+    public class GameDbContext
     {
         public List<SwitchIntermissionFrameAction> SwitchIntermissionFrameActions { get; set; }
         public List<Context> Contexts { get; set; }
         public List<GameAction> GameActions { get; set; }
         public List<OnClickOption> OnClickOptions { get; set; }
         public List<IntermissionFrame> IntermissionFrames { get; set; }
-        public List<IntermissionText> IntermissionTexts { get; set; }
         public List<Button> Buttons { get; set; }
         public List<Component> Components { get; set; }
         public List<IntermissionModule> IntermissionModules { get; set; }

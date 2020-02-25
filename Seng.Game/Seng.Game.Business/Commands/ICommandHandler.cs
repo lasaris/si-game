@@ -8,7 +8,6 @@ namespace Seng.Game.Business.Commands
 {
     public interface ICommandHandler<TCommand, TResponse> : IRequestHandler<TCommand, TResponse>
         where TCommand : ICommand<TResponse>
-        where TResponse : IEntity
     {
     }
 }

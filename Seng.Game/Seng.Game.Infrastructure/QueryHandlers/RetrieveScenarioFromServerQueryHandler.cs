@@ -1,6 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using MediatR;
+using Newtonsoft.Json;
+using Seng.Common.Entities;
 using Seng.Game.Business.Queries;
 using Seng.Game.Infrastructure.ApiClients;
+using Seng.Game.Infrastructure.Database;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,20 +13,21 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.QueryHandlers
 {
-    class RetrieveScenarioFromServerQueryHandler : IQueryHandler<RetrieveScenarioFromServerQuery, bool>
+    internal class RetrieveScenarioFromServerQueryHandler : IQueryHandler<RetrieveScenarioFromServerQuery, GameDbContext>
     {
         private ISengWebApiClient _webApiClient;
+        private IDbConnectionCreator _dbConnectionCreator { get; set; }
 
-        public RetrieveScenarioFromServerQueryHandler(ISengWebApiClient webApiClient)
+        public RetrieveScenarioFromServerQueryHandler(ISengWebApiClient webApiClient, IDbConnectionCreator dbConnectionFactory)
         {
             _webApiClient = webApiClient;
+            _dbConnectionCreator = dbConnectionFactory;
         }
 
-        public async Task<bool> Handle(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken)
+        public async Task<GameDbContext> Handle(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken)
         {
             await _webApiClient.GetScenario(query, cancellationToken);
-            //save it into database
-            return true;
+            return null;
         }
     }
 }

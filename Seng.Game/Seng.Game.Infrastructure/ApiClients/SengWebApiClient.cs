@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Seng.Common.Entities;
 using Seng.Game.Business.Queries;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ namespace Seng.Game.Infrastructure.ApiClients
 {
     class SengWebApiClient : ISengWebApiClient
     {
-        public async Task<DbContext> GetScenario(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken)
+        public async Task<GameDbContext> GetScenario(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken)
         {
             string webData = await File.ReadAllTextAsync("example_scenario.json", cancellationToken);
-            return JsonConvert.DeserializeObject<DbContext>(webData);
+            return JsonConvert.DeserializeObject<GameDbContext>(webData);
         }
     }
 }
