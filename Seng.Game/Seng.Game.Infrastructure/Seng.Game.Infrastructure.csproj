@@ -5,8 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Seng.Game.Business\Seng.Game.Business.csproj" />
-    <ProjectReference Include="..\Seng.Game.Entities\Seng.Game.Entities.csproj" />
+    <ProjectReference Include="..\Seng.Common.Entities\Seng.Common.Entities.csproj" />
   </ItemGroup>
 
 </Project>

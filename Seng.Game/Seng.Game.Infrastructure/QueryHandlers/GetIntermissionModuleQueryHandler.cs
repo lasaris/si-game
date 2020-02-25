@@ -1,5 +1,5 @@
-﻿using Seng.Game.Business.Queries;
-using Seng.Game.Entities.Modules;
+﻿using Seng.Common.Entities.Modules;
+using Seng.Game.Business.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +10,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     class GetIntermissionModuleQueryHandler : IQueryHandler<GetIntermissionModuleQuery, IntermissionModule>
     {
-        public Task<IntermissionModule> Handle(GetIntermissionModuleQuery request, CancellationToken cancellationToken)
+        public Task<IntermissionModule> Handle(GetIntermissionModuleQuery query, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

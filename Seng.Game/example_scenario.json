@@ -1,0 +1,98 @@
+{
+  "Modules": [
+    {
+      "Id": 1,
+      "IsVisible": true,
+      "IsRunning": true
+    }
+  ],
+  "IntermissionModules": [
+    {
+      "Id": 1,
+      "ModuleId": 1
+    }
+  ],
+  "Buttons": [
+    {
+      "Id": 1,
+      "ComponentId": 1,
+      "Text": "Next"
+    },
+    {
+      "Id": 2,
+      "ComponentId": 2,
+      "Text": "End"
+    }
+  ],
+  "IntermissionFrames": [
+    {
+      "Id": 1,
+      "IntermissionModuleId": 1,
+      "ComponentId": 3,
+      "ButtonId": 1
+    },
+    {
+      "Id": 2,
+      "IntermissionModuleId": 1,
+      "ComponentId": 4,
+      "ButtonId": 2
+    }
+  ],
+  "IntermissionTexts": [
+    {
+      "Id": 1,
+      "ComponentId": 5,
+      "Text": "Hello, abababa",
+      "IntermissionFrameId": 1
+    },
+    {
+      "Id": 2,
+      "ComponentId": 6,
+      "Text": "22asdf2asdf2asdf",
+      "IntermissionFrameId": 1
+    },
+    {
+      "Id": 3,
+      "ComponentId": 7,
+      "Text": "asdfasdfasdffasd 2 asdf2fsd a2 ",
+      "IntermissionFrameId": 2
+    }
+  ]
+  "Components": [
+    {
+      "Id": 1
+    },
+    {
+      "Id": 2
+    },
+    {
+      "Id": 3
+    },
+    {
+      "Id": 4
+    },
+    {
+      "Id": 5
+    },
+    {
+      "Id": 6
+    },
+    {
+      "Id": 7
+    }
+  ],
+  "GameAction": [
+    {
+      "Id": 1
+    }
+  ],
+  "SwitchIntermissionFrameActions": [
+    {
+      "Id": 1,
+      "GameActionId": 2,
+      "NewIntermissionFrameId": 2
+    }
+  ],
+  "Contexts": [],
+  "OnClickOptions": []
+}

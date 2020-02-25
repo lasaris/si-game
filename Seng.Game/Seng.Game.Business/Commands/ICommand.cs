@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Seng.Game.Entities;
+using Seng.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
