@@ -22,10 +22,10 @@ namespace Seng.Game.Infrastructure.CommandExecutors
 
         public Task<CommandBasicResult> Handle(InsertScenarioDataCommand request, CancellationToken cancellationToken)
         {
-            return null;
-            //using(var dbConnection = _dbConnectionCreator.CreateOpenConnection())
-            //{
-            //}
+            using(var dbConnection = _dbConnectionCreator.CreateOpenConnection())
+            {
+                return null;
+            }
         }
     }
 }

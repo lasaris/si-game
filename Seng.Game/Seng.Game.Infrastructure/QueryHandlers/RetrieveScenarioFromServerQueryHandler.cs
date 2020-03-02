@@ -26,8 +26,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 
         public async Task<GameDbContext> Handle(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken)
         {
-            await _webApiClient.GetScenario(query, cancellationToken);
-            return null;
+            return await _webApiClient.GetScenario(query, cancellationToken);
         }
     }
 }
