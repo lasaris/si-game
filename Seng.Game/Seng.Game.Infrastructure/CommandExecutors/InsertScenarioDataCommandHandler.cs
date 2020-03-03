@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Seng.Game.Business.Commands;
+using Seng.Game.Infrastructure.BulkInsert;
 using Seng.Game.Infrastructure.Database;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace Seng.Game.Infrastructure.CommandExecutors
 {
     class InsertScenarioDataCommandHandler : ICommandHandler<InsertScenarioDataCommand, CommandBasicResult>
     {
-        IDbConnectionCreator _dbConnectionCreator;
+        private IDbConnectionCreator _dbConnectionCreator;
+        private IBulkInsertExecutor _bulkInsertExecutor;
 
-        public InsertScenarioDataCommandHandler()
+        public InsertScenarioDataCommandHandler(IDbConnectionCreator dbConnectionCreator, IBulkInsertExecutor bulkInsertExecutor)
         {
-            
+            _dbConnectionCreator = dbConnectionCreator;
+            _bulkInsertExecutor = bulkInsertExecutor;
         }
 
         public Task<CommandBasicResult> Handle(InsertScenarioDataCommand request, CancellationToken cancellationToken)
