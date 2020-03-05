@@ -20,34 +20,34 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
         };
 
         public const string SwitchIntermissionFrameActionQuery = @"INSERT INTO [action.SwitchIntermissionFramesAction] 
-                                                                (
-                                                                    Id,
-                                                                    ActionId,
-                                                                    NewIntermissionFrameId
-                                                                )
-                                                                VALUES (
-                                                                    @Id,
-                                                                    @ActionId,
-                                                                    @NewIntermissionFrameId
-                                                                );";
+                                                                    (
+                                                                        Id,
+                                                                        GameActionId,
+                                                                        NewIntermissionFrameId
+                                                                    )
+                                                                    VALUES (
+                                                                        @Id,
+                                                                        @GameActionId,
+                                                                        @NewIntermissionFrameId
+                                                                    );";
 
         public const string ContextQuery = @"INSERT INTO [action.Context] 
-                                        (
-                                             Id,
-                                             ClickedComponentId,
-                                             AlreadyRunActionId,
-                                             OnClickOptionId,
-                                             InLast,
-                                             InFirst
-                                         )
-                                         VALUES (
-                                             @Id,
-                                             @ClickedComponentId,
-                                             @AlreadyRunActionId,
-                                             @OnClickOptionId,
-                                             @InLast,
-                                             @InFirst
-                                         );";
+                                            (
+                                                Id,
+                                                ClickedComponentId,
+                                                AlreadyRunActionId,
+                                                OnClickOptionId,
+                                                InLast,
+                                                InFirst
+                                            )
+                                            VALUES (
+                                                @Id,
+                                                @ClickedComponentId,
+                                                @AlreadyRunActionId,
+                                                @OnClickOptionId,
+                                                @InLast,
+                                                @InFirst
+                                            );";
 
         public const string GameActionQuery = @"INSERT INTO [action.GameAction] 
                                             (

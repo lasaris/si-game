@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Seng.Common.Entities;
+using Seng.Game.Business.Commands;
 using Seng.Game.Business.DTOs;
 using Seng.Game.Business.Queries;
 using Seng.Game.Business.Requests;
@@ -25,10 +27,13 @@ namespace Seng.Game.Business.RequestHandlers
         public async Task<RetrieveScenarioResultDto> Handle(RetrieveScenarioRequest request, CancellationToken cancellationToken)
         {
             RetrieveScenarioFromServerQuery query = _mapper.Map<RetrieveScenarioRequest, RetrieveScenarioFromServerQuery>(request);
-            await _mediator.Send(query);
-            return new RetrieveScenarioResultDto
+            GameDbContext gameDbContext = await _mediator.Send(query);
+            var insertScenarioDataCommand = new InsertScenarioDataCommand
             {
+                GameDbContext = gameDbContext
             };
+            await _mediator.Send(insertScenarioDataCommand);
+            return null;
         }
     }
 }
