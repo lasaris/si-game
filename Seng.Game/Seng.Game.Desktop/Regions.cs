@@ -37,6 +37,7 @@ namespace Seng.Game.Desktop
 		public static readonly string DisplayEmailView = nameof(Views.DisplayEmailView);
 		public static readonly string EmptyEmailView = nameof(Views.EmptyEmailView);
 		public static readonly Type EmptyEmailViewType = typeof(EmptyEmailView);
+		public static readonly string SelectOptionView = nameof(Views.SelectOptionView);
 
 		#endregion
 	}

@@ -28,6 +28,7 @@ namespace Seng.Game.Desktop
 			containerRegistry.RegisterForNavigation<NewEmailView>();
 			containerRegistry.RegisterForNavigation<DisplayEmailView>();
 			containerRegistry.RegisterForNavigation<EmptyEmailView>();
+			containerRegistry.RegisterForNavigation<SelectOptionView>();
 		}
 	}
 }

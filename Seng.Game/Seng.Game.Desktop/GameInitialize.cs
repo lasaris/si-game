@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Seng.Game.Business.DTOs;
+using Seng.Game.Business.DTOs.Components.EmailModule;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
 
@@ -11,7 +13,7 @@ namespace Seng.Game.Desktop
 			var intermissionModule = new IntermissionModuleDto
 			{
 				ModuleId = 1,
-				IsRunning = true,
+				IsRunning = false,
 				IsVisible = true,
 				Frames = new List<IntermissionFrameComponentDto>
 					{
@@ -107,6 +109,198 @@ namespace Seng.Game.Desktop
 
 			return gameState.CurrentModule;
 			*/
+		}
+
+		public static EmailModuleDto EmailModuleGet()
+		{
+			var emailModule = new EmailModuleDto
+			{
+				IsRunning = true,
+				IsVisible = true,
+				NewEmail = new NewEmailComponentDto
+				{
+					Recipients = new List<RecipientComponentDto>()
+					{
+						new RecipientComponentDto()
+						{
+							Address = "First",
+							ContentHeader = "Dear Mr. First,",
+							ContentFooter = "Regards",
+							FirstParagraphs = new List<ParagraphComponentDto>
+							{
+								new ParagraphComponentDto()
+								{
+									Text = "First option in first paragraph",
+									ChildrenParagraphs = new List<ParagraphComponentDto>
+									{
+										new ParagraphComponentDto
+										{
+											Text = "First Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Second Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Third Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Forth Children"
+										}
+									}
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Second option in first paragraph"
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Third option in first paragraph"
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Forth option in first paragraph"
+								}
+							}
+						},
+						new RecipientComponentDto()
+						{
+							Address = "Second",
+							ContentHeader = "Dear Mr. Second,",
+							ContentFooter = "Regards",
+							FirstParagraphs = new List<ParagraphComponentDto>
+							{
+								new ParagraphComponentDto()
+								{
+									Text = "First option in first paragraph",
+									ChildrenParagraphs = new List<ParagraphComponentDto>
+									{
+										new ParagraphComponentDto
+										{
+											Text = "First Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Second Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Third Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Forth Children"
+										}
+									}
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Second option in first paragraph"
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Third option in first paragraph"
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Forth option in first paragraph"
+								}
+							}
+						},
+						new RecipientComponentDto()
+						{
+							Address = "Third",
+							ContentHeader = "Dear Mr. Third,",
+							ContentFooter = "Regards",
+							FirstParagraphs = new List<ParagraphComponentDto>
+							{
+								new ParagraphComponentDto()
+								{
+									Text = "First option in first paragraph",
+									ChildrenParagraphs = new List<ParagraphComponentDto>
+									{
+										new ParagraphComponentDto
+										{
+											Text = "First Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Second Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Third Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Forth Children"
+										}
+									}
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Second option in first paragraph"
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Third option in first paragraph"
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Forth option in first paragraph"
+								}
+							}
+						},
+						new RecipientComponentDto()
+						{
+							Address = "Forth",
+							ContentHeader = "Dear Mr. Forth,",
+							ContentFooter = "Regards",
+							FirstParagraphs = new List<ParagraphComponentDto>
+							{
+								new ParagraphComponentDto()
+								{
+									Text = "First option in first paragraph",
+									ChildrenParagraphs = new List<ParagraphComponentDto>
+									{
+										new ParagraphComponentDto
+										{
+											Text = "First Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Second Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Third Children"
+										},
+										new ParagraphComponentDto
+										{
+											Text = "Forth Children"
+										}
+									}
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Second option in first paragraph"
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Third option in first paragraph"
+								},
+								new ParagraphComponentDto
+								{
+									Text = "Forth option in first paragraph"
+								}
+							}
+						}
+					}
+				}
+			};
+			return emailModule;
 		}
 	}
 }

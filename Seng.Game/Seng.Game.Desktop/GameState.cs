@@ -6,9 +6,12 @@ namespace Seng.Game.Desktop
 	{
 		public IntermissionModuleDto IntermissionModule { get; set; }
 
+		public EmailModuleDto EmailModule { get; set; }
+
 		public GameState()
 		{
 			IntermissionModule = GameInitialize.IntermissionModuleGet();
+			EmailModule = GameInitialize.EmailModuleGet();
 		}
 	}
 }

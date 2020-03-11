@@ -20,10 +20,10 @@
                 BorderThickness="0 0 1 0"
                 BorderBrush="Black">
             <StackPanel>
-                <Button Style="{StaticResource SideMenuButton}"
+                <Button Style="{StaticResource SideMenuButtonStyle}"
                         Content="New Email"
                         Command="{Binding NewEmailButtonCommand}" />
-                <Button Style="{StaticResource SideMenuButton}"
+                <Button Style="{StaticResource SideMenuButtonStyle}"
                         Content="Inbox" />
             </StackPanel>
         </Border>
