@@ -7,7 +7,45 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="../Styles/EmailModule.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="../Styles/EmailModule.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="EmailInListDataTemplate"
+                          DataType="{x:Type emailModule:EmailComponentDto}">
+                <Border BorderBrush="Black"
+                                        BorderThickness="0 0 1 1"
+                                        Height="140">
+                    <RadioButton Command="{Binding DataContext.ViewEmailFromListCommand,
+                                                   RelativeSource={RelativeSource FindAncestor,
+                                                   AncestorType={x:Type UserControl}}}"
+                                 CommandParameter="{Binding}">
+                        <RadioButton.Content>
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Bottom"
+                                                           Text="{Binding Subject}"
+                                                           Margin="5 0 5 20"
+                                                           FontSize="24"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           HorizontalAlignment="Left"/>
+                                <TextBlock DockPanel.Dock="Left"
+                                                           Text="{Binding Sender}"
+                                                           Margin="10 20 0 0"
+                                                           FontSize="22"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           HorizontalAlignment="left" />
+                                <TextBlock DockPanel.Dock="Right"
+                                                           Text="{Binding Date, StringFormat='dd/MM h:mm'}"
+                                                           Margin="0 20 10 0"
+                                                           FontSize="22"
+                                                           HorizontalAlignment="Right" />
+                            </DockPanel>
+                        </RadioButton.Content>
+                    </RadioButton>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
@@ -48,40 +86,8 @@
                 <ScrollViewer DockPanel.Dock="Top"
                               VerticalScrollBarVisibility="Visible"
                               VerticalAlignment="Stretch">
-                    <ItemsControl ItemsSource="{Binding EmailList}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type emailModule:EmailComponentDto}">
-                                <Border BorderBrush="Black"
-                                        BorderThickness="0 0 1 1"
-                                        Height="140">
-                                    <RadioButton Command="{Binding DataContext.ViewEmailFromListCommand,
-                                                           RelativeSource={RelativeSource FindAncestor,
-                                                           AncestorType={x:Type UserControl}}}">
-                                        <RadioButton.Content>
-                                            <DockPanel>
-                                                <TextBlock DockPanel.Dock="Bottom"
-                                                           Text="{Binding Subject}"
-                                                           Margin="5 0 5 20"
-                                                           FontSize="24"
-                                                           TextTrimming="CharacterEllipsis"
-                                                           HorizontalAlignment="Left"/>
-                                                <TextBlock DockPanel.Dock="Left"
-                                                           Text="{Binding Sender}"
-                                                           Margin="10 20 0 0"
-                                                           FontSize="22"
-                                                           TextTrimming="CharacterEllipsis"
-                                                           HorizontalAlignment="left" />
-                                                <TextBlock DockPanel.Dock="Right"
-                                                           Text="{Binding Date, StringFormat='dd/MM h:mm'}"
-                                                           Margin="0 20 10 0"
-                                                           FontSize="22"
-                                                           HorizontalAlignment="Right" />
-                                            </DockPanel>
-                                        </RadioButton.Content>
-                                    </RadioButton>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
+                    <ItemsControl ItemsSource="{Binding EmailList}"
+                                  ItemTemplate="{StaticResource EmailInListDataTemplate}">
                     </ItemsControl>
                 </ScrollViewer>
             </DockPanel>

@@ -22,23 +22,24 @@ namespace Seng.Game.Desktop.ViewModels
 
 		public DelegateCommand NewEmailCommand { get; set; }
 		public DelegateCommand ShowInboxEmailsCommand { get; set; }
-		public DelegateCommand ViewEmailFromListCommand { get; set; }
+		public DelegateCommand<EmailComponentDto> ViewEmailFromListCommand { get; set; }
 
 		public EmailModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
 			NewEmailCommand = new DelegateCommand(NewEmailCommandExecute);
 			ShowInboxEmailsCommand = new DelegateCommand(ShowInboxEmailsCommandExecute);
-			ViewEmailFromListCommand = new DelegateCommand(ViewEmailFromListCommandExecute);
+			ViewEmailFromListCommand = new DelegateCommand<EmailComponentDto>(ViewEmailFromListCommandExecute);
 
 			emailModule = gameState.EmailModule;
 
 			regionManager.RegisterViewWithRegion(Regions.EmailRegion, Regions.EmptyEmailViewType);
 		}
 
-		private void ViewEmailFromListCommandExecute()
+		private void ViewEmailFromListCommandExecute(EmailComponentDto email)
 		{
-			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.DisplayEmailView);
+			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.DisplayEmailView,
+				new NavigationParameters { {"Email", email} });
 		}
 
 		private void ShowInboxEmailsCommandExecute()
