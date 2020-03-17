@@ -1,7 +1,6 @@
 ﻿using Prism.Ioc;
 using Seng.Game.Desktop.Views;
 using System.Windows;
-using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop
 {
@@ -29,6 +28,11 @@ namespace Seng.Game.Desktop
 			containerRegistry.RegisterForNavigation<DisplayEmailView>();
 			containerRegistry.RegisterForNavigation<EmptyEmailView>();
 			containerRegistry.RegisterForNavigation<SelectOptionView>();
+		}
+
+		private void App_OnStartup(object sender, StartupEventArgs e)
+		{
+			Application.Current.Resources["ThemeColor"] = GameTheme.GetBaseThemeColor();
 		}
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Seng.Game.Desktop.Views
+﻿namespace Seng.Game.Desktop.Views
 {
 	public partial class SelectOptionView
 	{

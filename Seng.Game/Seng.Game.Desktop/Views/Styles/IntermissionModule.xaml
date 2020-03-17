@@ -37,7 +37,7 @@
             <Trigger Property="TextBlock.IsMouseOver"
                      Value="True">
                 <Setter Property="Foreground"
-                        Value="#ff5719" />
+                        Value="{DynamicResource ThemeColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -56,7 +56,7 @@
                         <Trigger Property="IsChecked"
                                  Value="True">
                             <Setter Property="Foreground"
-                                    Value="#ff5719"
+                                    Value="{DynamicResource ThemeColor}"
                                     TargetName="textBlock" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -91,9 +91,9 @@
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Foreground"
-                        Value="#ff5719" />
+                        Value="{DynamicResource ThemeColor}" />
                 <Setter Property="BorderBrush"
-                        Value="#ff5719" />
+                        Value="{DynamicResource ThemeColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>

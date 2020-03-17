@@ -22,7 +22,7 @@
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Background"
-                        Value="#ff5719" />
+                        Value="{DynamicResource ThemeColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -72,7 +72,7 @@
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Background"
-                        Value="#ff5719" />
+                        Value="{DynamicResource ThemeColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -128,12 +128,12 @@
             <Trigger Property="IsChecked"
                      Value="True">
                 <Setter Property="Background"
-                        Value="#ff5719" />
+                        Value="{DynamicResource ThemeColor}" />
             </Trigger>
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Background"
-                        Value="#ff5719" />
+                        Value="{DynamicResource ThemeColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>

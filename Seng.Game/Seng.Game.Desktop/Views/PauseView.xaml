@@ -16,7 +16,7 @@
             <Style.Triggers>
                 <Trigger Property="TextBlock.IsMouseOver"
                          Value="True">
-                    <Setter Property="TextBlock.Foreground" Value="#ff5719" />
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeColor}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -24,7 +24,17 @@
 
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-        <TextBlock Text="Back to game">
+        <TextBlock Text="Theme"
+                   HorizontalAlignment="Center">
+            <TextBlock.InputBindings>
+                <MouseBinding MouseAction="LeftClick"
+                              Command="{Binding DataContext.ChangeThemeCommand,
+                                    RelativeSource={RelativeSource FindAncestor, 
+                                    AncestorType={x:Type UserControl}}}" />
+            </TextBlock.InputBindings>
+        </TextBlock>
+        <TextBlock Text="Back to game"
+                   HorizontalAlignment="Center">
             <TextBlock.InputBindings>
                 <MouseBinding MouseAction="LeftClick"
                               Command="{Binding DataContext.BackToGameCommand,
@@ -33,7 +43,8 @@
             </TextBlock.InputBindings>
         </TextBlock>
 
-        <TextBlock Text="Exit game">
+        <TextBlock Text="Exit game"
+                   HorizontalAlignment="Center">
             <TextBlock.InputBindings>
                 <MouseBinding MouseAction="LeftClick"
                               Command="{Binding DataContext.ExitApplicationCommand,
