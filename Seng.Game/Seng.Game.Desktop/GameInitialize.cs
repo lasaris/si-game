@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Seng.Game.Business.DTOs;
+﻿using System;
+using System.Collections.Generic;
 using Seng.Game.Business.DTOs.Components.EmailModule;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
@@ -297,6 +297,113 @@ namespace Seng.Game.Desktop
 								}
 							}
 						}
+					}
+				},
+				RegularEmails = new List<EmailComponentDto>
+				{
+					new EmailComponentDto
+					{
+						Sender = "James Black",
+						Date = DateTime.Today,
+						Subject = "Example Subject",
+						ContentHeader = "Header,",
+						Paragraphs = new List<string>
+						{
+							"Example first paragraph",
+							"Example second paragraph"
+						},
+						ContentFooter = "Footer"
+					},
+					new EmailComponentDto
+					{
+						Sender = "James Black",
+						Date = DateTime.Today,
+						Subject = "Example Subject",
+						ContentHeader = "Header,",
+						Paragraphs = new List<string>
+						{
+							"Example first paragraph",
+							"Example second paragraph"
+						},
+						ContentFooter = "Footer"
+					},
+					new EmailComponentDto
+					{
+						Sender = "James Black",
+						Date = DateTime.Today,
+						Subject = "Example Subject",
+						ContentHeader = "Header,",
+						Paragraphs = new List<string>
+						{
+							"Example first paragraph",
+							"Example second paragraph"
+						},
+						ContentFooter = "Footer"
+					},
+					new EmailComponentDto
+					{
+						Sender = "James Black",
+						Date = DateTime.Today,
+						Subject = "Example Subject",
+						ContentHeader = "Header,",
+						Paragraphs = new List<string>
+						{
+							"Example first paragraph",
+							"Example second paragraph"
+						},
+						ContentFooter = "Footer"
+					},
+					new EmailComponentDto
+					{
+						Sender = "James Black",
+						Date = DateTime.Today,
+						Subject = "Example Subject",
+						ContentHeader = "Header,",
+						Paragraphs = new List<string>
+						{
+							"Example first paragraph",
+							"Example second paragraph"
+						},
+						ContentFooter = "Footer"
+					},
+					new EmailComponentDto
+					{
+						Sender = "James Black",
+						Date = DateTime.Today,
+						Subject = "Example Subject",
+						ContentHeader = "Header,",
+						Paragraphs = new List<string>
+						{
+							"Example first paragraph",
+							"Example second paragraph"
+						},
+						ContentFooter = "Footer"
+					},
+					new EmailComponentDto
+					{
+						Sender = "James Black",
+						Date = DateTime.Today,
+						Subject = "Example Subject",
+						ContentHeader = "Header,",
+						Paragraphs = new List<string>
+						{
+							"Example first paragraph",
+							"Example second paragraph"
+						},
+						ContentFooter = "Footer"
+					},
+					new EmailComponentDto
+					{
+						Sender = "James Black",
+						Date = DateTime.Today,
+						Subject = "Example Subject",
+						ContentHeader = "Header,",
+						Paragraphs = new List<string>
+						{
+							"Example first paragraph",
+							"Example second paragraph"
+						},
+						ContentFooter = "Footer"
 					}
 				}
 			};

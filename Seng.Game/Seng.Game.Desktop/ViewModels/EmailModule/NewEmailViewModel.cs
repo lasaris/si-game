@@ -19,6 +19,7 @@ namespace Seng.Game.Desktop.ViewModels
 		private readonly NewEmailComponentDto newEmail;
 		private RecipientComponentDto currentRecipient;
 		private List<ParagraphComponentDto> currentParagraphOptions;
+		private List<ParagraphComponentDto> nextParagraphOptions;
 
 		private string subject;
 		private string address;
@@ -144,16 +145,18 @@ namespace Seng.Game.Desktop.ViewModels
 					IsParagraphDisplayed = true;
 				}
 
-				Paragraphs.Add(payload.Selected);
+				currentParagraphOptions = payload.ParagraphOptions;
+				Paragraphs.Add(payload.SelectedParagraph);
 			}
 			else
 			{
-				Paragraphs[Paragraphs.Count - 1] = payload.Selected;
+				Paragraphs[Paragraphs.Count - 1] = payload.SelectedParagraph;
 			}
 
-			if (payload.Selected.ChildrenParagraphs != null)
+			if (payload.SelectedParagraph.ChildrenParagraphs != null)
 			{
-				currentParagraphOptions = payload.Selected.ChildrenParagraphs.ToList();
+				IsEmailCompleted = false;
+				nextParagraphOptions = payload.SelectedParagraph.ChildrenParagraphs.ToList();
 			}
 			else
 			{
@@ -172,7 +175,7 @@ namespace Seng.Game.Desktop.ViewModels
 
 			IsRecipientSelected = true;
 			currentRecipient = selectedRecipient;
-			currentParagraphOptions = selectedRecipient.FirstParagraphs.ToList();
+			nextParagraphOptions = selectedRecipient.FirstParagraphs.ToList();
 			Address = selectedRecipient.Address;
 			Header = selectedRecipient.ContentHeader;
 			Footer = selectedRecipient.ContentFooter;
@@ -206,7 +209,7 @@ namespace Seng.Game.Desktop.ViewModels
 				new NavigationParameters
 				{
 					{"Context", OptionsSelectionContext.Paragraphs},
-					{"ParagraphOptions", currentParagraphOptions},
+					{"ParagraphOptions", nextParagraphOptions},
 					{"Purpose", ParagraphSelectionPurpose.Add}
 				});
 		}
@@ -233,12 +236,15 @@ namespace Seng.Game.Desktop.ViewModels
 
 			if (Paragraphs.Count == 0)
 			{
-				currentParagraphOptions = currentRecipient.FirstParagraphs.ToList();
+				nextParagraphOptions = currentRecipient.FirstParagraphs.ToList();
 				IsParagraphDisplayed = false;
 			}
 			else
 			{
-				currentParagraphOptions = Paragraphs[Paragraphs.Count - 1].ChildrenParagraphs.ToList();
+				nextParagraphOptions = currentParagraphOptions;
+				currentParagraphOptions = Paragraphs.Count > 1
+					? Paragraphs[Paragraphs.Count - 2].ChildrenParagraphs.ToList()
+					: currentRecipient.FirstParagraphs.ToList();
 			}
 		}
 
@@ -251,6 +257,11 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			isNavigationTarget = false;
 			newEmail.Subject = subject;
+
+			foreach (var paragraph in Paragraphs)
+			{
+				paragraph.Selected = true;
+			}
 
 			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.EmptyEmailView);
 		}

@@ -111,4 +111,39 @@
                 Value="30" />
     </Style>
 
+    <Style x:Key="EmailListButtonStyle"
+           TargetType="{x:Type ToggleButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Stretch"                
+                                          VerticalAlignment="Stretch" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsChecked"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="#ff5719" />
+            </Trigger>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="#ff5719" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type RadioButton}"
+           BasedOn="{StaticResource EmailListButtonStyle}">
+        <Setter Property="Background"
+                Value="LightGray" />
+        <Setter Property="GroupName"
+                Value="EmailList" />
+    </Style>
+
 </ResourceDictionary>

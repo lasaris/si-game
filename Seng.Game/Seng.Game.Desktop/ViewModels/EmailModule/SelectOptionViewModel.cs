@@ -60,7 +60,8 @@ namespace Seng.Game.Desktop.ViewModels
 					ParagraphSelectionEventPayload paragraphSelectionEventPayload = new ParagraphSelectionEventPayload
 					{
 						Purpose = paragraphSelectionPurpose,
-						Selected = paragraphOptions.First(x => x.Text == selected)
+						ParagraphOptions = paragraphOptions,
+						SelectedParagraph = paragraphOptions.First(x => x.Text == selected)
 					};
 					EventAggregator.GetEvent<ParagraphSelectionEvent>().Publish(paragraphSelectionEventPayload);
 					break;
