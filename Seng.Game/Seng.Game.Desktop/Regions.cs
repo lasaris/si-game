@@ -9,7 +9,9 @@ namespace Seng.Game.Desktop
 
 		public static readonly string ApplicationRegion = "ApplicationRegion";
 
-		public static readonly string MainRibbonRegion = "MainRibbonRegion";
+		public static readonly string RibbonRegion = "RibbonRegion";
+
+		public static readonly string EmailRegion = "EmailRegion";
 
 		#endregion
 
@@ -25,8 +27,17 @@ namespace Seng.Game.Desktop
 		public static readonly Type IntermissionModuleViewType = typeof(IntermissionModuleView);
 
 		public static readonly string DesktopModuleView = nameof(Views.DesktopModuleView);
-		public static readonly string EmailModuleView = nameof(Views.EmailModuleView);
+		public static readonly Type DesktopModuleViewType = typeof(DesktopModuleView);
+
 		public static readonly string BrowserModuleView = nameof(Views.BrowserModuleView);
+
+		public static readonly string EmailModuleView = nameof(Views.EmailModuleView);
+
+		public static readonly string NewEmailView = nameof(Views.NewEmailView);
+		public static readonly string DisplayEmailView = nameof(Views.DisplayEmailView);
+		public static readonly string EmptyEmailView = nameof(Views.EmptyEmailView);
+		public static readonly Type EmptyEmailViewType = typeof(EmptyEmailView);
+		public static readonly string SelectOptionView = nameof(Views.SelectOptionView);
 
 		#endregion
 	}

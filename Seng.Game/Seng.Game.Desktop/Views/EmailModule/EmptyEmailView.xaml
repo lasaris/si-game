@@ -1,13 +1,7 @@
-﻿<UserControl x:Class="Seng.Game.Desktop.Views.EmailModuleView"
+﻿<UserControl x:Class="Seng.Game.Desktop.Views.EmptyEmailView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Background="LawnGreen">
-    <Grid>
-        <TextBlock Grid.Row="0"
-                   Text="EMAIL MODULE"
-                   FontSize="40" />
-
-    </Grid>
+             Background="{DynamicResource ThemeColor}">
 </UserControl>

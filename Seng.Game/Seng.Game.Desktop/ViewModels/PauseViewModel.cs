@@ -10,27 +10,32 @@ namespace Seng.Game.Desktop.ViewModels
 	{
 		private string pausedView;
 
-		public DelegateCommand ExitApplicationCommand { get; set; }
-
+		public DelegateCommand ChangeThemeCommand { get; set; }
 		public DelegateCommand BackToGameCommand { get; set; }
-
+		public DelegateCommand ExitApplicationCommand { get; set; }
+		
 		public PauseViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
-			ExitApplicationCommand = new DelegateCommand(ExitApplicationCommandExecute);
+			ChangeThemeCommand = new DelegateCommand(ChangeThemeCommandExecute);
 			BackToGameCommand = new DelegateCommand(BackToGameCommandExecute);
+			ExitApplicationCommand = new DelegateCommand(ExitApplicationCommandExecute);
 		}
 
-		private void ExitApplicationCommandExecute()
+		private void ChangeThemeCommandExecute()
 		{
-			//Things to be done before shutdown
-
-			Application.Current.Shutdown();
+			GameTheme.ChangeThemeColor();
 		}
 
 		private void BackToGameCommandExecute()
 		{
 			RegionManager.RequestNavigate(Regions.ApplicationRegion, pausedView);
+		}
+		private void ExitApplicationCommandExecute()
+		{
+			//Things to be done before shutdown
+
+			Application.Current.Shutdown();
 		}
 
 		public bool IsNavigationTarget(NavigationContext navigationContext) => true;

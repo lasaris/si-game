@@ -20,16 +20,18 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="FontSize"
+                    Value="20" />
             <Style.Triggers>
                 <Trigger Property="IsChecked"
                          Value="True">
                     <Setter Property="Background"
-                            Value="#7f7f7f" />
+                            Value="{DynamicResource ThemeColor}" />
                 </Trigger>
                 <Trigger Property="IsMouseOver"
                          Value="True">
                     <Setter Property="Background"
-                            Value="#7f7f7f" />
+                            Value="{DynamicResource ThemeColor}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -50,7 +52,7 @@
         </Grid.RowDefinitions>
 
         <ContentControl Grid.Row="0"
-                        prism:RegionManager.RegionName="{x:Static desktop:Regions.MainRibbonRegion}" />
+                        prism:RegionManager.RegionName="{x:Static desktop:Regions.RibbonRegion}" />
 
         <DockPanel Grid.Row="1"
                    LastChildFill="False"
@@ -59,7 +61,8 @@
                     Content="Desktop"
                     Width="120"
                     Command="{Binding NavigateCommand, Mode=OneWay}"
-                    CommandParameter="{x:Static desktop:Regions.DesktopModuleView}" />
+                    CommandParameter="{x:Static desktop:Regions.DesktopModuleView}"
+                    IsChecked="{Binding IsDesktopButtonChecked}"/>
             <RadioButton DockPanel.Dock="Left"
                     Content="Browser"
                     Width="120"
