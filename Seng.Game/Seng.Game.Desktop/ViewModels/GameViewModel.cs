@@ -15,23 +15,26 @@ namespace Seng.Game.Desktop.ViewModels
 			set => SetProperty(ref isDesktopButtonChecked, value);
 		}
 
-		public DelegateCommand<string> NavigateCommand { get; set; }
+		public bool IsBrowserModuleVisible => GameState.BrowserModule.IsVisible;
+		public bool IsEmailModuleVisible => GameState.EmailModule.IsVisible;
+
+		public DelegateCommand<string> ModuleNavigateCommand { get; set; }
 
 		public GameViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
-			NavigateCommand = new DelegateCommand<string>(NavigateCommandExecute);
+			ModuleNavigateCommand = new DelegateCommand<string>(ModuleNavigateCommandExecute);
 
-			isDesktopButtonChecked = true;
-			regionManager.RegisterViewWithRegion(Regions.RibbonRegion, Regions.DesktopModuleViewType);
+			if (GameState.DesktopModule.IsRunning)
+			{
+				IsDesktopButtonChecked = true;
+				regionManager.RegisterViewWithRegion(Regions.ModuleRegion, Regions.DesktopModuleViewType);
+			}
 		}
 
-		private void NavigateCommandExecute(string navigatePath)
+		private void ModuleNavigateCommandExecute(string moduleView)
 		{
-			if (navigatePath != null)
-			{
-				RegionManager.RequestNavigate(Regions.RibbonRegion, navigatePath);
-			}
+			RegionManager.RequestNavigate(Regions.ModuleRegion, moduleView);
 		}
 	}
 }

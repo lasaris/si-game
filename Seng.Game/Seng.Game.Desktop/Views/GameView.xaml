@@ -52,27 +52,29 @@
         </Grid.RowDefinitions>
 
         <ContentControl Grid.Row="0"
-                        prism:RegionManager.RegionName="{x:Static desktop:Regions.RibbonRegion}" />
+                        prism:RegionManager.RegionName="{x:Static desktop:Regions.ModuleRegion}" />
 
         <DockPanel Grid.Row="1"
                    LastChildFill="False"
                    Background="#323232">
             <RadioButton DockPanel.Dock="Right"
-                    Content="Desktop"
-                    Width="120"
-                    Command="{Binding NavigateCommand, Mode=OneWay}"
-                    CommandParameter="{x:Static desktop:Regions.DesktopModuleView}"
-                    IsChecked="{Binding IsDesktopButtonChecked}"/>
+                         Content="Desktop"
+                         Width="120"
+                         Command="{Binding ModuleNavigateCommand, Mode=OneWay}"
+                         CommandParameter="{x:Static desktop:Regions.DesktopModuleView}"
+                         IsChecked="{Binding IsDesktopButtonChecked}"/>
             <RadioButton DockPanel.Dock="Left"
-                    Content="Browser"
-                    Width="120"
-                    Command="{Binding NavigateCommand, Mode=OneWay}"
-                    CommandParameter="{x:Static desktop:Regions.BrowserModuleView}" />
+                         Visibility="{Binding IsBrowserModuleVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Content="Browser"
+                         Width="120"
+                         Command="{Binding ModuleNavigateCommand, Mode=OneWay}"
+                         CommandParameter="{x:Static desktop:Regions.BrowserModuleView}" />
             <RadioButton DockPanel.Dock="Left"
-                    Content="Email"
-                    Width="120"
-                    Command="{Binding NavigateCommand, Mode=OneWay}"
-                    CommandParameter="{x:Static desktop:Regions.EmailModuleView}" />
+                         Visibility="{Binding IsEmailModuleVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Content="Email"
+                         Width="120"
+                         Command="{Binding ModuleNavigateCommand, Mode=OneWay}"
+                         CommandParameter="{x:Static desktop:Regions.EmailModuleView}" />
         </DockPanel>
     </Grid>
 

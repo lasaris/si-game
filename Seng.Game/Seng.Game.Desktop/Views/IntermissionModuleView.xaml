@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:converters="clr-namespace:Seng.Game.Desktop.Views.Converters"
              xmlns:intermissionModule="clr-namespace:Seng.Game.Business.DTOs.Components.IntermissionModule;assembly=Seng.Game.Business"
              prism:ViewModelLocator.AutoWireViewModel="True"
              Background="Black">
@@ -13,12 +12,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary  Source="../Views/Styles/IntermissionModule.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <converters:NullVisibilityConverter x:Key="NullToVisibilityConverter" />
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToInvertedVisibilityConverter"
-                                                     True="Collapsed"
-                                                     False="Visible" />
 
             <DataTemplate x:Key="OptionsDataTemplate"
                           DataType="{x:Type intermissionModule:OptionComponentDto}">

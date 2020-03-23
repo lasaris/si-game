@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:desktop="clr-namespace:Seng.Game.Desktop"
              xmlns:emailModule="clr-namespace:Seng.Game.Business.DTOs.Components.EmailModule;assembly=Seng.Game.Business"
-             prism:ViewModelLocator.AutoWireViewModel="True">
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="{DynamicResource ThemeBackgroundColor}">
 
     <UserControl.Resources>
         <ResourceDictionary>

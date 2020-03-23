@@ -8,6 +8,25 @@ namespace Seng.Game.Desktop
 {
 	public static class GameInitialize
 	{
+		public static BrowserModuleDto BrowserModuleGet()
+		{
+			var browserModule = new BrowserModuleDto
+			{
+				IsRunning = false,
+				IsVisible = true
+			};
+
+			return browserModule;
+		}
+
+		public static DesktopModuleDto DesktopModuleGet()
+		{
+			return new DesktopModuleDto
+			{
+				IsRunning = true
+			};
+		}
+
 		public static IntermissionModuleDto IntermissionModuleGet()
 		{
 			var intermissionModule = new IntermissionModuleDto
@@ -115,7 +134,7 @@ namespace Seng.Game.Desktop
 		{
 			var emailModule = new EmailModuleDto
 			{
-				IsRunning = true,
+				IsRunning = false,
 				IsVisible = true,
 				NewEmail = new NewEmailComponentDto
 				{

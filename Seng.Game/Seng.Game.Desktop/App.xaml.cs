@@ -32,7 +32,8 @@ namespace Seng.Game.Desktop
 
 		private void App_OnStartup(object sender, StartupEventArgs e)
 		{
-			Application.Current.Resources["ThemeColor"] = GameTheme.GetBaseThemeColor();
+			Current.Resources["ThemeColor"] = GameTheme.GetBaseThemeColor();
+			Current.Resources["ThemeBackgroundColor"] = GameTheme.GetBaseThemeBackgroundColor();
 		}
 	}
 }

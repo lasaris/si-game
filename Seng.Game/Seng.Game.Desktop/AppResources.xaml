@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Seng.Game.Desktop.Views.Converters">
+
+    <!-- App theme -->
+    <SolidColorBrush x:Key="ThemeColor" />
+    <SolidColorBrush x:Key="ThemeBackgroundColor" />
+
+    <!-- Converters -->
+    <converters:NullVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToInvertedVisibilityConverter"
+                                             True="Collapsed"
+                                             False="Visible" />
+</ResourceDictionary>

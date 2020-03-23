@@ -9,7 +9,7 @@ namespace Seng.Game.Desktop
 
 		public static readonly string ApplicationRegion = "ApplicationRegion";
 
-		public static readonly string RibbonRegion = "RibbonRegion";
+		public static readonly string ModuleRegion = "ModuleRegion";
 
 		public static readonly string EmailRegion = "EmailRegion";
 
