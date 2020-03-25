@@ -10,8 +10,6 @@ namespace Seng.Game.Business.DTOs.Modules
     {
         public int ModuleId { get; set; }
 
-        public bool IsRunning { get; set; }
-
         public bool IsVisible { get; set; }
     }
 }

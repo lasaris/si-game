@@ -13,7 +13,6 @@ namespace Seng.Game.Desktop
 			var intermissionModule = new IntermissionModuleDto
 			{
 				ModuleId = 1,
-				IsRunning = false,
 				IsVisible = true,
 				Frames = new List<IntermissionFrameComponentDto>
 					{
@@ -115,7 +114,6 @@ namespace Seng.Game.Desktop
 		{
 			var emailModule = new EmailModuleDto
 			{
-				IsRunning = true,
 				IsVisible = true,
 				NewEmail = new NewEmailComponentDto
 				{

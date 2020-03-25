@@ -8,11 +8,10 @@ using System.Text;
 
 namespace Seng.Game.Business.Requests.Components
 {
-    public class GetModuleAfterActionRequest<TModuleDto> : IRequest<ModuleAfterActionDto<TModuleDto>>
-        where TModuleDto : BasicModuleDto
+    public class GetIntermissionModuleStateRequest : IRequest<IntermissionModuleDto>
     {
         public int TriggeredComponentId { get; set; }
 
-        public TModuleDto Module { get; set; }
+        public IntermissionModuleDto Module { get; set; }
     }
 }

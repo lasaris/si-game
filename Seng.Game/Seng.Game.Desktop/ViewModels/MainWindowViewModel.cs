@@ -18,7 +18,7 @@ namespace Seng.Game.Desktop.ViewModels
 			PauseApplicationCommand = new DelegateCommand(PauseApplicationCommandExecute);
 
 			RegionManager.RegisterViewWithRegion(Regions.ApplicationRegion,
-				GameState.IntermissionModule.IsRunning ? Regions.IntermissionModuleViewType : Regions.GameViewType);
+				GameState.IntermissionModule.IsVisible ? Regions.IntermissionModuleViewType : Regions.GameViewType);
 		}
 
 		private void PauseApplicationCommandExecute()

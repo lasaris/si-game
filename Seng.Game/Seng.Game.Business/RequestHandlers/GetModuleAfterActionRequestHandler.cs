@@ -15,8 +15,7 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Business.RequestHandlers
 {
-    public class GetModuleAfterActionRequestHandler<TModuleDto> : IRequestHandler<GetModuleAfterActionRequest<TModuleDto>, ModuleAfterActionDto<TModuleDto>>
-        where TModuleDto : BasicModuleDto
+    public class GetModuleAfterActionRequestHandler : IRequestHandler<GetIntermissionModuleStateRequest, IntermissionModuleDto>
     {
         //private IMediator _mediator;
         //private IMapper _mapper;
@@ -27,7 +26,7 @@ namespace Seng.Game.Business.RequestHandlers
             //_mapper = mapper;
         }
 
-        public async Task<ModuleAfterActionDto<TModuleDto>> Handle(GetModuleAfterActionRequest<TModuleDto> request, CancellationToken cancellationToken)
+        public async Task<IntermissionModuleDto> Handle(GetIntermissionModuleStateRequest request, CancellationToken cancellationToken)
         {
             //this will be the actual flow:
             //var getActionByComponentQuery = _mapper.Map<GetModuleAfterActionRequest<TModuleDto>, GetActionByComponentQuery>(request);
@@ -36,43 +35,7 @@ namespace Seng.Game.Business.RequestHandlers
             //run action command
             //GetBasicModuleStatesQuery
             //Get specific current module
-
-            var module = new IntermissionModuleDto
-            {
-                ModuleId = 1,
-                IsRunning = true,
-                IsVisible = true,
-                Frames = new List<IntermissionFrameComponentDto>
-                    {
-                        new IntermissionFrameComponentDto
-                        {
-                            ComponentId = 2,
-                            TextParagraph = "Hello, this is our demo game",
-                            Button = new ButtonComponentDto
-                            {
-                                ComponentId = 4,
-                                Text = "Next"
-                            }
-                        }
-                    }
-            };
-
-            return await Task.Run(() => new ModuleAfterActionDto<TModuleDto>
-            {
-                ModulesInfo = new ModulesInfoDto
-                {
-                    Modules = new List<BasicModuleDto>
-                    {
-                        new BasicModuleDto
-                        {
-                            ModuleId = 1,
-                            IsRunning = true,
-                            IsVisible = false
-                        }
-                    }
-                },
-                CurrentModule = (TModuleDto)Convert.ChangeType(module, typeof(TModuleDto))
-            });
+            return null;
         }
     }
 }

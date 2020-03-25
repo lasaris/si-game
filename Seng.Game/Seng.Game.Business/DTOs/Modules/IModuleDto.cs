@@ -6,6 +6,6 @@ namespace Seng.Game.Business.DTOs.Modules
 {
     public interface IModuleDto
     {
-        public int ModuleId { get; set; }
+        int ModuleId { get; set; }
     }
 }
