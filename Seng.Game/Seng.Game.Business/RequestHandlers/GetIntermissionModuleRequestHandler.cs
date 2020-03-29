@@ -15,12 +15,12 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Business.RequestHandlers
 {
-    public class GetModuleAfterActionRequestHandler : IRequestHandler<GetIntermissionModuleStateRequest, IntermissionModuleDto>
+    public class GetIntermissionModuleRequestHandler : IRequestHandler<GetIntermissionModuleStateRequest, IntermissionModuleDto>
     {
         //private IMediator _mediator;
         //private IMapper _mapper;
 
-        public GetModuleAfterActionRequestHandler(/*IMediator mediator, IMapper mapper*/)
+        public GetIntermissionModuleRequestHandler(IMediator mediator, IMapper mapper)
         {
             //_mediator = mediator;
             //_mapper = mapper;
