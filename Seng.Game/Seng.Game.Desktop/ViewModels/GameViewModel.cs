@@ -25,7 +25,7 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			ModuleNavigateCommand = new DelegateCommand<string>(ModuleNavigateCommandExecute);
 
-			if (GameState.DesktopModule.IsRunning)
+			if (GameState.DesktopModule.IsVisible)
 			{
 				IsDesktopButtonChecked = true;
 				regionManager.RegisterViewWithRegion(Regions.ModuleRegion, Regions.DesktopModuleViewType);

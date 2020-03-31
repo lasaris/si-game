@@ -5,20 +5,23 @@ using System.Collections.Generic;
 using System.Linq;
 using Prism.Events;
 using Prism.Regions;
+using Seng.Game.Business.DTOs.Modules;
 
 namespace Seng.Game.Desktop.ViewModels
 {
 	public class IntermissionModuleViewModel : BaseViewModel, INavigationAware
 	{
+		private readonly IntermissionModuleDto intermissionModule;
 		private readonly List<IntermissionFrameComponentDto> frames;
+		private int? currentVisibleIntermissionFrameId;
 		private bool isQuestionOnCurrentFrame;
 		private bool isNavigationTarget = true;
 
-		private int currentFrame;
+		private IntermissionFrameComponentDto currentFrame;
 		private string currentText;
 		private QuestionComponentDto currentQuestion;
 
-		public int CurrentFrame
+		public IntermissionFrameComponentDto CurrentFrame
 		{
 			get => currentFrame;
 			set => SetProperty(ref currentFrame, value);
@@ -43,15 +46,20 @@ namespace Seng.Game.Desktop.ViewModels
 		public IntermissionModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
-			frames = GameState.IntermissionModule.Frames.ToList();
+			InitializeDelegateCommands();
+			intermissionModule = GameState.IntermissionModule;
+			frames = intermissionModule.Frames.ToList();
 
+			currentVisibleIntermissionFrameId = intermissionModule.CurrentVisibleIntermissionFrameId;
+			currentFrame = frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
 			UpdateFrameContent();
+		}
 
+		private void InitializeDelegateCommands()
+		{
 			NextFrameOrCloseCommand = new DelegateCommand(NextFrameOrCloseCommandExecute, CanNextFrameOrCloseCommandExecute);
 			OptionSelectCommand = new DelegateCommand<OptionComponentDto>(OptionSelectCommandExecute);
 			MultichoiceConfirmCommand = new DelegateCommand(MultichoiceConfirmCommandExecute);
-
-			CurrentFrame = 0;
 		}
 
 		private void MultichoiceConfirmCommandExecute()
@@ -82,25 +90,41 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void NextFrameOrCloseCommandExecute()
 		{
-			var lastFrame = currentFrame + 1 == frames.Count;
-
-			if (lastFrame)
+			//Temporary action call, will be replaced
+			TemporaryActionCallSimulation();
+			
+			if (currentVisibleIntermissionFrameId == null)
 			{
 				isNavigationTarget = false;
 				RegionManager.RequestNavigate(Regions.ApplicationRegion, Regions.GameView);
 			}
 			else
 			{
-				CurrentFrame += 1;
+				CurrentFrame = frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
 				UpdateFrameContent();
+			}
+		}
+
+		/// <summary>
+		/// Temporary, it will be deleted
+		/// </summary>
+		private void TemporaryActionCallSimulation()
+		{
+			if (currentFrame.ComponentId == 3)
+			{
+				currentVisibleIntermissionFrameId = null;
+			}
+			else
+			{
+				currentVisibleIntermissionFrameId++;
 			}
 		}
 
 		private void UpdateFrameContent()
 		{
-			CurrentText = frames[currentFrame].TextParagraph;
+			CurrentText = CurrentFrame.TextParagraph;
 
-			CurrentQuestion = frames[currentFrame].Question;
+			CurrentQuestion = CurrentFrame.Question;
 			isQuestionOnCurrentFrame = CurrentQuestion != null;
 		}
 

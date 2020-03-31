@@ -13,7 +13,6 @@ namespace Seng.Game.Desktop
 		{
 			var browserModule = new BrowserModuleDto
 			{
-				IsRunning = false,
 				IsVisible = true,
 				SearchingMinigame = new SearchingMinigameComponentDto
 				{
@@ -38,7 +37,7 @@ namespace Seng.Game.Desktop
 		{
 			return new DesktopModuleDto
 			{
-				IsRunning = true
+				IsVisible = true
 			};
 		}
 
@@ -48,13 +47,14 @@ namespace Seng.Game.Desktop
 			{
 				ModuleId = 1,
 				IsVisible = true,
+				CurrentVisibleIntermissionFrameId = 1,
 				Frames = new List<IntermissionFrameComponentDto>
 					{
 						new IntermissionFrameComponentDto
 						{
-							ComponentId = 2,
-								TextParagraph = "Hello, this is our demo game",
-								Question = new QuestionComponentDto()
+							ComponentId = 1,
+							TextParagraph = "Hello, this is our demo game",
+							Question = new QuestionComponentDto()
 							{
 								ComponentId = 4,
 								Text = "Example question ?",
@@ -77,12 +77,12 @@ namespace Seng.Game.Desktop
 						},
 						new IntermissionFrameComponentDto
 						{
-							ComponentId = 7,
+							ComponentId = 2,
 							TextParagraph = "Second page\nAnother row",
 						},
 						new IntermissionFrameComponentDto
 						{
-							ComponentId = 9,
+							ComponentId = 3,
 							Question = new QuestionComponentDto()
 							{
 								ComponentId = 10,

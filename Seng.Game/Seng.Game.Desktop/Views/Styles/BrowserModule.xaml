@@ -126,6 +126,8 @@
                          Value="True">
                 <Setter Property="Foreground"
                         Value="{DynamicResource ThemeColor}" />
+                <Setter Property="FontWeight"
+                        Value="Bold" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
