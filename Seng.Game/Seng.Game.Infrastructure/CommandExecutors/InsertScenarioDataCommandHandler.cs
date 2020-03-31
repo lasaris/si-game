@@ -28,15 +28,17 @@ namespace Seng.Game.Infrastructure.CommandExecutors
         {
             using(var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.ModuleQuery, command.GameDbContext.Modules, dbConnection);
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.IntermissionModuleQuery, command.GameDbContext.IntermissionModules, dbConnection);
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.ButtonQuery, command.GameDbContext.Buttons, dbConnection);
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.ComponentQuery, command.GameDbContext.Components, dbConnection);
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.GameActionQuery, command.GameDbContext.GameActions, dbConnection);
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.OnClickOptionQuery, command.GameDbContext.OnClickOptions, dbConnection);
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.ContextQuery, command.GameDbContext.Contexts, dbConnection);
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.IntermissionFrameQuery, command.GameDbContext.IntermissionFrames, dbConnection); 
-                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlQueries.SwitchIntermissionFrameActionQuery, command.GameDbContext.SwitchIntermissionFrameActions, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.ModuleCommand, command.GameDbContext.Modules, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.IntermissionModuleCommand, command.GameDbContext.IntermissionModules, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.ButtonComponentCommand, command.GameDbContext.ButtonComponents, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.ComponentCommand, command.GameDbContext.Components, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.GameActionCommand, command.GameDbContext.GameActions, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.OnClickOptionCommand, command.GameDbContext.OnClickOptions, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.ContextCommand, command.GameDbContext.Contexts, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.IntermissionFrameComponentCommand, command.GameDbContext.IntermissionFrameComponents, dbConnection); 
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.SwitchIntermissionFrameActionCommand, command.GameDbContext.SwitchIntermissionFrameActions, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.QuestionComponentCommand, command.GameDbContext.QuestionComponents, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.OptionComponentCommand, command.GameDbContext.OptionComponents, dbConnection);
             }
             return new CommandBasicResult();
         }

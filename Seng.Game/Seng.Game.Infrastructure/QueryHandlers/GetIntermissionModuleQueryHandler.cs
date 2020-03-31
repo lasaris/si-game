@@ -10,6 +10,8 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     class GetIntermissionModuleQueryHandler : IQueryHandler<GetIntermissionModuleQuery, IntermissionModule>
     {
+        private const string SqlQuery = "";
+
         public async Task<IntermissionModule> Handle(GetIntermissionModuleQuery query, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
