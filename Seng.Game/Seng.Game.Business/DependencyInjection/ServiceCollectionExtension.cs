@@ -18,16 +18,8 @@ namespace Seng.Game.Business.DependencyInjection
     {
         public static void AddBusiness(this IServiceCollection services)
         {
-            services.AddMediatRGenericHandlers<IntermissionModuleDto>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        }
-
-        private static void AddMediatRGenericHandlers<TModuleDto>(this IServiceCollection services) where TModuleDto : BasicModuleDto
-        {
-            services.AddScoped(
-                typeof(IRequestHandler<GetModuleAfterActionRequest<TModuleDto>, ModuleAfterActionDto<TModuleDto>>),
-                typeof(GetModuleAfterActionRequestHandler<TModuleDto>));
         }
     }
 }

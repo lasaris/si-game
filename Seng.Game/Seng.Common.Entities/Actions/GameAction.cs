@@ -6,5 +6,6 @@ namespace Seng.Common.Entities.Actions
 {
     public class GameAction : BasicEntity
     {
+        public string Type { get; set; }
     }
 }

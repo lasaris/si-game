@@ -37,13 +37,13 @@ namespace Seng.Game.Examples
 
             //creating request and fetching data
             //this is the way you should call Business layer
-            var runActionRequest = new GetModuleAfterActionRequest<IntermissionModuleDto>
+            var request = new GetIntermissionModuleStateRequest
             {
                 Module = new IntermissionModuleDto(),
                 TriggeredComponentId = 4
             };
-            ModuleAfterActionDto<IntermissionModuleDto> gameState = await mediator.Send(runActionRequest);
-            Console.WriteLine(gameState.CurrentModule.GetType());
+            IntermissionModuleDto gameState = await mediator.Send(request);
+            Console.WriteLine(gameState.GetType());
         }
     }
 }

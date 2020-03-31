@@ -15,7 +15,7 @@ namespace Seng.Common.Entities
         public List<Context> Contexts { get; set; }
         public List<GameAction> GameActions { get; set; }
         public List<OnClickOption> OnClickOptions { get; set; }
-        public List<IntermissionFrame> IntermissionFrames { get; set; }
+        public List<IntermissionFrameComponent> IntermissionFrames { get; set; }
         public List<Button> Buttons { get; set; }
         public List<Component> Components { get; set; }
         public List<IntermissionModule> IntermissionModules { get; set; }

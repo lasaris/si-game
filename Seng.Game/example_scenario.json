@@ -2,62 +2,79 @@
   "Modules": [
     {
       "Id": 1,
-      "IsVisible": true,
-      "IsRunning": true
+      "IsVisible": true
     }
   ],
   "IntermissionModules": [
     {
       "Id": 1,
-      "ModuleId": 1
+      "ModuleId": 1,
+      "CurrentlyVisibleFrameId": 1
     }
   ],
-  "Buttons": [
+  "ButtonComponents": [
     {
       "Id": 1,
       "ComponentId": 1,
-      "Text": "Next"
+      "Text": "Confirm"
     },
     {
       "Id": 2,
       "ComponentId": 2,
-      "Text": "End"
-    }
-  ],
-  "IntermissionFrames": [
-    {
-      "Id": 1,
-      "IntermissionModuleId": 1,
-      "ComponentId": 3,
-      "ButtonId": 1
-    },
-    {
-      "Id": 2,
-      "IntermissionModuleId": 1,
-      "ComponentId": 4,
-      "ButtonId": 2
-    }
-  ],
-  "IntermissionTexts": [
-    {
-      "Id": 1,
-      "ComponentId": 5,
-      "Text": "Hello, abababa",
-      "IntermissionFrameId": 1
-    },
-    {
-      "Id": 2,
-      "ComponentId": 6,
-      "Text": "22asdf2asdf2asdf",
-      "IntermissionFrameId": 1
+      "Text": "Go next"
     },
     {
       "Id": 3,
-      "ComponentId": 7,
-      "Text": "asdfasdfasdffasd 2 asdf2fsd a2 ",
-      "IntermissionFrameId": 2
+      "ComponentId": 3,
+      "Text": "End"
     }
-  ]
+  ],
+  "QuestionComponents": [
+    {
+      "Id": 1,
+      "ComponentId": 7,
+      "Text": "Do you want to proceed, or to end?",
+      "Multichoice": false
+    }
+  ],
+  "OptionComponents": [
+    {
+      "Id": 1,
+      "ComponentId": 8,
+      "Text": "Proceed",
+      "QuestionComponentId": 1
+    },
+    {
+      "Id": 2,
+      "ComponentId": 9,
+      "Text": "End",
+      "QuestionComponentId": 1
+    }
+  ],
+  "IntermissionFrameComponents": [
+    {
+      "Id": 1,
+      "IntermissionModuleId": 1,
+      "ComponentId": 4,
+      "ButtonComponentId": 1,
+      "QuestionComponentId": 1,
+      "TextParagraph": "Hello, this is the beggining of the game. You can choose to proceed or to end the game"
+    },
+    {
+      "Id": 2,
+      "IntermissionModuleId": 1,
+      "ComponentId": 5,
+      "ButtonComponentId": 2,
+      "TextParagraph": "You have chosen to continue. Now you can go only to the next frame"
+    },
+    {
+      "Id": 3,
+      "IntermissionModuleId": 1,
+      "ComponentId": 6,
+      "ButtonComponentId": 3,
+      "TextParagraph": "This is the last thing you will see in this game. Push the button to end it."
+    }
+  ],
   "Components": [
     {
       "Id": 1
@@ -79,20 +96,73 @@
     },
     {
       "Id": 7
+    },
+    {
+      "Id": 8
+    },
+    {
+      "Id": 9
     }
   ],
-  "GameAction": [
+  "GameActions": [
     {
-      "Id": 1
+      "Id": 1,
+      "Type": "SwitchIntermissionFrame"
+    },
+    {
+      "Id": 2,
+      "Type": "SwitchIntermissionFrame"
+    },
+    {
+      "Id": 3,
+      "Type": "EndGame"
     }
   ],
   "SwitchIntermissionFrameActions": [
     {
       "Id": 1,
+      "GameActionId": 1,
+      "NewIntermissionFrameComponentId": 2
+    },
+    {
+      "Id": 2,
       "GameActionId": 2,
-      "NewIntermissionFrameId": 2
+      "NewIntermissionFrameComponentId": 3
     }
   ],
-  "Contexts": [],
-  "OnClickOptions": []
+  "Contexts": [
+    {
+      "Id": 1,
+      "ClickedComponentId": 8,
+      "AlreadyRunActionId": null,
+      "OnClickOptionId": 1,
+      "InLast": null,
+      "InFirst": null
+    },
+    {
+      "Id": 1,
+      "ClickedComponentId": 9,
+      "AlreadyRunActionId": null,
+      "OnClickOptionId": 2,
+      "InLast": null,
+      "InFirst": null
+    }
+  ],
+  "OnClickOptions": [
+    {
+      "Id": 1,
+      "ComponentId": 1,
+      "ResultActionId": 1
+    },
+    {
+      "Id": 2,
+      "ComponentId": 1,
+      "ResultActionId": 2
+    },
+    {
+      "Id": 1,
+      "ComponentId": 2,
+      "ResultActionId": 2
+    }
+  ]
 }

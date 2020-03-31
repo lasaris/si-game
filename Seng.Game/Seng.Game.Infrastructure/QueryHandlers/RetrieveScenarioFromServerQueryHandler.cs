@@ -16,18 +16,15 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     internal class RetrieveScenarioFromServerQueryHandler : IQueryHandler<RetrieveScenarioFromServerQuery, GameDbContext>
     {
         private ISengWebApiClient _webApiClient;
-        private IDbConnectionCreator _dbConnectionCreator { get; set; }
 
-        public RetrieveScenarioFromServerQueryHandler(ISengWebApiClient webApiClient, IDbConnectionCreator dbConnectionFactory)
+        public RetrieveScenarioFromServerQueryHandler(ISengWebApiClient webApiClient)
         {
             _webApiClient = webApiClient;
-            _dbConnectionCreator = dbConnectionFactory;
         }
 
         public async Task<GameDbContext> Handle(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken)
         {
-            await _webApiClient.GetScenario(query, cancellationToken);
-            return null;
+            return await _webApiClient.GetScenario(query, cancellationToken);
         }
     }
 }

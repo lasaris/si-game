@@ -6,7 +6,10 @@ using System.Text;
 
 namespace Seng.Game.Business.Commands
 {
-    public class RunNextIntermissionFrameActionCommand : ICommand<IntermissionModule>
+    public class RunNextIntermissionFrameActionCommand : ICommand<bool>
     {
+        public int IntermissionModuleId { get; set; }
+
+        public int NewVisibleFrameId { get; set; }
     }
 }

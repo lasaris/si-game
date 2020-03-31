@@ -7,5 +7,6 @@ namespace Seng.Game.Business.Queries
 {
     public class GetActionByComponentQuery : IQuery<GameAction>
     {
+        public int ComponentId { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     public class GetActionByComponentQueryHandler : IQueryHandler<GetActionByComponentQuery, GameAction>
     {
+        private const string SqlQuery = "";
+
         public Task<GameAction> Handle(GetActionByComponentQuery query, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
