@@ -37,7 +37,8 @@
 
         <Button Grid.Row="1"
                 Grid.Column="1"
-                Style="{StaticResource MinigameButtonStyle}">
+                Style="{StaticResource MinigameButtonStyle}"
+                Command="{Binding OpenSearchingMinigameCommand}">
             <Button.Content>
                 <DockPanel>
                     <Image DockPanel.Dock="Left"

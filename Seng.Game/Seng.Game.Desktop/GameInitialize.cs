@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Seng.Game.Business.DTOs.Components.BrowserModule;
 using Seng.Game.Business.DTOs.Components.EmailModule;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
@@ -13,7 +14,21 @@ namespace Seng.Game.Desktop
 			var browserModule = new BrowserModuleDto
 			{
 				IsRunning = false,
-				IsVisible = true
+				IsVisible = true,
+				SearchingMinigame = new SearchingMinigameComponentDto
+				{
+					Width = 15,
+					Height = 10,
+					Solution = "TEST",
+					Words = new List<string>
+					{
+						"FIRST",
+						"SECOND",
+						"THIRD",
+						"FORTH",
+						"FIFTH",
+					}
+				}
 			};
 
 			return browserModule;

@@ -15,7 +15,7 @@ namespace Seng.Game.Desktop
 		static GameTheme()
 		{
 			BaseColor = Color.FromRgb(0, 102, 204);
-			Opacity = 0.1;
+			Opacity = 0.05;
 
 			AllThemeColors = new List<SolidColorBrush>
 			{

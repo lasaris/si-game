@@ -6,14 +6,22 @@
     <AssemblyName>Seng.Game.Desktop</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Images\check-mark.png" />
     <None Remove="Resources\Images\loupe.png" />
     <None Remove="Resources\Images\maintenance.png" />
+    <None Remove="Resources\Images\return.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Images\check-mark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\loupe.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\maintenance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\return.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

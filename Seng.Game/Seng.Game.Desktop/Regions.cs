@@ -38,6 +38,7 @@ namespace Seng.Game.Desktop
 		public static readonly string BrowserModuleView = nameof(Views.BrowserModuleView);
 		public static readonly string MinigameSelectionView = nameof(Views.MinigameSelectionView);
 		public static readonly Type MinigameSelectionViewType = typeof(MinigameSelectionView);
+		public static readonly string SearchingMinigameView = nameof(Views.SearchingMinigameView);
 
 
 		public static readonly string EmailModuleView = nameof(Views.EmailModuleView);
