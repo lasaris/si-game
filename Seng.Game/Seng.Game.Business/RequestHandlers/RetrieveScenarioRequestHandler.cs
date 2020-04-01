@@ -26,13 +26,24 @@ namespace Seng.Game.Business.RequestHandlers
 
         public async Task<RetrieveScenarioResultDto> Handle(RetrieveScenarioRequest request, CancellationToken cancellationToken)
         {
-            RetrieveScenarioFromServerQuery query = _mapper.Map<RetrieveScenarioRequest, RetrieveScenarioFromServerQuery>(request);
-            GameDbContext gameDbContext = await _mediator.Send(query);
-            var insertScenarioDataCommand = new InsertScenarioDataCommand
+            //RetrieveScenarioFromServerQuery query = _mapper.Map<RetrieveScenarioRequest, RetrieveScenarioFromServerQuery>(request);
+            //GameDbContext gameDbContext = await _mediator.Send(query);
+            //var insertScenarioDataCommand = new InsertScenarioDataCommand
+            //{
+            //    GameDbContext = gameDbContext
+            //};
+            //await _mediator.Send(insertScenarioDataCommand);
+
+            GetActionByComponentQuery query2 = new GetActionByComponentQuery
             {
-                GameDbContext = gameDbContext
+                ClickedComponentIds = new List<int>
+                {
+                    8, 9
+                }.ToArray(),
+                ComponentId = 1
             };
-            await _mediator.Send(insertScenarioDataCommand);
+            var result =  await _mediator.Send(query2);
+
             return null;
         }
     }
