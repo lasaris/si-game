@@ -2,11 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:desktop="clr-namespace:Seng.Game.Desktop"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Background="{DynamicResource ThemeColor}">
-    <Grid>
-        <TextBlock Grid.Row="0"
-                   Text="BROWSER MODULE"
-                   FontSize="40" />
-    </Grid>
+             Background="{DynamicResource ThemeBackgroundColor}">
+
+    <ContentControl prism:RegionManager.RegionName="{x:Static desktop:Regions.BrowserRegion}" />
 </UserControl>

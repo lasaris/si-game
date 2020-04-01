@@ -1,8 +1,5 @@
-﻿using Seng.Game.Business.DTOs.Components.Common;
-using Seng.Game.Business.DTOs.Components.IntermissionModule;
-using System;
+﻿using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Seng.Game.Business.DTOs.Modules
 {
@@ -10,6 +7,6 @@ namespace Seng.Game.Business.DTOs.Modules
     {
         public IEnumerable<IntermissionFrameComponentDto> Frames { get; set; }
 
-        public int CurrentVisibleIntermissionFrameId { get; set; }
+        public int? CurrentVisibleIntermissionFrameId { get; set; }
     }
 }

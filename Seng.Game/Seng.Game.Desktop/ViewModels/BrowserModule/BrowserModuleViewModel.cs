@@ -9,6 +9,7 @@ namespace Seng.Game.Desktop.ViewModels
 		public BrowserModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
+			regionManager.RegisterViewWithRegion(Regions.BrowserRegion, Regions.MinigameSelectionViewType);
 		}
 	}
 }

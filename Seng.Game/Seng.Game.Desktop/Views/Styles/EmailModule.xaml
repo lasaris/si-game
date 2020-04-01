@@ -109,6 +109,11 @@
                 Value="0" />
         <Setter Property="FontSize"
                 Value="30" />
+        <Setter Property="Background"
+                Value="{Binding Background, 
+                        RelativeSource={RelativeSource FindAncestor, 
+                        AncestorType={x:Type UserControl}}}">
+        </Setter>
     </Style>
 
     <Style x:Key="EmailListButtonStyle"

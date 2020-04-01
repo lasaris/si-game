@@ -2,20 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:converters="clr-namespace:Seng.Game.Desktop.Views.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary  Source="../Styles/EmailModule.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToInvertedVisibilityConverter"
-                                                     True="Collapsed"
-                                                     False="Visible" />
-        </ResourceDictionary>
+        <ResourceDictionary  Source="../Styles/EmailModule.xaml" />
     </UserControl.Resources>
 
     <Grid>

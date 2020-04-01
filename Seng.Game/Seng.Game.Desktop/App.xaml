@@ -4,6 +4,6 @@
              xmlns:prism="http://prismlibrary.com/"
              Startup="App_OnStartup">
     <Application.Resources>
-         <SolidColorBrush x:Key="ThemeColor"></SolidColorBrush>
+         <ResourceDictionary Source="AppResources.xaml" />
     </Application.Resources>
 </prism:PrismApplication>

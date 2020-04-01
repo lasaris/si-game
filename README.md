@@ -2,6 +2,8 @@
 
 Project for social engineering game creation application.
 
+Attribution: "Icon made by Freepik from www.flaticon.com"
+
 ## Use case diagram
 
 ![UseCase](https://github.com/sbojnak/si-game/blob/master/doc/SI_usecase.png)
