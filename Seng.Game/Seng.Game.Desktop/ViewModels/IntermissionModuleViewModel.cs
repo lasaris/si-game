@@ -1,25 +1,23 @@
-﻿using Prism.Commands;
+﻿using System;
+using Prism.Commands;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Desktop.ViewModels.Base;
 using System.Collections.Generic;
 using System.Linq;
 using Prism.Events;
 using Prism.Regions;
-using Seng.Game.Business.DTOs.Modules;
+using Seng.Game.Desktop.Helpers.IntermissionModule;
 
 namespace Seng.Game.Desktop.ViewModels
 {
 	public class IntermissionModuleViewModel : BaseViewModel, INavigationAware
 	{
-		private readonly IntermissionModuleDto intermissionModule;
+		private bool isNavigationTarget = true;
 		private readonly List<IntermissionFrameComponentDto> frames;
 		private int? currentVisibleIntermissionFrameId;
-		private bool isQuestionOnCurrentFrame;
-		private bool isNavigationTarget = true;
 
 		private IntermissionFrameComponentDto currentFrame;
-		private string currentText;
-		private QuestionComponentDto currentQuestion;
+		private FrameType currentFrameType;
 
 		public IntermissionFrameComponentDto CurrentFrame
 		{
@@ -27,81 +25,87 @@ namespace Seng.Game.Desktop.ViewModels
 			set => SetProperty(ref currentFrame, value);
 		}
 
-		public string CurrentText
+		public FrameType CurrentFrameType
 		{
-			get => currentText;
-			set => SetProperty(ref currentText, value);
-		}
-
-		public QuestionComponentDto CurrentQuestion
-		{
-			get => currentQuestion;
-			set => SetProperty(ref currentQuestion, value);
+			get => currentFrameType;
+			set => SetProperty(ref currentFrameType, value);
 		}
 
 		public DelegateCommand NextFrameOrCloseCommand { get; set; }
 		public DelegateCommand<OptionComponentDto> OptionSelectCommand { get; set; }
-		public DelegateCommand MultichoiceConfirmCommand { get; set; }
 
 		public IntermissionModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
 			InitializeDelegateCommands();
-			intermissionModule = GameState.IntermissionModule;
+			
+			var intermissionModule = GameState.IntermissionModule;
 			frames = intermissionModule.Frames.ToList();
-
 			currentVisibleIntermissionFrameId = intermissionModule.CurrentVisibleIntermissionFrameId;
-			currentFrame = frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
+
 			UpdateFrameContent();
 		}
 
 		private void InitializeDelegateCommands()
 		{
-			NextFrameOrCloseCommand = new DelegateCommand(NextFrameOrCloseCommandExecute, CanNextFrameOrCloseCommandExecute);
+			NextFrameOrCloseCommand = new DelegateCommand(NextFrameOrCloseCommandExecute);
 			OptionSelectCommand = new DelegateCommand<OptionComponentDto>(OptionSelectCommandExecute);
-			MultichoiceConfirmCommand = new DelegateCommand(MultichoiceConfirmCommandExecute);
-		}
-
-		private void MultichoiceConfirmCommandExecute()
-		{
-			NextFrameOrCloseCommandExecute();
 		}
 
 		private void OptionSelectCommandExecute(OptionComponentDto selectedOption)
 		{
-			var option = currentQuestion.Options.First(x => x == selectedOption);
+			var options = CurrentFrame.Question.Options.ToList();
+			var selected = CurrentFrame.Question.Options.First(x => x == selectedOption);
 
-			if (currentQuestion.Multichoice)
+			if (CurrentFrame.Question.Multichoice)
 			{
-				option.Clicked = !option.Clicked;
+				selected.Clicked = !selected.Clicked;
 			}
 			else
 			{
-				option.Clicked = true;
+				foreach (var option in options)
+				{
+					option.Clicked = false;
+				}
 
-				NextFrameOrCloseCommandExecute();
+				selected.Clicked = true;
 			}
+
+			NextFrameOrCloseCommand.RaiseCanExecuteChanged();
 		}
-		 
+
 		private bool CanNextFrameOrCloseCommandExecute()
 		{
-			return !isQuestionOnCurrentFrame;
+			switch (currentFrameType)
+			{
+				case FrameType.Question:
+				case FrameType.MultichoiceQuestion:
+				{
+					return CurrentFrame.Question.Options.Any(x => x.Clicked);
+				}
+				case FrameType.UserInput:
+					return currentFrame.UserInput != null;
+				default: return true;
+			}
 		}
 
 		private void NextFrameOrCloseCommandExecute()
 		{
-			//Temporary action call, will be replaced
-			TemporaryActionCallSimulation();
-			
-			if (currentVisibleIntermissionFrameId == null)
+			if (CanNextFrameOrCloseCommandExecute())
 			{
-				isNavigationTarget = false;
-				RegionManager.RequestNavigate(Regions.ApplicationRegion, Regions.GameView);
-			}
-			else
-			{
-				CurrentFrame = frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
-				UpdateFrameContent();
+				//Temporary action call, will be replaced
+				TemporaryActionCallSimulation();
+
+				if (currentVisibleIntermissionFrameId == null)
+				{
+					isNavigationTarget = false;
+					RegionManager.RequestNavigate(Regions.ApplicationRegion, Regions.GameView);
+				}
+				else
+				{
+					CurrentFrame = frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
+					UpdateFrameContent();
+				}
 			}
 		}
 
@@ -110,7 +114,7 @@ namespace Seng.Game.Desktop.ViewModels
 		/// </summary>
 		private void TemporaryActionCallSimulation()
 		{
-			if (currentFrame.ComponentId == 3)
+			if (currentFrame.ComponentId == 4)
 			{
 				currentVisibleIntermissionFrameId = null;
 			}
@@ -122,10 +126,8 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void UpdateFrameContent()
 		{
-			CurrentText = CurrentFrame.TextParagraph;
-
-			CurrentQuestion = CurrentFrame.Question;
-			isQuestionOnCurrentFrame = CurrentQuestion != null;
+			currentFrame = frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
+			CurrentFrameType = (FrameType) Enum.Parse(typeof(FrameType), currentFrame.FrameType);
 		}
 
 		public bool IsNavigationTarget(NavigationContext navigationContext) => isNavigationTarget;

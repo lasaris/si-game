@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Seng.Game.Business.DTOs.Components;
 using Seng.Game.Business.DTOs.Components.BrowserModule;
 using Seng.Game.Business.DTOs.Components.EmailModule;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
@@ -53,11 +54,11 @@ namespace Seng.Game.Desktop
 						new IntermissionFrameComponentDto
 						{
 							ComponentId = 1,
-							TextParagraph = "Hello, this is our demo game",
+							FrameType = "Question",
 							Question = new QuestionComponentDto()
 							{
 								ComponentId = 4,
-								Text = "Example question ?",
+								Text = "Hello, this is our demo game!\n\nExample question ?",
 								Options = new List<OptionComponentDto>()
 								{
 									new OptionComponentDto()
@@ -73,16 +74,26 @@ namespace Seng.Game.Desktop
 										Clicked = false
 									}
 								}
+							},
+							Button = new ButtonComponentDto
+							{
+							Text = "Confirm choice"
 							}
 						},
 						new IntermissionFrameComponentDto
 						{
 							ComponentId = 2,
+							FrameType = "Text",
 							TextParagraph = "Second page\nAnother row",
+							Button = new ButtonComponentDto
+							{
+								Text = "Continue"
+							}
 						},
 						new IntermissionFrameComponentDto
 						{
 							ComponentId = 3,
+							FrameType = "MultichoiceQuestion",
 							Question = new QuestionComponentDto()
 							{
 								ComponentId = 10,
@@ -111,8 +122,22 @@ namespace Seng.Game.Desktop
 										Text = "Definitely no"
 									}
 								}
+							},
+							Button = new ButtonComponentDto
+							{
+								Text = "Confirm choices"
 							}
-						}
+						},
+						new IntermissionFrameComponentDto
+						{
+							ComponentId = 4,
+							FrameType = "UserInput",
+							TextParagraph = "User input example frame",
+							Button = new ButtonComponentDto
+							{
+								Text = "OK"
+							}
+						},
 					}
 			};
 			return intermissionModule;

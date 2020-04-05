@@ -42,7 +42,32 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="MultichoiceOptionStyle"
+    <Style x:Key="OptionRadioButtonStyle"
+           TargetType="{x:Type RadioButton}">
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="GroupName"
+                Value="Option" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <TextBlock x:Name="textBlock"
+                               Text="{TemplateBinding Content}"
+                               Style="{StaticResource OptionStyle}" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource ThemeColor}"
+                                    TargetName="textBlock" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MultichoiceOptionToggleButtonStyle"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="HorizontalAlignment"
                 Value="Center" />
@@ -63,6 +88,24 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="UserInputTextBoxStyle"
+           TargetType="{x:Type TextBox}">
+        <Setter Property="Background"
+                Value="Black" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="FontSize"
+                Value="40" />
+        <Setter Property="Width"
+                Value="750" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="MaxLength"
+                Value="32" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
     </Style>
 
     <Style x:Key="ConfirmationButtonStyle"
