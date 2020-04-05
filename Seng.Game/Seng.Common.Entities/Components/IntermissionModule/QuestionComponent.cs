@@ -9,5 +9,7 @@ namespace Seng.Common.Entities.Components.IntermissionModule
         public int ComponentId { get; set; }
         public string Text { get; set; }
         public bool Multichoice { get; set; }
+
+        public IEnumerable<OptionComponent> OptionComponents { get; set; } = new List<OptionComponent>();
     }
 }

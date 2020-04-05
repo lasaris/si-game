@@ -19,13 +19,12 @@ namespace Seng.Game.Infrastructure.QueryHandlers
                                             a.Type AS Type
                                         FROM [action.OnClickOption] oco
                                         INNER JOIN [action.GameAction] a ON a.Id = oco.ResultActionId
-                                        INNER JOIN [action.Context] c ON oco.Id = c.OnClickOptionId
-                                        LEFT JOIN[history.ActionHistory] ah
+                                        LEFT JOIN [action.Context] c ON oco.Id = c.OnClickOptionId AND c.ClickedComponentId IN @ClickedComponentIds
+                                        LEFT JOIN [history.ActionHistory] ah
                                         ON c.AlreadyRunActionId = ah.GameActionId
                                         AND (SELECT Value FROM [history.ActionsMetaStatistics] WHERE Type = 'ExecutedActionsSum') - c.InLast <= InsertOrder
                                         AND InFirst >= InsertOrder
-                                        WHERE ComponentId = @ComponentId
-                                        AND c.ClickedComponentId IN @ClickedComponentIds;";
+                                        WHERE ComponentId = @ComponentId";
 
         private IDbConnectionCreator _dbConnectionCreator;
 

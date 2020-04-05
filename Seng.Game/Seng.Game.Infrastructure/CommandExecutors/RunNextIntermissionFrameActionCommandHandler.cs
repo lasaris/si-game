@@ -8,15 +8,21 @@ using System.Threading.Tasks;
 using Seng.Common.Entities.Modules;
 using Seng.Game.Infrastructure.Database;
 using Dapper;
+using Seng.Game.Business.Commands.ActionCommands;
 
 namespace Seng.Game.Infrastructure.CommandExecutors
 {
     class RunNextIntermissionFrameActionCommandHandler : ICommandHandler<RunNextIntermissionFrameActionCommand, bool>
     {
         private const string SqlQuery = @"UPDATE [module.IntermissionModule]
-                                            SET 
-                                                CurrentlyVisibleFrameId = @NewVisibleFrameId
-                                            WHERE Id = @IntermissionModuleId";
+                                        SET 
+                                            CurrentlyVisibleFrameId = (SELECT NewIntermissionFrameComponentId 
+                                                                        FROM [action.SwitchIntermissionFramesAction] a 
+                                                                        WHERE a.GameActionId = @GameActionId)
+                                        WHERE EXISTS (SELECT Id 
+                                                        FROM [action.SwitchIntermissionFramesAction] a 
+                                                        WHERE a.GameActionId = 1 
+                                                        AND [module.IntermissionModule].Id = a.IntermissionModuleId);";
 
         private IDbConnectionCreator _dbConnectionCreator;
 

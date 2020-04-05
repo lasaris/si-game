@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Seng.Game.Business.Commands
 {
-    public class ICommand<TResponse> : IRequest<TResponse>
+    public interface ICommand<TResponse> : IRequest<TResponse>
     {
     }
 }

@@ -8,5 +8,6 @@ namespace Seng.Common.Entities.Actions.IntermissionModule
     {
         public int GameActionId { get; set; }
         public int NewIntermissionFrameComponentId { get; set; }
+        public int IntermissionModuleId { get; set; }
     }
 }

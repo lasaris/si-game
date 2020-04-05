@@ -26,23 +26,31 @@ namespace Seng.Game.Business.RequestHandlers
 
         public async Task<RetrieveScenarioResultDto> Handle(RetrieveScenarioRequest request, CancellationToken cancellationToken)
         {
-            //RetrieveScenarioFromServerQuery query = _mapper.Map<RetrieveScenarioRequest, RetrieveScenarioFromServerQuery>(request);
-            //GameDbContext gameDbContext = await _mediator.Send(query);
-            //var insertScenarioDataCommand = new InsertScenarioDataCommand
-            //{
-            //    GameDbContext = gameDbContext
-            //};
-            //await _mediator.Send(insertScenarioDataCommand);
-
-            GetActionByComponentQuery query2 = new GetActionByComponentQuery
+            RetrieveScenarioFromServerQuery query = _mapper.Map<RetrieveScenarioRequest, RetrieveScenarioFromServerQuery>(request);
+            GameDbContext gameDbContext = await _mediator.Send(query);
+            var insertScenarioDataCommand = new InsertScenarioDataCommand
             {
-                ClickedComponentIds = new List<int>
-                {
-                    8, 9
-                }.ToArray(),
-                ComponentId = 1
+                GameDbContext = gameDbContext
             };
-            var result =  await _mediator.Send(query2);
+            await _mediator.Send(insertScenarioDataCommand);
+
+            //GetActionByComponentQuery query2 = new GetActionByComponentQuery
+            //{
+            //    ClickedComponentIds = new List<int>
+            //    {
+            //        8, 9
+            //    }.ToArray(),
+            //    ComponentId = 1
+            //};
+            //var result =  await _mediator.Send(query2);
+
+            //RunNextIntermissionFrameActionCommand command = new RunNextIntermissionFrameActionCommand
+            //{
+            //    IntermissionModuleId = 1,
+            //    NewVisibleFrameId = 2
+            //};
+
+            //var result2 = await _mediator.Send(command);
 
             return null;
         }
