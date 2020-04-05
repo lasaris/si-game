@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Seng.Game.Business.DTOs.Components.BrowserModule;
 using Seng.Game.Business.DTOs.Components.EmailModule;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
@@ -8,19 +9,52 @@ namespace Seng.Game.Desktop
 {
 	public static class GameInitialize
 	{
+		public static BrowserModuleDto BrowserModuleGet()
+		{
+			var browserModule = new BrowserModuleDto
+			{
+				IsVisible = true,
+				SearchingMinigame = new SearchingMinigameComponentDto
+				{
+					Width = 15,
+					Height = 10,
+					Solution = "TEST",
+					Words = new List<string>
+					{
+						"FIRST",
+						"SECOND",
+						"THIRD",
+						"FORTH",
+						"FIFTH",
+					}
+				}
+			};
+
+			return browserModule;
+		}
+
+		public static DesktopModuleDto DesktopModuleGet()
+		{
+			return new DesktopModuleDto
+			{
+				IsVisible = true
+			};
+		}
+
 		public static IntermissionModuleDto IntermissionModuleGet()
 		{
 			var intermissionModule = new IntermissionModuleDto
 			{
 				ModuleId = 1,
 				IsVisible = true,
+				CurrentVisibleIntermissionFrameId = 1,
 				Frames = new List<IntermissionFrameComponentDto>
 					{
 						new IntermissionFrameComponentDto
 						{
-							ComponentId = 2,
-								TextParagraph = "Hello, this is our demo game",
-								Question = new QuestionComponentDto()
+							ComponentId = 1,
+							TextParagraph = "Hello, this is our demo game",
+							Question = new QuestionComponentDto()
 							{
 								ComponentId = 4,
 								Text = "Example question ?",
@@ -43,12 +77,12 @@ namespace Seng.Game.Desktop
 						},
 						new IntermissionFrameComponentDto
 						{
-							ComponentId = 7,
+							ComponentId = 2,
 							TextParagraph = "Second page\nAnother row",
 						},
 						new IntermissionFrameComponentDto
 						{
-							ComponentId = 9,
+							ComponentId = 3,
 							Question = new QuestionComponentDto()
 							{
 								ComponentId = 10,

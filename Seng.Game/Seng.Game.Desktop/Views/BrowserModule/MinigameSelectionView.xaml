@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="Seng.Game.Desktop.Views.MinigameSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="{DynamicResource ThemeBackgroundColor}">
+
+    <UserControl.Resources>
+        <ResourceDictionary  Source="../Styles/BrowserModule.xaml" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Grid.ColumnSpan="5"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="45"
+                   Text="Browser" />
+
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource MinigameButtonStyle}"
+                Command="{Binding OpenSearchingMinigameCommand}">
+            <Button.Content>
+                <DockPanel>
+                    <Image DockPanel.Dock="Left"
+                           Source="pack://application:,,,/Resources/Images/loupe.png" />
+                    <TextBlock Text="Searching"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Button.Content>
+        </Button>
+
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource MinigameButtonStyle}">
+            <Button.Content>
+                <DockPanel>
+                    <Image DockPanel.Dock="Left"
+                           Source="pack://application:,,,/Resources/Images/maintenance.png" />
+                    <TextBlock Text="In production"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Button.Content>
+        </Button>
+
+        <Button Grid.Row="5"
+                Grid.Column="1"
+                Style="{StaticResource MinigameButtonStyle}">
+            <Button.Content>
+                <DockPanel>
+                    <Image DockPanel.Dock="Left"
+                           Source="pack://application:,,,/Resources/Images/maintenance.png" />
+                    <TextBlock Text="In production"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                </DockPanel>
+            </Button.Content>
+        </Button>
+
+        <Button Grid.Row="1"
+                Grid.Column="3"
+                Style="{StaticResource MinigameButtonStyle}">
+            <Button.Content>
+                <DockPanel>
+                    <Image DockPanel.Dock="Left"
+                           Source="pack://application:,,,/Resources/Images/maintenance.png" />
+                    <TextBlock Text="In production"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Button.Content>
+        </Button>
+
+        <Button Grid.Row="3"
+                Grid.Column="3"
+                Style="{StaticResource MinigameButtonStyle}">
+            <Button.Content>
+                <DockPanel>
+                    <Image DockPanel.Dock="Left"
+                           Source="pack://application:,,,/Resources/Images/maintenance.png" />
+                    <TextBlock Text="In production"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Button.Content>
+        </Button>
+
+        <Button Grid.Row="5"
+                Grid.Column="3"
+                Style="{StaticResource MinigameButtonStyle}">
+            <Button.Content>
+                <DockPanel>
+                    <Image DockPanel.Dock="Left"
+                           Source="pack://application:,,,/Resources/Images/maintenance.png" />
+                    <TextBlock Text="In production"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>
