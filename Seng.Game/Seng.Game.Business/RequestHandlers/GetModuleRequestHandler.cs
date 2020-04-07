@@ -29,10 +29,16 @@ namespace Seng.Game.Business.RequestHandlers
 
         public async Task<TModuleDto> Handle(GetModuleRequest<TModuleDto> request, CancellationToken cancellationToken)
         {
+            int moduleId = request.Module?.ModuleId ?? throw new ArgumentNullException(nameof(request.Module));
+            if (!request.TriggeredComponentId.HasValue)
+            {
+                return await RetrieveModule(moduleId);
+            }
+
             var getActionQuery = new GetActionByComponentQuery
             {
                 ClickedComponentIds = GetClickedComponentIds(request.Module).ToArray(),
-                ComponentId = request.TriggeredComponentId
+                ComponentId = request.TriggeredComponentId.Value
             };
             IEnumerable<GameAction> gameActionsToRun = await _mediator.Send(getActionQuery);
 
@@ -47,7 +53,6 @@ namespace Seng.Game.Business.RequestHandlers
                 await _mediator.Send(actionCommand);
             }
 
-            int moduleId = request.Module?.ModuleId ?? throw new ArgumentNullException(nameof(request.Module));
             return await RetrieveModule(moduleId);
         }
 

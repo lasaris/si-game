@@ -10,7 +10,7 @@ namespace Seng.Game.Infrastructure.Database
     {
         public IDbConnection CreateOpenConnection()
         {
-            return new SQLiteConnection("Data Source=" + "SengLocalDb.db");
+            return new SQLiteConnection("Data Source=" + "../../../../SengLocalDb.db");
         }
     }
 }

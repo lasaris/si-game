@@ -43,7 +43,7 @@ namespace Seng.Game.Examples
                 { 
                     ModuleId = 1
                 },
-                TriggeredComponentId = 1
+                TriggeredComponentId = null//1
             };
             IntermissionModuleDto gameState = await mediator.Send(request);
             Console.WriteLine(gameState.GetType());

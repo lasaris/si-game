@@ -9,7 +9,7 @@ namespace Seng.Game.Business.Requests
     public class GetModuleRequest<TModuleDto> : IRequest<TModuleDto>
         where TModuleDto : IModuleDto
     {
-        public int TriggeredComponentId { get; set; }
+        public int? TriggeredComponentId { get; set; }
 
         public TModuleDto Module { get; set; }
     }
