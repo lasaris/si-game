@@ -33,6 +33,9 @@
                                     AncestorType={x:Type UserControl}}}" />
             </TextBlock.InputBindings>
         </TextBlock>
+        <TextBlock Text="Save"
+                   HorizontalAlignment="Center">
+        </TextBlock>
         <TextBlock Text="Back to game"
                    HorizontalAlignment="Center">
             <TextBlock.InputBindings>
