@@ -57,7 +57,7 @@ namespace Seng.Game.Desktop.ViewModels
 			var options = CurrentFrame.Question.Options.ToList();
 			var selected = CurrentFrame.Question.Options.First(x => x == selectedOption);
 
-			if (CurrentFrame.Question.Multichoice)
+			if (CurrentFrameType == FrameType.MultichoiceQuestion)
 			{
 				selected.Clicked = !selected.Clicked;
 			}

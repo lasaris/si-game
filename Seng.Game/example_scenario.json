@@ -33,8 +33,7 @@
     {
       "Id": 1,
       "ComponentId": 7,
-      "Text": "Do you want to proceed, or to end?",
-      "Multichoice": false
+      "Text": "Do you want to proceed, or to end?"
     }
   ],
   "OptionComponents": [

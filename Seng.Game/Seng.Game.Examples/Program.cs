@@ -7,7 +7,6 @@ using Seng.Game.Business.DTOs;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
 using Seng.Game.Business.Requests;
-using Seng.Game.Business.Requests.Components;
 using Seng.Game.Infrastructure.DependencyInjection;
 
 namespace Seng.Game.Examples
@@ -45,8 +44,13 @@ namespace Seng.Game.Examples
                 },
                 TriggeredComponentId = null//1
             };
-            IntermissionModuleDto gameState = await mediator.Send(request);
-            Console.WriteLine(gameState.GetType());
+            IntermissionModuleDto intermissionModule = await mediator.Send(request);
+
+            //basic module states request
+            var modulesStatesRequest = new GetAllModuleBasicStatesRequest();
+            AllGameModulesBasicInfoDto moduleStates = await mediator.Send(modulesStatesRequest);
+
+            Console.WriteLine(intermissionModule.GetType());
         }
     }
 }

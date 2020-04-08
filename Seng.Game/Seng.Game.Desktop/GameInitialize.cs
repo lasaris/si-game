@@ -98,7 +98,6 @@ namespace Seng.Game.Desktop
 							{
 								ComponentId = 10,
 								Text = "Slide with multichoice question ?",
-								Multichoice = true,
 								Options = new List<OptionComponentDto>()
 								{
 									new OptionComponentDto()

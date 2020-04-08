@@ -12,7 +12,6 @@ using Seng.Game.Business.DTOs.Components.Common;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
 using Seng.Game.Business.Queries;
-using Seng.Game.Business.Requests.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;

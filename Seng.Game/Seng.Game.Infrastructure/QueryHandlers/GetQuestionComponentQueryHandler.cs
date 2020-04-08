@@ -16,8 +16,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
         private const string SqlQuery = @"SELECT
                                     Id,
                                     ComponentId,
-                                    Text,
-                                    Multichoice
+                                    Text
                                     FROM [component.QuestionComponent]
                                     WHERE Id = @QuestionComponentId;";
 

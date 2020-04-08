@@ -18,7 +18,6 @@ namespace Seng.Game.Business.RequestHandlers
         where TModuleDto : IModuleDto
     {
         private IMediator _mediator;
-        private IMapper _mapper;
 
         protected abstract IDictionary<string, IActionCommand> ActionCommandResolver { get; }
 
