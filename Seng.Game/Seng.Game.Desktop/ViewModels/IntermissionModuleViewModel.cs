@@ -103,7 +103,7 @@ namespace Seng.Game.Desktop.ViewModels
 				}
 				else
 				{
-					CurrentFrame = frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
+					CurrentFrame = frames.First(x => x.Id == currentVisibleIntermissionFrameId);
 					UpdateFrameContent();
 				}
 			}
@@ -126,7 +126,7 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void UpdateFrameContent()
 		{
-			currentFrame = frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
+			currentFrame = frames.First(x => x.Id == currentVisibleIntermissionFrameId);
 			CurrentFrameType = (FrameType) Enum.Parse(typeof(FrameType), currentFrame.FrameType);
 		}
 

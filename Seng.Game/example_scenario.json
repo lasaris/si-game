@@ -58,21 +58,24 @@
       "ComponentId": 4,
       "ButtonComponentId": 1,
       "QuestionComponentId": 1,
-      "TextParagraph": "Hello, this is the beggining of the game. You can choose to proceed or to end the game"
+      "TextParagraph": "Hello, this is the beggining of the game. You can choose to proceed or to end the game",
+      "FrameType": "Question"
     },
     {
       "Id": 2,
       "IntermissionModuleId": 1,
       "ComponentId": 5,
       "ButtonComponentId": 2,
-      "TextParagraph": "You have chosen to continue. Now you can go only to the next frame"
+      "TextParagraph": "You have chosen to continue. Now you can go only to the next frame",
+      "FrameType": "Text"
     },
     {
       "Id": 3,
       "IntermissionModuleId": 1,
       "ComponentId": 6,
       "ButtonComponentId": 3,
-      "TextParagraph": "This is the last thing you will see in this game. Push the button to end it."
+      "TextParagraph": "This is the last thing you will see in this game. Push the button to end it.",
+      "FrameType": "Text"
     }
   ],
   "Components": [
@@ -122,12 +125,14 @@
     {
       "Id": 1,
       "GameActionId": 1,
-      "NewIntermissionFrameComponentId": 2
+      "NewIntermissionFrameComponentId": 2,
+      "IntermissionModuleId": 1
     },
     {
       "Id": 2,
       "GameActionId": 2,
-      "NewIntermissionFrameComponentId": 3
+      "NewIntermissionFrameComponentId": 3,
+      "IntermissionModuleId": 1
     }
   ],
   "Contexts": [

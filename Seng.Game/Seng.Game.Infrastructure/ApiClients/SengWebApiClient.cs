@@ -14,7 +14,7 @@ namespace Seng.Game.Infrastructure.ApiClients
     {
         public async Task<GameDbContext> GetScenario(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken)
         {
-            string webData = await File.ReadAllTextAsync("example_scenario.json", cancellationToken);
+            string webData = await File.ReadAllTextAsync("../../../../example_scenario.json", cancellationToken);
             return JsonConvert.DeserializeObject<GameDbContext>(webData);
         }
     }

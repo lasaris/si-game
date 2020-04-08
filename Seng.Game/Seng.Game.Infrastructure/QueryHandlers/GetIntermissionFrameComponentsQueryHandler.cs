@@ -19,8 +19,9 @@ namespace Seng.Game.Infrastructure.QueryHandlers
                                     ButtonComponentId,
                                     TextParagraph,
                                     ComponentId,
-                                    QuestionComponentId
-                                    FROM[component.IntermissionFrameComponent]
+                                    QuestionComponentId,
+                                    FrameType
+                                    FROM [component.IntermissionFrameComponent]
                                     WHERE IntermissionModuleId = @IntermissionModuleId;";
 
         private IDbConnectionCreator _dbConnectionCreator;

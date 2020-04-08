@@ -11,6 +11,7 @@ namespace Seng.Common.Entities.Components.IntermissionModule
         public int ButtonComponentId { get; set; }
         public string TextParagraph { get; set; }
         public int? QuestionComponentId { get; set; }
+        public string FrameType { get; set; } // Text, Question, MultichoiceQuestion, UserInput
 
         public ButtonComponent ButtonComponent { get; set; }
         public QuestionComponent QuestionComponent { get; set; }
