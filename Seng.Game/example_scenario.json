@@ -117,7 +117,7 @@
     },
     {
       "Id": 3,
-      "Type": "EndGame"
+      "Type": "SwitchIntermissionFrame"
     }
   ],
   "SwitchIntermissionFrameActions": [
@@ -156,17 +156,34 @@
     {
       "Id": 1,
       "ComponentId": 1,
-      "ResultActionId": 1
+      "ResultActionId": 1,
+      "UseClickedComponentConstraint": true,
+      "UseInLastConstraint": false,
+      "UseInFirstConstraint": false
     },
     {
       "Id": 2,
       "ComponentId": 1,
-      "ResultActionId": 2
+      "ResultActionId": 2,
+      "UseClickedComponentConstraint": true,
+      "UseInLastConstraint": false,
+      "UseInFirstConstraint": false
     },
     {
-      "Id": 1,
+      "Id": 3,
       "ComponentId": 2,
-      "ResultActionId": 2
+      "ResultActionId": 2,
+      "UseClickedComponentConstraint": false,
+      "UseInLastConstraint": false,
+      "UseInFirstConstraint": false
+    },
+    {
+      "Id": 4,
+      "ComponentId": 3,
+      "ResultActionId": 3,
+      "UseClickedComponentConstraint": false,
+      "UseInLastConstraint": false,
+      "UseInFirstConstraint": false
     }
   ]
 }

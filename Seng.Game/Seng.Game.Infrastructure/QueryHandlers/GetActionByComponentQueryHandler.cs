@@ -16,15 +16,18 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     {
         private const string SqlQuery = @"SELECT
                                             oco.ResultActionId AS Id,
-                                            a.Type AS Type
+                                            a.Type AS Type,
+                                            c.ClickedComponentId,
+                                            c.InLast
                                         FROM [action.OnClickOption] oco
                                         INNER JOIN [action.GameAction] a ON a.Id = oco.ResultActionId
-                                        LEFT JOIN [action.Context] c ON oco.Id = c.OnClickOptionId AND c.ClickedComponentId IN @ClickedComponentIds
+                                        LEFT JOIN [action.Context] c ON oco.Id = c.OnClickOptionId
                                         LEFT JOIN [history.ActionHistory] ah
                                         ON c.AlreadyRunActionId = ah.GameActionId
-                                        AND (SELECT Value FROM [history.ActionsMetaStatistics] WHERE Type = 'ExecutedActionsSum') - c.InLast <= InsertOrder
-                                        AND InFirst >= InsertOrder
-                                        WHERE ComponentId = @ComponentId";
+                                        WHERE oco.ComponentId = @ComponentId
+                                        AND (NOT oco.UseClickedComponentConstraint OR c.ClickedComponentId IN @ClickedComponentIds)
+                                        AND (NOT oco.UseInLastConstraint OR (SELECT Value FROM [history.ActionsMetaStatistics] WHERE Type = 'ExecutedActionsSum') - c.InLast <= InsertOrder)
+                                        AND (NOT oco.UseInFirstConstraint OR InFirst >= InsertOrder);";
 
         private IDbConnectionCreator _dbConnectionCreator;
 

@@ -52,7 +52,10 @@ namespace Seng.Game.Business.RequestHandlers
                 {
                     foreach(var option in frame.Question.Options)
                     {
-                        clickedComponentIds.Add(option.ComponentId);
+                        if (option.Clicked)
+                        {
+                            clickedComponentIds.Add(option.ComponentId);
+                        }
                     }
                 }
             }
