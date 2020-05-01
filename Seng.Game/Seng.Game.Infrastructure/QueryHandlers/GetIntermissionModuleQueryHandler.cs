@@ -23,8 +23,8 @@ namespace Seng.Game.Infrastructure.QueryHandlers
                                         m.Id,
                                         m.IsVisible
                                         FROM [module.IntermissionModule] im
-                                        INNER JOIN [module.Module] m
-                                        WHERE ModuleId = @ModuleId";
+                                        INNER JOIN [module.Module] m ON im.ModuleId = m.Id
+                                        WHERE im.ModuleId = @ModuleId";
 
         private IDbConnectionCreator _dbConnectionCreator;
 

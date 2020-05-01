@@ -51,9 +51,12 @@ namespace Seng.Game.Business.RequestHandlers
                 actionCommand.GameActionId = gameAction.Id;
                 await _mediator.Send(actionCommand);
             }
+            await UpdateDataBasedOnModuleState(request.Module);
 
             return await RetrieveModule(moduleId);
         }
+
+        protected abstract Task UpdateDataBasedOnModuleState(TModuleDto moduleDto);
 
         protected abstract IEnumerable<int> GetClickedComponentIds(TModuleDto moduleDto);
 

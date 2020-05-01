@@ -21,7 +21,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                                                         WHERE a.GameActionId = @GameActionId)
                                         WHERE EXISTS (SELECT Id 
                                                         FROM [action.SwitchIntermissionFramesAction] a 
-                                                        WHERE a.GameActionId = 1 
+                                                        WHERE a.GameActionId = @GameActionId
                                                         AND [module.IntermissionModule].Id = a.IntermissionModuleId);";
 
         private IDbConnectionCreator _dbConnectionCreator;

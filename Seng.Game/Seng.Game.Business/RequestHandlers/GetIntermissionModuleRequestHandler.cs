@@ -106,5 +106,10 @@ namespace Seng.Game.Business.RequestHandlers
 
             return _mapper.Map<IntermissionModule, IntermissionModuleDto>(intermissionModule);
         }
+
+        protected override Task UpdateDataBasedOnModuleState(IntermissionModuleDto moduleDto)
+        {
+            return Task.CompletedTask;
+        }
     }
 }
