@@ -19,7 +19,7 @@ namespace Seng.Game.Business.RequestHandlers
     {
         private IMediator _mediator;
 
-        protected abstract IDictionary<string, IActionCommand> ActionCommandResolver { get; }
+        protected abstract IDictionary<string, Func<TModuleDto, IActionCommand>> ActionCommandResolver { get; }
 
         public GetModuleRequestHandler(IMediator mediator)
         {
@@ -43,11 +43,12 @@ namespace Seng.Game.Business.RequestHandlers
 
             foreach(var gameAction in gameActionsToRun)
             {
-                bool actionExists = ActionCommandResolver.TryGetValue(gameAction.Type, out IActionCommand actionCommand);
+                bool actionExists = ActionCommandResolver.TryGetValue(gameAction.Type, out Func<TModuleDto, IActionCommand> actionCommandCreator);
                 if (!actionExists)
                 {
                     throw new ArgumentException($"No action command for action type {gameAction.Type}");
                 }
+                var actionCommand = actionCommandCreator(request.Module);
                 actionCommand.GameActionId = gameAction.Id;
                 await _mediator.Send(actionCommand);
             }

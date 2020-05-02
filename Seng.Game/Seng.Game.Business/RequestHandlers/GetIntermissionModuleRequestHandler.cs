@@ -32,11 +32,10 @@ namespace Seng.Game.Business.RequestHandlers
             _mapper = mapper;
         }
 
-        protected override IDictionary<string, IActionCommand> ActionCommandResolver
-        =>
-            new Dictionary<string, IActionCommand>
+        protected override IDictionary<string, Func<IntermissionModuleDto, IActionCommand>> ActionCommandResolver =>
+            new Dictionary<string, Func<IntermissionModuleDto, IActionCommand>>
             {
-                { "SwitchIntermissionFrame", new RunNextIntermissionFrameActionCommand() }
+                { "SwitchIntermissionFrame", (module) => new RunNextIntermissionFrameActionCommand() }
             };
 
         protected override IEnumerable<int> GetClickedComponentIds(IntermissionModuleDto moduleDto)

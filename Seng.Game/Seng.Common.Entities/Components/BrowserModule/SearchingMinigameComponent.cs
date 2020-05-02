@@ -4,7 +4,7 @@ namespace Seng.Common.Entities.Components.BrowserModule
 {
 	public class SearchingMinigameComponent : BasicEntity
 	{
-		public IEnumerable<string> Words { get; set; }
+		public IEnumerable<WordComponent> Words { get; set; }
 
 		public string Solution { get; set; }
 

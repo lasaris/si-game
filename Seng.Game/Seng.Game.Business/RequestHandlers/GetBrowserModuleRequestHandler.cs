@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Seng.Common.Entities.Components.BrowserModule;
 using Seng.Common.Entities.Modules;
 using Seng.Game.Business.Commands;
 using Seng.Game.Business.Commands.ActionCommands;
@@ -23,7 +24,7 @@ namespace Seng.Game.Business.RequestHandlers
             _mapper = mapper;
         }
 
-        protected override IDictionary<string, IActionCommand> ActionCommandResolver { get; }
+        protected override IDictionary<string, Func<BrowserModuleDto, IActionCommand>> ActionCommandResolver { get; }
 
         protected override IEnumerable<int> GetClickedComponentIds(BrowserModuleDto moduleDto)
         {
@@ -37,6 +38,14 @@ namespace Seng.Game.Business.RequestHandlers
                 ModuleId = moduleId
             };
             BrowserModule browserModule = await _mediator.Send(getBrowserModuleQuery);
+            if(browserModule != null && browserModule.SearchingMinigame != null)
+            {
+                var getWordsQuery = new GetWordsQuery
+                {
+                    SearchingMinigameComponentId = browserModule.SearchingMinigame.Id
+                };
+                browserModule.SearchingMinigame.Words = await _mediator.Send(getWordsQuery);
+            }
             return _mapper.Map<BrowserModule, BrowserModuleDto>(browserModule);
         }
 

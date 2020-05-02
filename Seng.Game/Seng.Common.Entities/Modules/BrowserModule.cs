@@ -7,6 +7,8 @@ namespace Seng.Common.Entities.Modules
 {
     public class BrowserModule : BasicEntity
     {
+        public int SearchingMinigameComponentId { get; set; }
+
         public SearchingMinigameComponent SearchingMinigame { get; set; }
 
         public int ModuleId { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Seng.Common.Entities.Components.EmailModule
 {
-    public class RecipientComponent
+    public class RecipientComponent : BasicEntity
 	{
 		public string Address { get; set; }
 

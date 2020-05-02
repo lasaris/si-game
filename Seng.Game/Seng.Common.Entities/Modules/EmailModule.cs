@@ -5,12 +5,14 @@ using System.Text;
 
 namespace Seng.Common.Entities.Modules
 {
-    public class EmailModule
+    public class EmailModule : BasicEntity
     {
+        public int ModuleId { get; set; }
+
         public IEnumerable<EmailComponent> RegularEmails { get; set; }
 
         public IEnumerable<EmailComponent> SentEmails { get; set; }
 
-        public NewEmailComponent NewEmail { get; set; }
+        public IEnumerable<RecipientComponent> Recipients { get; set; }
     }
 }

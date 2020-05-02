@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Seng.Common.Entities.Components.EmailModule
 {
-	public class EmailComponent
+	public class EmailComponent : BasicEntity
 	{
 		public string Sender { get; set; }
 
