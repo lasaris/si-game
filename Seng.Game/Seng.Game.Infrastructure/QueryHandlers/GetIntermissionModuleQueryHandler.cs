@@ -3,7 +3,6 @@ using Seng.Common.Entities.Components;
 using Seng.Common.Entities.Components.IntermissionModule;
 using Seng.Common.Entities.Modules;
 using Seng.Game.Business.Queries;
-using Seng.Game.Business.QueryResponseModels;
 using Seng.Game.Infrastructure.Database;
 using System;
 using System.Collections.Generic;

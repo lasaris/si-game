@@ -1,5 +1,4 @@
 ﻿using Seng.Common.Entities.Modules;
-using Seng.Game.Business.QueryResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Text;

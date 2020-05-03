@@ -5,6 +5,7 @@ using Seng.Common.Entities.Modules;
 using Seng.Game.Business.Commands;
 using Seng.Game.Business.Commands.ActionCommands;
 using Seng.Game.Business.DTOs.Modules;
+using Seng.Game.Business.GameActionRunners;
 using Seng.Game.Business.Queries;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,11 @@ namespace Seng.Game.Business.RequestHandlers
         private IMediator _mediator;
         private IMapper _mapper;
 
-        public GetBrowserModuleRequestHandler(IMediator mediator, IMapper mapper) : base(mediator)
+        public GetBrowserModuleRequestHandler(IMediator mediator, IMapper mapper, IGameActionFactory gameActionFactory) : base(mediator, gameActionFactory)
         {
             _mediator = mediator;
             _mapper = mapper;
         }
-
-        protected override IDictionary<string, Func<BrowserModuleDto, IActionCommand>> ActionCommandResolver { get; }
 
         protected override IEnumerable<int> GetClickedComponentIds(BrowserModuleDto moduleDto)
         {

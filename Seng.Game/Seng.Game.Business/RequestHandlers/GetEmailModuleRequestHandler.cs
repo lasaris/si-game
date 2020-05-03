@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Seng.Game.Business.Commands.ActionCommands;
 using Seng.Game.Business.DTOs.Modules;
+using Seng.Game.Business.GameActionRunners;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,12 +11,8 @@ namespace Seng.Game.Business.RequestHandlers
 {
     class GetEmailModuleRequestHandler : GetModuleRequestHandler<EmailModuleDto>
     {
-        protected override IDictionary<string, Func<EmailModuleDto, IActionCommand>> ActionCommandResolver =>
-            new Dictionary<string, Func<EmailModuleDto, IActionCommand>>
-            {
-            };
 
-        public GetEmailModuleRequestHandler(IMediator mediator) : base(mediator)
+        public GetEmailModuleRequestHandler(IMediator mediator, IGameActionFactory gameActionFactory) : base(mediator, gameActionFactory)
         {
 
         }

@@ -11,6 +11,7 @@ using Seng.Game.Business.DTOs.Components;
 using Seng.Game.Business.DTOs.Components.Common;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
+using Seng.Game.Business.GameActionRunners;
 using Seng.Game.Business.Queries;
 using System;
 using System.Collections.Generic;
@@ -21,22 +22,17 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Business.RequestHandlers
 {
-    public class GetIntermissionModuleRequestHandler : GetModuleRequestHandler<IntermissionModuleDto>
+    class GetIntermissionModuleRequestHandler : GetModuleRequestHandler<IntermissionModuleDto>
     {
         private IMediator _mediator;
         private IMapper _mapper;
 
-        public GetIntermissionModuleRequestHandler(IMediator mediator, IMapper mapper) : base(mediator)
+        public GetIntermissionModuleRequestHandler(IMediator mediator, IMapper mapper, IGameActionFactory gameActionFactory) : base(mediator, gameActionFactory)
         {
             _mediator = mediator;
             _mapper = mapper;
+            gameActionFactory.Register(GameActionType.SwitchIntermissionFrame, typeof(NextIntermissionFrameActionRunner));
         }
-
-        protected override IDictionary<string, Func<IntermissionModuleDto, IActionCommand>> ActionCommandResolver =>
-            new Dictionary<string, Func<IntermissionModuleDto, IActionCommand>>
-            {
-                { "SwitchIntermissionFrame", (module) => new RunNextIntermissionFrameActionCommand() }
-            };
 
         protected override IEnumerable<int> GetClickedComponentIds(IntermissionModuleDto moduleDto)
         {
