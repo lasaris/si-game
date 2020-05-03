@@ -8,6 +8,10 @@ namespace Seng.Common.Entities.Components.EmailModule
 
 		public string Text { get; set; }
 
+        public int? ParentParagraphId { get; set; }
+
+        public int RecipientComponentId { get; set; }
+
 		public IEnumerable<ParagraphComponent> ChildrenParagraphs { get; set; }
 	}
 }

@@ -13,5 +13,7 @@ namespace Seng.Common.Entities.Actions.EmailModule
         public string ContentHeader { get; set; }
         public string ContentFooter { get; set; }
         public string Content { get; set; }
+        public int EmailModuleId { get; set; }
+        public int ComponentId { get; set; }
     }
 }

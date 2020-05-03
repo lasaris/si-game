@@ -5,8 +5,15 @@ using System.Text;
 
 namespace Seng.Game.Business.Commands.ActionCommands
 {
-    public class SendEmailToPlayerActionCommand : IActionCommand
+    public class SendEmailToPlayerActionCommand : ICommand<bool>
     {
-        public SendEmailToPlayerAction ActionData { get; set; }
+        public string Sender { get; set; }
+        public string Subject { get; set; }
+        public DateTime Date { get; set; }
+        public string ContentHeader { get; set; }
+        public string ContentFooter { get; set; }
+        public string Content { get; set; }
+        public int EmailModuleId { get; set; }
+        public int ComponentId { get; set; }
     }
 }

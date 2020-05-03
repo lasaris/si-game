@@ -16,6 +16,5 @@ namespace Seng.Common.Entities.Components.EmailModule
 
 		public string ContentFooter { get; set; }
 
-		public bool Selected { get; set; }
 	}
 }

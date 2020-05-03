@@ -13,7 +13,6 @@ namespace Seng.Game.Infrastructure.CommandExecutors
     class SendEmailToPlayerActionCommandHandler : ICommandHandler<SendEmailToPlayerActionCommand, bool>
     {
         private const string SqlQuery = @"INSERT INTO [component.EmailComponent] (
-                                           Id,
                                            Sender,
                                            Subject,
                                            Date,
@@ -25,14 +24,13 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                            Content
                                        )
                                        VALUES (
-                                           @Id,
                                            @Sender,
                                            @Subject,
                                            @Date,
                                            @ContentHeader,
                                            @ContentFooter,
                                            @ComponentId,
-                                           @IsSentEmail,
+                                           0,
                                            @EmailModuleId,
                                            @Content
                                        );";
@@ -48,7 +46,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
         {
             using (var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {
-                int updateRowsNumber = await dbConnection.ExecuteAsync(SqlQuery, command.ActionData);
+                int updateRowsNumber = await dbConnection.ExecuteAsync(SqlQuery, command);
                 return updateRowsNumber > 0;
             }
         }
