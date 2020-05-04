@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.CommandExecutors
 {
-    class InsertNewComponentCommandHandler : ICommandHandler<InsertNewComponentCommand, bool>
+    class InsertNewComponentCommandHandler : ICommandHandler<InsertNewComponentCommand, int>
     {
         private const string SqlQuery = @"INSERT INTO [component.Component] (
                                               Id
@@ -25,12 +25,12 @@ namespace Seng.Game.Infrastructure.CommandExecutors
             _dbConnectionCreator = dbConnectionCreator;
         }
 
-        public async Task<bool> Handle(InsertNewComponentCommand command, CancellationToken cancellationToken)
+        public async Task<int> Handle(InsertNewComponentCommand command, CancellationToken cancellationToken)
         {
             using (var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {
                 int updateRowsNumber = await dbConnection.ExecuteAsync(SqlQuery, command);
-                return updateRowsNumber > 0;
+                return (int)_dbConnectionCreator.GetLastInsertedRowId(dbConnection);
             }
         }
     }

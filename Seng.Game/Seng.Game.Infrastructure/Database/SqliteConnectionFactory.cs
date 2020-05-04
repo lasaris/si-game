@@ -12,5 +12,11 @@ namespace Seng.Game.Infrastructure.Database
         {
             return new SQLiteConnection("Data Source=" + "../../../../SengLocalDb.db");
         }
+
+        public long GetLastInsertedRowId(IDbConnection dbConnection)
+        {
+            var sqliteConnection = (SQLiteConnection)dbConnection;
+            return sqliteConnection.LastInsertRowId;
+        }
     }
 }

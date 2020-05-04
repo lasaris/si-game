@@ -9,6 +9,8 @@ namespace Seng.Common.Entities.Modules
     {
         public int ModuleId { get; set; }
 
+        public Module Module { get; set; }
+
         public IEnumerable<EmailComponent> RegularEmails { get; set; }
 
         public IEnumerable<EmailComponent> SentEmails { get; set; }

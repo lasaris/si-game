@@ -2,6 +2,7 @@
 using MediatR;
 using Seng.Common.Entities.Components.EmailModule;
 using Seng.Common.Entities.Modules;
+using Seng.Game.Business.Commands;
 using Seng.Game.Business.Commands.ActionCommands;
 using Seng.Game.Business.DTOs.Modules;
 using Seng.Game.Business.GameActionRunners;
@@ -102,9 +103,47 @@ namespace Seng.Game.Business.RequestHandlers
             return _mapper.Map<EmailModule, EmailModuleDto>(emailModule);
         }
 
-        protected override Task UpdateDataBasedOnModuleState(EmailModuleDto moduleDto)
+        protected override async Task UpdateDataBasedOnModuleState(EmailModuleDto moduleDto)
         {
-            return Task.CompletedTask;
+            if(moduleDto == null || moduleDto.NewEmail == null)
+            {
+                return;
+            }
+
+            var insertComponentCommand = new InsertNewComponentCommand
+            {
+            };
+            int componentId = await _mediator.Send(insertComponentCommand);
+
+            var selectedRecipient = moduleDto.NewEmail.Recipients.Where(recipient => recipient.Selected).FirstOrDefault();
+
+            if(selectedRecipient == default)
+            {
+                return;
+            }
+            string content = string.Empty;
+            var currentSelectedParagraph = selectedRecipient.FirstParagraphs.Where(paragraph => paragraph.Selected).FirstOrDefault();
+            while(currentSelectedParagraph.ChildrenParagraphs != null && currentSelectedParagraph.ChildrenParagraphs.Any())
+            {
+                content += currentSelectedParagraph.Text;
+                currentSelectedParagraph = currentSelectedParagraph.ChildrenParagraphs
+                    .Where(paragraph => paragraph.Selected).FirstOrDefault();
+            }
+
+            var command = new CreateNewEmailCommand
+            {
+                Sender = selectedRecipient.Address,
+                Subject = moduleDto.NewEmail.Subject,
+                Content = content,
+                ContentFooter = selectedRecipient.ContentFooter,
+                ContentHeader = selectedRecipient.ContentHeader,
+                Date = DateTime.Now,
+                EmailModuleId = moduleDto.EmailModuleId,
+                ComponentId = componentId,
+                IsSentEmail = true
+            };
+
+            await _mediator.Send(command);
         }
     }
 }

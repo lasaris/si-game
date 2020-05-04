@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.CommandExecutors
 {
-    class SendEmailToPlayerActionCommandHandler : ICommandHandler<SendEmailToPlayerActionCommand, bool>
+    class CreateNewEmailCommandHandler : ICommandHandler<CreateNewEmailCommand, bool>
     {
         private const string SqlQuery = @"INSERT INTO [component.EmailComponent] (
                                            Sender,
@@ -30,19 +30,19 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                            @ContentHeader,
                                            @ContentFooter,
                                            @ComponentId,
-                                           0,
+                                           @IsSentEmail,
                                            @EmailModuleId,
                                            @Content
                                        );";
 
         private IDbConnectionCreator _dbConnectionCreator;
 
-        public SendEmailToPlayerActionCommandHandler(IDbConnectionCreator dbConnectionCreator)
+        public CreateNewEmailCommandHandler(IDbConnectionCreator dbConnectionCreator)
         {
             _dbConnectionCreator = dbConnectionCreator;
         }
 
-        public async Task<bool> Handle(SendEmailToPlayerActionCommand command, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CreateNewEmailCommand command, CancellationToken cancellationToken)
         {
             using (var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {

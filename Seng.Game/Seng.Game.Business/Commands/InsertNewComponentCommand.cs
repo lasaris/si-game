@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Seng.Game.Business.Commands
 {
-    public class InsertNewComponentCommand : ICommand<bool>
+    public class InsertNewComponentCommand : ICommand<int>
     {
         public int ComponentId { get; set; }
     }

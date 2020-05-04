@@ -34,7 +34,7 @@ namespace Seng.Game.Business.GameActionRunners
             };
             await _mediator.Send(insertComponentCommand);
 
-            var command = new SendEmailToPlayerActionCommand
+            var command = new CreateNewEmailCommand
             {
                 Sender = actionData.Sender,
                 Subject = actionData.Subject,
@@ -42,7 +42,9 @@ namespace Seng.Game.Business.GameActionRunners
                 ContentFooter = actionData.ContentFooter,
                 ContentHeader = actionData.ContentHeader,
                 Date = actionData.Date,
-                EmailModuleId = actionData.EmailModuleId
+                EmailModuleId = actionData.EmailModuleId,
+                ComponentId = actionData.ComponentId,
+                IsSentEmail = false
             };
             return await _mediator.Send(command);
         }
