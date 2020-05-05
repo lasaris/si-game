@@ -2,18 +2,19 @@
 using Prism.Commands;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Desktop.ViewModels.Base;
-using System.Collections.Generic;
 using System.Linq;
 using Prism.Events;
 using Prism.Regions;
+using Seng.Game.Business.DTOs.Modules;
+using Seng.Game.Business.Requests;
 using Seng.Game.Desktop.Helpers.IntermissionModule;
 
 namespace Seng.Game.Desktop.ViewModels
 {
 	public class IntermissionModuleViewModel : BaseViewModel, INavigationAware
 	{
+		private IntermissionModuleDto intermissionModule;
 		private bool isNavigationTarget = true;
-		private readonly List<IntermissionFrameComponentDto> frames;
 		private int? currentVisibleIntermissionFrameId;
 
 		private IntermissionFrameComponentDto currentFrame;
@@ -39,8 +40,7 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			InitializeDelegateCommands();
 			
-			var intermissionModule = GameState.IntermissionModule;
-			frames = intermissionModule.Frames.ToList();
+			intermissionModule = GameState.IntermissionModule;
 			currentVisibleIntermissionFrameId = intermissionModule.CurrentVisibleIntermissionFrameId;
 
 			UpdateFrameContent();
@@ -93,8 +93,14 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			if (CanNextFrameOrCloseCommandExecute())
 			{
-				//Temporary action call, will be replaced
-				TemporaryActionCallSimulation();
+				var request = new GetModuleRequest<IntermissionModuleDto>
+				{
+					Module = intermissionModule,
+					TriggeredComponentId = currentFrame.Button.ComponentId
+				};
+				GameState.IntermissionModule = GameState.Mediator.Send(request).Result;
+				intermissionModule = GameState.IntermissionModule;
+				currentVisibleIntermissionFrameId = intermissionModule.CurrentVisibleIntermissionFrameId;
 
 				if (currentVisibleIntermissionFrameId == null)
 				{
@@ -103,30 +109,14 @@ namespace Seng.Game.Desktop.ViewModels
 				}
 				else
 				{
-					CurrentFrame = frames.First(x => x.Id == currentVisibleIntermissionFrameId);
 					UpdateFrameContent();
 				}
 			}
 		}
 
-		/// <summary>
-		/// Temporary, it will be deleted
-		/// </summary>
-		private void TemporaryActionCallSimulation()
-		{
-			if (currentFrame.ComponentId == 4)
-			{
-				currentVisibleIntermissionFrameId = null;
-			}
-			else
-			{
-				currentVisibleIntermissionFrameId++;
-			}
-		}
-
 		private void UpdateFrameContent()
 		{
-			currentFrame = frames.First(x => x.Id == currentVisibleIntermissionFrameId);
+			CurrentFrame = intermissionModule.Frames.First(x => x.Id == currentVisibleIntermissionFrameId);
 			CurrentFrameType = (FrameType) Enum.Parse(typeof(FrameType), currentFrame.FrameType);
 		}
 

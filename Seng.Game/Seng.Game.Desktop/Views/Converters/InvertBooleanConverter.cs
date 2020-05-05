@@ -4,6 +4,9 @@ using System.Windows.Data;
 
 namespace Seng.Game.Desktop.Views.Converters
 {
+	/// <summary>
+	/// Converts <see cref="bool"/> to its inverted value.
+	/// </summary>
 	[ValueConversion(typeof(bool), typeof(bool))]
 	public class InvertBooleanConverter : IValueConverter
 	{

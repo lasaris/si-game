@@ -6,6 +6,9 @@ using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop.ViewModels
 {
+	/// <summary>
+	/// Class represents pause (options) state of the application.
+	/// </summary>
 	public class PauseViewModel : BaseViewModel, INavigationAware
 	{
 		private string pausedView;

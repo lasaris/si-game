@@ -5,13 +5,35 @@ using System.Windows.Media;
 
 namespace Seng.Game.Desktop
 {
+	/// <summary>
+	/// Contains settings about color themes, that are used accross application.
+	/// </summary>
 	public static class GameTheme
 	{
+		/// <summary>
+		/// Default theme color, used first after application start.
+		/// </summary>
 		private static readonly Color BaseColor;
+
+		/// <summary>
+		/// Opacity for background theme color.
+		/// </summary>
 		private static readonly double Opacity;
+
+		/// <summary>
+		/// Theme colors, which are rotated inside the application. First in list is base color. 
+		/// </summary>
 		private static readonly List<SolidColorBrush> AllThemeColors;
+
+		/// <summary>
+		/// Background theme colors, which are rotated inside the application.
+		/// Contains same colors as <see cref="AllThemeColors"/> with opacity on them.
+		/// </summary>
 		private static readonly List<SolidColorBrush> AllThemeBackgroundColors;
 
+		/// <summary>
+		/// Initializes <see cref="GameTheme"/> class.
+		/// </summary>
 		static GameTheme()
 		{
 			BaseColor = Color.FromRgb(0, 102, 204);
@@ -34,9 +56,24 @@ namespace Seng.Game.Desktop
 			};
 		}
 
+		/// <summary>
+		/// Returns base theme color.
+		/// </summary>
+		/// <returns><see cref="SolidColorBrush"/></returns>
 		public static SolidColorBrush GetBaseThemeColor() => new SolidColorBrush(BaseColor);
+
+		/// <summary>
+		/// Returns base background color.
+		/// </summary>
+		/// <returns><see cref="SolidColorBrush"/></returns>
 		public static SolidColorBrush GetBaseThemeBackgroundColor() => new SolidColorBrush(BaseColor) {Opacity = Opacity};
 
+
+		/// <summary>
+		/// Changes theme color across the application.
+		/// Color is changed to the next one in <see cref="AllThemeColors"/> and <see cref="AllThemeBackgroundColors"/>.
+		/// If current is the last one, first (default) theme is used.
+		/// </summary>
 		public static void ChangeThemeColor()
 		{
 			var currentTheme = Application.Current.Resources["ThemeColor"] as SolidColorBrush;

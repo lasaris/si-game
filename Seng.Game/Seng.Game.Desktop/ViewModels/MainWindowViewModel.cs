@@ -6,6 +6,9 @@ using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop.ViewModels
 {
+	/// <summary>
+	/// Class contains pause mechanism logic.
+	/// </summary>
 	public class MainWindowViewModel : BaseViewModel
 	{
 		private string pausedView;
