@@ -69,6 +69,8 @@ namespace Seng.Game.Examples
             intermissionModule = await mediator.Send(getModuleRequest);
 
             Console.WriteLine(intermissionModule.GetType());
+
+
         }
     }
 }
