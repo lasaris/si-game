@@ -5,6 +5,7 @@ using Seng.Game.Business.DTOs;
 using Seng.Game.Business.DTOs.Components.Common;
 using Seng.Game.Business.DTOs.Components.IntermissionModule;
 using Seng.Game.Business.DTOs.Modules;
+using Seng.Game.Business.GameActionRunners;
 using Seng.Game.Business.RequestHandlers;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,11 @@ namespace Seng.Game.Business.DependencyInjection
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddScoped<IGameActionFactory, GameActionFactory>();
+            services.AddScoped<NextIntermissionFrameActionRunner>();
+            services.AddScoped<SendEmailToPlayerActionRunner>();
+            services.AddScoped<IGameActionRunner, NextIntermissionFrameActionRunner>(s => s.GetService<NextIntermissionFrameActionRunner>());
+            services.AddScoped<IGameActionRunner, SendEmailToPlayerActionRunner>(s => s.GetService<SendEmailToPlayerActionRunner>());
         }
     }
 }

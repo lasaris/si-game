@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Seng.Game.Business.Queries
 {
-    public class GetIntermissionModuleQuery : IQuery<IntermissionModule>
+    public class GetEmailModuleQuery : IQuery<EmailModule>
     {
         public int ModuleId { get; set; }
     }

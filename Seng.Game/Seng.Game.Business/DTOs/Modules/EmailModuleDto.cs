@@ -10,5 +10,7 @@ namespace Seng.Game.Business.DTOs.Modules
         public IEnumerable<EmailComponentDto> SentEmails { get; set; }
 
         public NewEmailComponentDto NewEmail { get; set; }
+
+        public int EmailModuleId { get; set; }
     }
 }

@@ -3,6 +3,10 @@
     {
       "Id": 1,
       "IsVisible": true
+    },
+    {
+      "Id": 2,
+      "IsVisible": true
     }
   ],
   "IntermissionModules": [
@@ -104,6 +108,21 @@
     },
     {
       "Id": 9
+    },
+    {
+      "Id": 10
+    },
+    {
+      "Id": 11
+    },
+    {
+      "Id": 12
+    },
+    {
+      "Id": 13
+    },
+    {
+      "Id": 14
     }
   ],
   "GameActions": [
@@ -184,6 +203,50 @@
       "UseClickedComponentConstraint": false,
       "UseInLastConstraint": false,
       "UseInFirstConstraint": false
+    }
+  ],
+  "BrowserModules": [
+    {
+      "Id": 1,
+      "SearchingMinigameComponentId": 1,
+      "ModuleId": 2
+    }
+  ],
+  "SearchingMinigameComponents": [
+    {
+      "Id": 1,
+      "Solution": "abcdef",
+      "IsCompleted": false,
+      "Height": 20,
+      "Width": 30,
+      "WordComponentId": 1,
+      "ComponentId": 10
+    }
+  ],
+  "WordComponents": [
+    {
+      "Id": 1,
+      "Value": "abacava",
+      "SearchingMinigameComponentId": 1,
+      "ComponentId": 11
+    },
+    {
+      "Id": 2,
+      "Value": "fgfsgfdsg",
+      "SearchingMinigameComponentId": 1,
+      "ComponentId": 12
+    },
+    {
+      "Id": 3,
+      "Value": "dsafngh",
+      "SearchingMinigameComponentId": 1,
+      "ComponentId": 13
+    },
+    {
+      "Id": 4,
+      "Value": "rewyeuokcv",
+      "SearchingMinigameComponentId": 1,
+      "ComponentId": 14
     }
   ]
 }

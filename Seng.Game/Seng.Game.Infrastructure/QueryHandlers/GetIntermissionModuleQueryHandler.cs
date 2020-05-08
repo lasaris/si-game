@@ -3,7 +3,6 @@ using Seng.Common.Entities.Components;
 using Seng.Common.Entities.Components.IntermissionModule;
 using Seng.Common.Entities.Modules;
 using Seng.Game.Business.Queries;
-using Seng.Game.Business.QueryResponseModels;
 using Seng.Game.Infrastructure.Database;
 using System;
 using System.Collections.Generic;
@@ -23,8 +22,8 @@ namespace Seng.Game.Infrastructure.QueryHandlers
                                         m.Id,
                                         m.IsVisible
                                         FROM [module.IntermissionModule] im
-                                        INNER JOIN [module.Module] m
-                                        WHERE ModuleId = @ModuleId";
+                                        INNER JOIN [module.Module] m ON im.ModuleId = m.Id
+                                        WHERE im.ModuleId = @ModuleId";
 
         private IDbConnectionCreator _dbConnectionCreator;
 
