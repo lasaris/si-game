@@ -38,7 +38,6 @@ namespace Seng.Game.Business.GameActionRunners
             {
                 Sender = actionData.Sender,
                 Subject = actionData.Subject,
-                Content = actionData.Content,
                 ContentFooter = actionData.ContentFooter,
                 ContentHeader = actionData.ContentHeader,
                 Date = actionData.Date,
@@ -46,7 +45,7 @@ namespace Seng.Game.Business.GameActionRunners
                 ComponentId = actionData.ComponentId,
                 IsSentEmail = false
             };
-            return await _mediator.Send(command);
+            return await _mediator.Send(command) != 0;
         }
     }
 }

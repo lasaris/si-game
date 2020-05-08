@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.CommandExecutors
 {
-    class CreateNewEmailCommandHandler : ICommandHandler<CreateNewEmailCommand, bool>
+    class CreateNewEmailCommandHandler : ICommandHandler<CreateNewEmailCommand, int>
     {
         private const string SqlQuery = @"INSERT INTO [component.EmailComponent] (
                                            Sender,
@@ -20,8 +20,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                            ContentFooter,
                                            ComponentId,
                                            IsSentEmail,
-                                           EmailModuleId,
-                                           Content
+                                           EmailModuleId
                                        )
                                        VALUES (
                                            @Sender,
@@ -31,8 +30,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                            @ContentFooter,
                                            @ComponentId,
                                            @IsSentEmail,
-                                           @EmailModuleId,
-                                           @Content
+                                           @EmailModuleId
                                        );";
 
         private IDbConnectionCreator _dbConnectionCreator;
@@ -42,12 +40,12 @@ namespace Seng.Game.Infrastructure.CommandExecutors
             _dbConnectionCreator = dbConnectionCreator;
         }
 
-        public async Task<bool> Handle(CreateNewEmailCommand command, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateNewEmailCommand command, CancellationToken cancellationToken)
         {
             using (var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {
                 int updateRowsNumber = await dbConnection.ExecuteAsync(SqlQuery, command);
-                return updateRowsNumber > 0;
+                return (int)_dbConnectionCreator.GetLastInsertedRowId(dbConnection);
             }
         }
     }

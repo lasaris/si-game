@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Seng.Game.Business.Queries
 {
-    public class GetParagraphComponentsQuery : IQuery<IEnumerable<ParagraphComponent>>
+    public class GetEmailComponentParagraphsQuery : IQuery<IEnumerable<EmailComponentParagraph>>
     {
-        public int RecipientComponentId { get; set; }
+        public int EmailComponentId { get; set; }
     }
 }

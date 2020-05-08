@@ -2,7 +2,7 @@
 
 namespace Seng.Common.Entities.Components.EmailModule
 {
-    public class ParagraphComponent : BasicEntity
+    public class NewEmailParagraphComponent : BasicEntity
 	{
         public int ComponentId { get; set; }
 
@@ -12,6 +12,6 @@ namespace Seng.Common.Entities.Components.EmailModule
 
         public int RecipientComponentId { get; set; }
 
-		public IEnumerable<ParagraphComponent> ChildrenParagraphs { get; set; }
+		public IEnumerable<NewEmailParagraphComponent> ChildrenParagraphs { get; set; }
 	}
 }

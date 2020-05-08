@@ -70,7 +70,25 @@ namespace Seng.Game.Examples
 
             Console.WriteLine(intermissionModule.GetType());
 
+            var mailModule = new EmailModuleDto
+            {
+                ModuleId = 2
+            };
 
+            var getMailModuleRequest = new GetModuleRequest<EmailModuleDto>
+            {
+                TriggeredComponentId = 200,
+                Module = mailModule
+            };
+            mailModule = await mediator.Send(getMailModuleRequest);
+            mailModule.NewEmail.Recipients.First().Selected = true;
+            mailModule.NewEmail.Recipients.First().FirstParagraphs.First().Selected = true;
+            var getMailModuleRequest2 = new GetModuleRequest<EmailModuleDto>
+            {
+                TriggeredComponentId = 200,
+                Module = mailModule
+            };
+            mailModule = await mediator.Send(getMailModuleRequest2);
         }
     }
 }

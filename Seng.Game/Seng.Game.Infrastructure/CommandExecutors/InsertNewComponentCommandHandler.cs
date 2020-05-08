@@ -15,7 +15,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                               Id
                                           )
                                           VALUES (
-                                              @Id
+                                              @ComponentId
                                           );";
 
         private IDbConnectionCreator _dbConnectionCreator;

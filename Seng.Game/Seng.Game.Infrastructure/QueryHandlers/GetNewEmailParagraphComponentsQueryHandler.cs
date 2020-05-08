@@ -10,29 +10,29 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.QueryHandlers
 {
-    class GetParagraphComponentsQueryHandler : IQueryHandler<GetParagraphComponentsQuery, IEnumerable<ParagraphComponent>>
+    class GetNewEmailParagraphComponentsQueryHandler : IQueryHandler<GetNewEmailParagraphComponentsQuery, IEnumerable<NewEmailParagraphComponent>>
     {
         private const string SqlQuery = @"SELECT Id,
                                             Text,
                                             ParentParagraphId,
                                             ComponentId,
                                             RecipientComponentId
-                                        FROM [component.ParagraphComponent]
+                                        FROM [component.NewEmailParagraphComponent]
                                         WHERE RecipientComponentId = @RecipientComponentId;";
 
         private IDbConnectionCreator _dbConnectionCreator;
 
-        public GetParagraphComponentsQueryHandler(IDbConnectionCreator dbConnectionCreator)
+        public GetNewEmailParagraphComponentsQueryHandler(IDbConnectionCreator dbConnectionCreator)
         {
             _dbConnectionCreator = dbConnectionCreator;
         }
 
-        public async Task<IEnumerable<ParagraphComponent>> Handle(GetParagraphComponentsQuery query, CancellationToken cancellationToken)
+        public async Task<IEnumerable<NewEmailParagraphComponent>> Handle(GetNewEmailParagraphComponentsQuery query, CancellationToken cancellationToken)
         {
             using (var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {
-                var result = await dbConnection.QueryAsync<ParagraphComponent>(SqlQuery, query);
-                return result == null ? new List<ParagraphComponent>() : result;
+                var result = await dbConnection.QueryAsync<NewEmailParagraphComponent>(SqlQuery, query);
+                return result == null ? new List<NewEmailParagraphComponent>() : result;
             }
         }
     }

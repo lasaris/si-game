@@ -16,5 +16,7 @@ namespace Seng.Common.Entities.Modules
         public IEnumerable<EmailComponent> SentEmails { get; set; }
 
         public IEnumerable<RecipientComponent> Recipients { get; set; }
+
+        public string NewEmailSubject { get; set; }
     }
 }

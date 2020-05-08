@@ -13,7 +13,7 @@ namespace Seng.Common.Entities.Components.EmailModule
 
         public string ContentHeader { get; set; }
 
-        public IEnumerable<string> Paragraphs { get; set; }
+        public IEnumerable<EmailComponentParagraph> Paragraphs { get; set; }
 
         public string ContentFooter { get; set; }
 
