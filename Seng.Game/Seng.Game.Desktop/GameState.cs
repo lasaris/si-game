@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Windows.Markup;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Seng.Game.Business.DependencyInjection;
 using Seng.Game.Business.DTOs.Modules;
@@ -31,7 +32,7 @@ namespace Seng.Game.Desktop
 			var modulesStatesRequest = new GetAllModuleBasicStatesRequest();
 			AllGameModulesBasicInfoDto moduleStates = Mediator.Send(modulesStatesRequest).Result;
 
-			var request = new GetModuleRequest<IntermissionModuleDto>
+			var intermissionRequest = new GetModuleRequest<IntermissionModuleDto>
 			{
 				Module = new IntermissionModuleDto()
 				{
@@ -39,10 +40,20 @@ namespace Seng.Game.Desktop
 				},
 				TriggeredComponentId = null//1
 			};
-			IntermissionModuleDto intermissionModule = Mediator.Send(request).Result;
+			IntermissionModuleDto intermissionModule = Mediator.Send(intermissionRequest).Result;
+
+			var emailRequest = new GetModuleRequest<EmailModuleDto>
+			{
+				Module = new EmailModuleDto()
+				{
+					ModuleId = 2
+				},
+				TriggeredComponentId = null//1
+			};
+			EmailModuleDto emailModule = Mediator.Send(emailRequest).Result;
 
 			IntermissionModule = intermissionModule;
-			EmailModule = GameInitialize.EmailModuleGet();
+			EmailModule = emailModule;
 			BrowserModule = GameInitialize.BrowserModuleGet();
 			DesktopModule = GameInitialize.DesktopModuleGet();
 		}
