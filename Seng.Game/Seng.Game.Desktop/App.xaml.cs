@@ -33,6 +33,11 @@ namespace Seng.Game.Desktop
 			containerRegistry.RegisterForNavigation<SearchingMinigameView>();
 		}
 
+		/// <summary>
+		/// On startup sets base theme color and theme background color.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void App_OnStartup(object sender, StartupEventArgs e)
 		{
 			Current.Resources["ThemeColor"] = GameTheme.GetBaseThemeColor();

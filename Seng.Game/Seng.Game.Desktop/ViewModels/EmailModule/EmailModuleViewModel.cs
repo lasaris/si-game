@@ -13,6 +13,7 @@ namespace Seng.Game.Desktop.ViewModels
 		private EmailModuleDto emailModule;
 
 		private ObservableCollection<EmailComponentDto> emailList = new ObservableCollection<EmailComponentDto>();
+		private string activeEmailListName;
 
 		public ObservableCollection<EmailComponentDto> EmailList
 		{
@@ -20,8 +21,15 @@ namespace Seng.Game.Desktop.ViewModels
 			set => SetProperty(ref emailList, value);
 		}
 
+		public string ActiveEmailListName
+		{
+			get => activeEmailListName;
+			set => SetProperty(ref activeEmailListName, value);
+		}
+
 		public DelegateCommand NewEmailCommand { get; set; }
 		public DelegateCommand ShowInboxEmailsCommand { get; set; }
+		public DelegateCommand ShowSentEmailsCommand { get; set; }
 		public DelegateCommand<EmailComponentDto> ViewEmailFromListCommand { get; set; }
 
 		public EmailModuleViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
@@ -29,6 +37,7 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			NewEmailCommand = new DelegateCommand(NewEmailCommandExecute);
 			ShowInboxEmailsCommand = new DelegateCommand(ShowInboxEmailsCommandExecute);
+			ShowSentEmailsCommand = new DelegateCommand(ShowSentEmailsCommandExecute);
 			ViewEmailFromListCommand = new DelegateCommand<EmailComponentDto>(ViewEmailFromListCommandExecute);
 
 			emailModule = gameState.EmailModule;
@@ -46,7 +55,16 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			EmailList.Clear();
 
+			ActiveEmailListName = "Inbox";
 			EmailList.AddRange(emailModule.RegularEmails);
+		}
+
+		private void ShowSentEmailsCommandExecute()
+		{
+			EmailList.Clear();
+
+			ActiveEmailListName = "Sent";
+			EmailList.AddRange(emailModule.SentEmails);
 		}
 
 		private void NewEmailCommandExecute()
