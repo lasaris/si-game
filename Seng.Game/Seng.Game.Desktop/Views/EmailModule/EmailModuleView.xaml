@@ -20,27 +20,27 @@
                                         Height="140">
                     <RadioButton Command="{Binding DataContext.ViewEmailFromListCommand,
                                                    RelativeSource={RelativeSource FindAncestor,
-                                                   AncestorType={x:Type UserControl}}}"
+                                                   AncestorType={x:Type UserControl}}, Mode=OneWay}"
                                  CommandParameter="{Binding}">
                         <RadioButton.Content>
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Bottom"
-                                                           Text="{Binding Subject}"
-                                                           Margin="5 0 5 20"
-                                                           FontSize="24"
-                                                           TextTrimming="CharacterEllipsis"
-                                                           HorizontalAlignment="Left"/>
+                                           Text="{Binding Subject}"
+                                           Margin="5 0 5 20"
+                                           FontSize="24"
+                                           TextTrimming="CharacterEllipsis"
+                                           HorizontalAlignment="Left"/>
                                 <TextBlock DockPanel.Dock="Left"
-                                                           Text="{Binding Sender}"
-                                                           Margin="10 20 0 0"
-                                                           FontSize="22"
-                                                           TextTrimming="CharacterEllipsis"
-                                                           HorizontalAlignment="left" />
+                                           Text="{Binding Sender}"
+                                           Margin="10 20 0 0"
+                                           FontSize="22"
+                                           TextTrimming="CharacterEllipsis"
+                                           HorizontalAlignment="left" />
                                 <TextBlock DockPanel.Dock="Right"
-                                                           Text="{Binding Date, StringFormat='dd/MM h:mm'}"
-                                                           Margin="0 20 10 0"
-                                                           FontSize="22"
-                                                           HorizontalAlignment="Right" />
+                                           Text="{Binding Date, StringFormat='dd/MM h:mm'}"
+                                           Margin="0 20 10 0"
+                                           FontSize="22"
+                                           HorizontalAlignment="Right" />
                             </DockPanel>
                         </RadioButton.Content>
                     </RadioButton>
@@ -62,13 +62,13 @@
             <StackPanel>
                 <Button Style="{StaticResource SideMenuButtonStyle}"
                         Content="New Email"
-                        Command="{Binding NewEmailCommand}" />
+                        Command="{Binding NewEmailCommand, Mode=OneWay}" />
                 <Button Style="{StaticResource SideMenuButtonStyle}"
                         Content="Inbox"
-                        Command="{Binding ShowInboxEmailsCommand}" />
+                        Command="{Binding ShowInboxEmailsCommand, Mode=OneWay}" />
                 <Button Style="{StaticResource SideMenuButtonStyle}"
                         Content="Sent"
-                        Command="{Binding ShowSentEmailsCommand}" />
+                        Command="{Binding ShowSentEmailsCommand, Mode=OneWay}" />
             </StackPanel>
         </Border>
 

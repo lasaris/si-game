@@ -21,7 +21,7 @@
                              Style="{StaticResource OptionRadioButtonStyle}"
                              Command="{Binding DataContext.OptionSelectCommand,
                                        RelativeSource={RelativeSource FindAncestor,
-                                       AncestorType={x:Type UserControl}}}"
+                                       AncestorType={x:Type UserControl}}, Mode=OneWay}"
                              CommandParameter="{Binding}">
                 </RadioButton>
             </DataTemplate>
@@ -32,7 +32,7 @@
                               Style="{StaticResource MultichoiceOptionToggleButtonStyle}"
                               Command="{Binding DataContext.OptionSelectCommand,
                                                 RelativeSource={RelativeSource FindAncestor,
-                                                AncestorType={x:Type UserControl}}}"
+                                                AncestorType={x:Type UserControl}}, Mode=OneWay}"
                               CommandParameter="{Binding}">
                 </ToggleButton>
             </DataTemplate>

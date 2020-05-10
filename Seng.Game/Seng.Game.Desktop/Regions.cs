@@ -4,7 +4,7 @@ using Seng.Game.Desktop.Views;
 namespace Seng.Game.Desktop
 {
 	/// <summary>
-	/// Prism region names and region views for navigation between regions.
+	/// Prism region names and region views for navigation within regions.
 	/// </summary>
 	public static class Regions
 	{

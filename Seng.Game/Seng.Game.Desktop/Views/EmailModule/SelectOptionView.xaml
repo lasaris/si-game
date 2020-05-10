@@ -44,7 +44,7 @@
                         Content="{Binding}"
                         Command="{Binding DataContext.SelectOptionCommand,
                                           RelativeSource={RelativeSource FindAncestor,
-                                          AncestorType={x:Type UserControl}}}"
+                                          AncestorType={x:Type UserControl}}, Mode=OneWay}"
                         CommandParameter="{Binding}"/>
             </DataTemplate>
         </ItemsControl.ItemTemplate>

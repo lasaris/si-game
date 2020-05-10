@@ -30,7 +30,7 @@
                 <MouseBinding MouseAction="LeftClick"
                               Command="{Binding DataContext.ChangeThemeCommand,
                                     RelativeSource={RelativeSource FindAncestor, 
-                                    AncestorType={x:Type UserControl}}}" />
+                                    AncestorType={x:Type UserControl}}, Mode=OneWay}" />
             </TextBlock.InputBindings>
         </TextBlock>
         <TextBlock Text="Save"
@@ -42,7 +42,7 @@
                 <MouseBinding MouseAction="LeftClick"
                               Command="{Binding DataContext.BackToGameCommand,
                                     RelativeSource={RelativeSource FindAncestor, 
-                                    AncestorType={x:Type UserControl}}}" />
+                                    AncestorType={x:Type UserControl}}, Mode=OneWay}" />
             </TextBlock.InputBindings>
         </TextBlock>
 
@@ -52,7 +52,7 @@
                 <MouseBinding MouseAction="LeftClick"
                               Command="{Binding DataContext.ExitApplicationCommand,
                                     RelativeSource={RelativeSource FindAncestor, 
-                                    AncestorType={x:Type UserControl}}}" />
+                                    AncestorType={x:Type UserControl}}, Mode=OneWay}" />
             </TextBlock.InputBindings>
         </TextBlock>
     </StackPanel>
