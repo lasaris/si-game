@@ -8,6 +8,8 @@ namespace Seng.Game.Business.DTOs.Modules
     {
         public BasicModuleDto IntermissionModuleInfo { get; set; }
 
-        //other modules
+        public BasicModuleDto EmailModuleInfo { get; set; }
+
+        public BasicModuleDto BrowserModuleInfo { get; set; }
     }
 }

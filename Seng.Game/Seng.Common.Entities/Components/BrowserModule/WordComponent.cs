@@ -9,7 +9,5 @@ namespace Seng.Common.Entities.Components.BrowserModule
         public string Value { get; set; }
 
         public int SearchingMinigameComponentId { get; set; }
-
-        public int ComponentId { get; set; }
     }
 }

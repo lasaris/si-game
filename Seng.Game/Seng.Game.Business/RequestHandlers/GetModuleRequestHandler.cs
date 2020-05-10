@@ -30,23 +30,23 @@ namespace Seng.Game.Business.RequestHandlers
         public async Task<TModuleDto> Handle(GetModuleRequest<TModuleDto> request, CancellationToken cancellationToken)
         {
             int moduleId = request.Module?.ModuleId ?? throw new ArgumentNullException(nameof(request.Module));
-            if (!request.TriggeredComponentId.HasValue)
+
+            if (request.TriggeredComponentId.HasValue)
             {
-                return await RetrieveModule(moduleId);
+                var getActionQuery = new GetActionByComponentQuery
+                {
+                    ClickedComponentIds = GetClickedComponentIds(request.Module).ToArray(),
+                    ComponentId = request.TriggeredComponentId.Value
+                };
+                IEnumerable<GameAction> gameActionsToRun = await _mediator.Send(getActionQuery);
+
+                foreach (var gameAction in gameActionsToRun)
+                {
+                    var gameActionRunner = _gameActionFactory.GetGameActionRunner(Enum.Parse<GameActionType>(gameAction.Type));
+                    await gameActionRunner.RunGameAction(gameAction.Id);
+                }
             }
 
-            var getActionQuery = new GetActionByComponentQuery
-            {
-                ClickedComponentIds = GetClickedComponentIds(request.Module).ToArray(),
-                ComponentId = request.TriggeredComponentId.Value
-            };
-            IEnumerable<GameAction> gameActionsToRun = await _mediator.Send(getActionQuery);
-
-            foreach(var gameAction in gameActionsToRun)
-            {
-                var gameActionRunner = _gameActionFactory.GetGameActionRunner(Enum.Parse<GameActionType>(gameAction.Type));
-                await gameActionRunner.RunGameAction(gameAction.Id);
-            }
             await UpdateDataBasedOnModuleState(request.Module);
 
             return await RetrieveModule(moduleId);

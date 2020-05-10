@@ -26,7 +26,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
                                         smc.IsCompleted,
                                         smc.Height,
                                         smc.Width,
-                                        smc.WordComponentId
+                                        smc.ComponentId
                                         FROM [module.BrowserModule] bm
                                         INNER JOIN [module.Module] m ON bm.ModuleId = m.Id
                                         LEFT JOIN [component.SearchingMinigameComponent] smc ON bm.SearchingMinigameComponentId = smc.Id

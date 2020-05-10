@@ -47,7 +47,8 @@ namespace Seng.Game.Business.MapperProfile
             CreateMap<NewEmailParagraphComponent, ParagraphComponentDto>();
             CreateMap<BrowserModule, BrowserModuleDto>()
                 .ForMember(dest => dest.IsVisible, opt => opt.MapFrom(src => src.Module.IsVisible));
-            CreateMap<SearchingMinigameComponent, SearchingMinigameComponentDto>();
+            CreateMap<SearchingMinigameComponent, SearchingMinigameComponentDto>()
+                .ForMember(dest => dest.Words, opt => opt.MapFrom(src => src.Words.Select(c => c.Value)));
             CreateMap<Module, BasicModuleDto>();
         }
     }
