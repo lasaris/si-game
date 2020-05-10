@@ -4,6 +4,7 @@ using Prism.Events;
 using Prism.Regions;
 using Seng.Game.Business.DTOs.Components.EmailModule;
 using Seng.Game.Business.DTOs.Modules;
+using Seng.Game.Desktop.Events;
 using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop.ViewModels
@@ -42,7 +43,19 @@ namespace Seng.Game.Desktop.ViewModels
 
 			emailModule = gameState.EmailModule;
 
+			EventAggregator.GetEvent<EmailSentEvent>().Subscribe(UpdateSentEmails);
+
 			regionManager.RegisterViewWithRegion(Regions.EmailRegion, Regions.EmptyEmailViewType);
+		}
+
+		private void UpdateSentEmails()
+		{
+			emailModule = GameState.EmailModule;
+
+			if (ActiveEmailListName == "Sent")
+			{
+				ShowSentEmailsCommandExecute();
+			}
 		}
 
 		private void ViewEmailFromListCommandExecute(EmailComponentDto email)

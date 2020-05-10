@@ -23,11 +23,11 @@
                 <Button DockPanel.Dock="Right"
                         Style="{StaticResource UpperMenuButtonStyle}"
                         Content="SEND"
-                        Command="{Binding SendEmailCommand}" />
+                        Command="{Binding SendEmailCommand, Mode=OneWay}" />
                 <Button DockPanel.Dock="Right"
                         Style="{StaticResource UpperMenuButtonStyle}"
                         Content="DISCARD"
-                        Command="{Binding DiscardEmailCommand}" />
+                        Command="{Binding DiscardEmailCommand, Mode=OneWay}" />
             </DockPanel>
         </Border>
 
@@ -41,7 +41,7 @@
                            VerticalAlignment="Center" />
                 <Button Visibility="{Binding IsRecipientSelected, Converter={StaticResource BooleanToInvertedVisibilityConverter}}"
                         Style="{StaticResource RoundedButtonStyle}"
-                        Command="{Binding SelectRecipientCommand}"
+                        Command="{Binding SelectRecipientCommand, Mode=OneWay}"
                         Content="Click to select a recipient"
                         Margin="50 0 0 0" />
                 <TextBlock Visibility="{Binding IsRecipientSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -51,7 +51,7 @@
                            Margin="15 0 0 0"/>
                 <Button Visibility="{Binding IsRecipientSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Style="{StaticResource RoundedShorterButtonStyle}"
-                        Command="{Binding SelectRecipientCommand}"
+                        Command="{Binding SelectRecipientCommand, Mode=OneWay}"
                         Content="Change"
                         Margin="50 0 0 0" />
             </StackPanel>
@@ -97,17 +97,17 @@
             <StackPanel Orientation="Horizontal">
                 <Button Visibility="{Binding IsEmailCompleted, Converter={StaticResource BooleanToInvertedVisibilityConverter}}"
                         Style="{StaticResource RoundedButtonStyle}"
-                        Command="{Binding SelectParagraphCommand}"
+                        Command="{Binding SelectParagraphCommand, Mode=OneWay}"
                         Content="Click to select a paragraph"
                         Margin="0 0 20 0" />
                 <Button Visibility="{Binding IsParagraphDisplayed, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Style="{StaticResource RoundedShorterButtonStyle}"
-                        Command="{Binding ChangeParagraphCommand}"
+                        Command="{Binding ChangeParagraphCommand, Mode=OneWay}"
                         Content="Change"
                         Margin ="0 0 20 0" />
                 <Button Visibility="{Binding IsParagraphDisplayed, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Style="{StaticResource RoundedShorterButtonStyle}"
-                        Command="{Binding RemoveParagraphCommand}"
+                        Command="{Binding RemoveParagraphCommand, Mode=OneWay}"
                         Content="Remove" />
             </StackPanel>
         </StackPanel>

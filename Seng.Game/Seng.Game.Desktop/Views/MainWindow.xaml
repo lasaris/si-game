@@ -10,7 +10,7 @@
 
     <Window.InputBindings>
         <KeyBinding Key="Escape"
-                    Command="{Binding PauseApplicationCommand}" />
+                    Command="{Binding PauseApplicationCommand, Mode=OneWay}" />
     </Window.InputBindings>
 
     <ContentControl prism:RegionManager.RegionName="{x:Static desktop:Regions.ApplicationRegion}" />

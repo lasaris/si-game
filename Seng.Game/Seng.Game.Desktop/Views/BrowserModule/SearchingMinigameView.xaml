@@ -18,7 +18,7 @@
                               Content="{Binding Letter}"
                               Command="{Binding DataContext.FieldClickCommand,
                                         RelativeSource={RelativeSource FindAncestor, 
-                                        AncestorType={x:Type UserControl}}}"
+                                        AncestorType={x:Type UserControl}}, Mode=OneWay}"
                               CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
                 </ToggleButton>
             </DataTemplate>
@@ -58,7 +58,7 @@
 
         <Button Grid.Row="0" Grid.Column="0"
                 Style="{StaticResource ReturnBackButtonStyle}"
-                Command="{Binding ReturnFromSearchingCommand}" />
+                Command="{Binding ReturnFromSearchingCommand, Mode=OneWay}" />
 
         <TextBlock Grid.Row="0" Grid.Column="1"
                    Text="Searching"

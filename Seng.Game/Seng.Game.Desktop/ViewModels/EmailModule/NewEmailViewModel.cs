@@ -5,6 +5,8 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using Seng.Game.Business.DTOs.Components.EmailModule;
+using Seng.Game.Business.DTOs.Modules;
+using Seng.Game.Business.Requests;
 using Seng.Game.Desktop.Events;
 using Seng.Game.Desktop.Helpers.EmailModule;
 using Seng.Game.Desktop.ViewModels.Base;
@@ -16,6 +18,7 @@ namespace Seng.Game.Desktop.ViewModels
 		#region Fields
 
 		private bool isNavigationTarget = true;
+		private readonly EmailModuleDto emailModule;
 		private readonly NewEmailComponentDto newEmail;
 		private RecipientComponentDto currentRecipient;
 		private List<ParagraphComponentDto> currentParagraphOptions;
@@ -106,10 +109,12 @@ namespace Seng.Game.Desktop.ViewModels
 		public NewEmailViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
-			newEmail = GameState.EmailModule.NewEmail;
+			emailModule = GameState.EmailModule;
+			newEmail = emailModule.NewEmail;
+			
 
-			eventAggregator.GetEvent<ParagraphSelectionEvent>().Subscribe(HandleSelectedParagraph);
-			eventAggregator.GetEvent<RecipientSelectionEvent>().Subscribe(HandleSelectedRecipient);
+			EventAggregator.GetEvent<ParagraphSelectionEvent>().Subscribe(HandleSelectedParagraph);
+			EventAggregator.GetEvent<RecipientSelectionEvent>().Subscribe(HandleSelectedRecipient);
 
 			InitializeDelegateCommands();
 
@@ -153,7 +158,7 @@ namespace Seng.Game.Desktop.ViewModels
 				Paragraphs[Paragraphs.Count - 1] = payload.SelectedParagraph;
 			}
 
-			if (payload.SelectedParagraph.ChildrenParagraphs != null)
+			if (payload.SelectedParagraph.ChildrenParagraphs != null && payload.SelectedParagraph.ChildrenParagraphs.Any())
 			{
 				IsEmailCompleted = false;
 				nextParagraphOptions = payload.SelectedParagraph.ChildrenParagraphs.ToList();
@@ -190,6 +195,7 @@ namespace Seng.Game.Desktop.ViewModels
 
 			isNavigationTarget = false;
 
+			UnsubscribeEvents();
 			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.EmptyEmailView);
 		}
 
@@ -263,7 +269,24 @@ namespace Seng.Game.Desktop.ViewModels
 				paragraph.Selected = true;
 			}
 
+			emailModule.NewEmail = newEmail;
+			var request = new GetModuleRequest<EmailModuleDto>
+			{
+				Module = emailModule,
+				TriggeredComponentId = 200
+			};
+
+			GameState.EmailModule = GameState.Mediator.Send(request).Result;
+
+			UnsubscribeEvents();
+			EventAggregator.GetEvent<EmailSentEvent>().Publish();
 			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.EmptyEmailView);
+		}
+
+		private void UnsubscribeEvents()
+		{
+			EventAggregator.GetEvent<ParagraphSelectionEvent>().Unsubscribe(HandleSelectedParagraph);
+			EventAggregator.GetEvent<RecipientSelectionEvent>().Unsubscribe(HandleSelectedRecipient);
 		}
 
 		#endregion
