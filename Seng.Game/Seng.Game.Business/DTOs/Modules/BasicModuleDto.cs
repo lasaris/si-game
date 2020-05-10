@@ -11,5 +11,9 @@ namespace Seng.Game.Business.DTOs.Modules
         public int ModuleId { get; set; }
 
         public bool IsVisible { get; set; }
+
+        public List<(int miliseconds, List<IModuleDto>)> AlertCollection { get; set; }
+
+        public int NewMainVisibleModuleId { get; set; }
     }
 }

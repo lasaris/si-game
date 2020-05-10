@@ -110,6 +110,7 @@ namespace Seng.Game.Examples
             };
             browserModule = await mediator.Send(getBrowserModule2Request);
 
+            await Task.Delay(120000);
         }
     }
 }

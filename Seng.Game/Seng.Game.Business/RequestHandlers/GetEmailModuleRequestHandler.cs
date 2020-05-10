@@ -24,6 +24,7 @@ namespace Seng.Game.Business.RequestHandlers
         {
             _mediator = mediator;
             _mapper = mapper;
+            gameActionFactory.Register(GameActionType.SendEmailToPlayer, typeof(NextIntermissionFrameActionRunner));
         }
 
         protected override IEnumerable<int> GetClickedComponentIds(EmailModuleDto moduleDto)

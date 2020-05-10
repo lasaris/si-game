@@ -25,6 +25,7 @@ namespace Seng.Game.Business.RequestHandlers
         {
             _mediator = mediator;
             _gameActionFactory = gameActionFactory;
+            gameActionFactory.Register(GameActionType.UpdateMainVisibleModuleId, typeof(UpdateMainVIsibleModuleActionRunner));
         }
 
         public async Task<TModuleDto> Handle(GetModuleRequest<TModuleDto> request, CancellationToken cancellationToken)
@@ -42,14 +43,18 @@ namespace Seng.Game.Business.RequestHandlers
 
                 foreach (var gameAction in gameActionsToRun)
                 {
-                    var gameActionRunner = _gameActionFactory.GetGameActionRunner(Enum.Parse<GameActionType>(gameAction.Type));
-                    await gameActionRunner.RunGameAction(gameAction.Id);
+                    _ = Task.Run(() => RunAction(gameAction, gameAction.TimeFromTrigger)).ConfigureAwait(false);
                 }
             }
 
             await UpdateDataBasedOnModuleState(request.Module);
 
-            return await RetrieveModule(moduleId);
+            var module = await RetrieveModule(moduleId);
+
+            var getNewMainVisibleModule = new GetCommonGameDataQuery();
+            var commonGameData = await _mediator.Send(getNewMainVisibleModule);
+            module.NewMainVisibleModuleId = commonGameData.MainVisibleModuleId;
+            return module;
         }
 
         protected abstract Task UpdateDataBasedOnModuleState(TModuleDto moduleDto);
@@ -57,5 +62,12 @@ namespace Seng.Game.Business.RequestHandlers
         protected abstract IEnumerable<int> GetClickedComponentIds(TModuleDto moduleDto);
 
         protected abstract Task<TModuleDto> RetrieveModule(int moduleId);
+
+        private async Task RunAction(GameAction gameAction, int timeToWait)
+        {
+            await Task.Delay(timeToWait);
+            var gameActionRunner = _gameActionFactory.GetGameActionRunner(Enum.Parse<GameActionType>(gameAction.Type));
+            await gameActionRunner.RunGameAction(gameAction.Id);
+        }
     }
 }
