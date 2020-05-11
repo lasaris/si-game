@@ -273,7 +273,7 @@ namespace Seng.Game.Desktop.ViewModels
 			var request = new GetModuleRequest<EmailModuleDto>
 			{
 				Module = emailModule,
-				TriggeredComponentId = 200
+				TriggeredComponentId = newEmail.SentButton.ComponentId
 			};
 
 			GameState.EmailModule = GameState.Mediator.Send(request).Result;

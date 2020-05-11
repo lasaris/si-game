@@ -17,16 +17,16 @@ namespace Seng.Game.Desktop
 				IsVisible = true,
 				SearchingMinigame = new SearchingMinigameComponentDto
 				{
-					Width = 15,
-					Height = 10,
-					Solution = "TEST",
+					Width = 18,
+					Height = 12,
+					Solution = "PYTHON",
 					Words = new List<string>
 					{
-						"FIRST",
-						"SECOND",
-						"THIRD",
-						"FORTH",
-						"FIFTH",
+						"JAVA",
+						"KOTLIN",
+						"PYTHON",
+						"CSHARP",
+						"PASCAL",
 					}
 				}
 			};
