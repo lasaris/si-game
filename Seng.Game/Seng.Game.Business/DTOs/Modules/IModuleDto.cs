@@ -9,5 +9,7 @@ namespace Seng.Game.Business.DTOs.Modules
         int ModuleId { get; set; }
 
         int NewMainVisibleModuleId { get; set; }
+
+        IEnumerable<(int miliseconds, IEnumerable<ModuleType>)> AlertCollection { get; set; }
     }
 }

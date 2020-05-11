@@ -21,6 +21,15 @@ namespace Seng.Game.Business.RequestHandlers
         private IMediator _mediator;
         private IGameActionFactory _gameActionFactory;
 
+        private readonly IDictionary<GameActionType, IEnumerable<ModuleType>> gameActionTypeWithAffectedModules =
+            new Dictionary<GameActionType, IEnumerable<ModuleType>>
+            {
+                { GameActionType.SendEmailToPlayer, new List<ModuleType>{ ModuleType.EmailModule } },
+                { GameActionType.SwitchIntermissionFrame, new List<ModuleType>{ ModuleType.IntermissionModule } },
+                { GameActionType.UpdateMainVisibleModuleId, new List<ModuleType>{ ModuleType.IntermissionModule } }
+
+            };
+
         public GetModuleRequestHandler(IMediator mediator, IGameActionFactory gameActionFactory)
         {
             _mediator = mediator;
@@ -32,6 +41,7 @@ namespace Seng.Game.Business.RequestHandlers
         {
             int moduleId = request.Module?.ModuleId ?? throw new ArgumentNullException(nameof(request.Module));
 
+            var alerts = new List<(int miliseconds, IEnumerable<ModuleType>)>();
             if (request.TriggeredComponentId.HasValue)
             {
                 var getActionQuery = new GetActionByComponentQuery
@@ -43,14 +53,23 @@ namespace Seng.Game.Business.RequestHandlers
 
                 foreach (var gameAction in gameActionsToRun)
                 {
-                    _ = Task.Run(() => RunAction(gameAction, gameAction.TimeFromTrigger)).ConfigureAwait(false);
+                    if(gameAction.TimeFromTrigger > 0)
+                    {
+                        _ = Task.Run(() => RunAction(gameAction, gameAction.TimeFromTrigger)).ConfigureAwait(false);
+                        gameActionTypeWithAffectedModules.TryGetValue(Enum.Parse<GameActionType>(gameAction.Type), out var affectedModules);
+                        alerts.Add((gameAction.TimeFromTrigger, affectedModules));
+                    }
+                    else
+                    {
+                        await RunAction(gameAction, gameAction.TimeFromTrigger);
+                    }
                 }
             }
 
             await UpdateDataBasedOnModuleState(request.Module);
 
             var module = await RetrieveModule(moduleId);
-
+            module.AlertCollection = alerts;
             var getNewMainVisibleModule = new GetCommonGameDataQuery();
             var commonGameData = await _mediator.Send(getNewMainVisibleModule);
             module.NewMainVisibleModuleId = commonGameData.MainVisibleModuleId;

@@ -12,7 +12,7 @@ namespace Seng.Game.Business.DTOs.Modules
 
         public bool IsVisible { get; set; }
 
-        public List<(int miliseconds, List<IModuleDto>)> AlertCollection { get; set; }
+        public IEnumerable<(int miliseconds, IEnumerable<ModuleType>)> AlertCollection { get; set; } 
 
         public int NewMainVisibleModuleId { get; set; }
     }
