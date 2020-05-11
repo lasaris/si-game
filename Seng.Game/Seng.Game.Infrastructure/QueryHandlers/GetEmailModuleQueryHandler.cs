@@ -17,6 +17,8 @@ namespace Seng.Game.Infrastructure.QueryHandlers
         private const string SqlQuery = @"SELECT
                                         em.Id,
                                         em.ModuleId,
+                                        em.NewEmailSubject,
+                                        em.NewEmailButtonComponentId,
                                         m.Id,
                                         m.IsVisible
                                         FROM [module.EmailModule] em

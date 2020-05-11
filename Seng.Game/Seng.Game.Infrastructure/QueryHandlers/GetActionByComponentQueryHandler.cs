@@ -17,6 +17,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
         private const string SqlQuery = @"SELECT
                                             oco.ResultActionId AS Id,
                                             a.Type AS Type,
+                                            a.TimeFromTrigger,
                                             c.ClickedComponentId,
                                             c.InLast
                                         FROM [action.OnClickOption] oco

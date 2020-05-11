@@ -13,5 +13,7 @@ namespace Seng.Common.Entities.Components.BrowserModule
 		public int Height { get; set; }
 
 		public int Width { get; set; }
+
+        public int ComponentId { get; set; }
 	}
 }

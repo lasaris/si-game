@@ -28,24 +28,37 @@ namespace Seng.Game.Business.RequestHandlers
         {
             var getIntermissionModuleQuery = new GetIntermissionModuleStateQuery();
             IntermissionModule intermissionModule = await _mediator.Send(getIntermissionModuleQuery);
-            if(intermissionModule != null)
+            var allGameModulesBasicInfo = new AllGameModulesBasicInfoDto();
+            if (intermissionModule != null)
             {
-                return new AllGameModulesBasicInfoDto
+                allGameModulesBasicInfo.IntermissionModuleInfo = new BasicModuleDto
                 {
-                    IntermissionModuleInfo = new BasicModuleDto
-                    {
-                        IsVisible = true,
-                        ModuleId = intermissionModule.ModuleId
-                    }
+                    IsVisible = true,
+                    ModuleId = intermissionModule.ModuleId
                 };
             }
-            return new AllGameModulesBasicInfoDto
+            var getEmailModuleQuery = new GetEmailModuleQuery() { ModuleId = 2 };
+            EmailModule emailModule = await _mediator.Send(getEmailModuleQuery);
+            if(emailModule != null)
             {
-                IntermissionModuleInfo = new BasicModuleDto
+                allGameModulesBasicInfo.EmailModuleInfo = new BasicModuleDto
                 {
-                    IsVisible = false
-                }
-            };
+                    IsVisible = true,
+                    ModuleId = emailModule.ModuleId
+                };
+            }
+
+            var getBrowserModuleQuery = new GetBrowserModuleQuery() { ModuleId = 3 } ;
+            BrowserModule browserModule = await _mediator.Send(getBrowserModuleQuery);
+            if (browserModule != null)
+            {
+                allGameModulesBasicInfo.BrowserModuleInfo = new BasicModuleDto
+                {
+                    IsVisible = true,
+                    ModuleId = browserModule.ModuleId
+                };
+            }
+            return allGameModulesBasicInfo;
         }
     }
 }

@@ -89,6 +89,28 @@ namespace Seng.Game.Examples
                 Module = mailModule
             };
             mailModule = await mediator.Send(getMailModuleRequest2);
+
+            var browserModule = new BrowserModuleDto
+            {
+                ModuleId = 3
+            };
+
+            var getBrowserModuleRequest = new GetModuleRequest<BrowserModuleDto>
+            {
+                TriggeredComponentId = null,
+                Module = browserModule
+            };
+
+            browserModule = await mediator.Send(getBrowserModuleRequest);
+            browserModule.SearchingMinigame.IsCompleted = true;
+            var getBrowserModule2Request = new GetModuleRequest<BrowserModuleDto>
+            {
+                TriggeredComponentId = null,
+                Module = browserModule
+            };
+            browserModule = await mediator.Send(getBrowserModule2Request);
+
+            await Task.Delay(120000);
         }
     }
 }

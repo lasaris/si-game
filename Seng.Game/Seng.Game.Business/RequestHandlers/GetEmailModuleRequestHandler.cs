@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Seng.Common.Entities.Components;
 using Seng.Common.Entities.Components.EmailModule;
 using Seng.Common.Entities.Modules;
 using Seng.Game.Business.Commands;
@@ -24,6 +25,7 @@ namespace Seng.Game.Business.RequestHandlers
         {
             _mediator = mediator;
             _mapper = mapper;
+            gameActionFactory.Register(GameActionType.SendEmailToPlayer, typeof(NextIntermissionFrameActionRunner));
         }
 
         protected override IEnumerable<int> GetClickedComponentIds(EmailModuleDto moduleDto)
@@ -63,8 +65,15 @@ namespace Seng.Game.Business.RequestHandlers
             };
             IEnumerable<RecipientComponent> recipientComponents = await _mediator.Send(getRecipientComponentsQuery);
             emailModule.Recipients = recipientComponents;
-            
-            foreach(var recipient in emailModule.Recipients)
+
+            var getButtonQuery = new GetButtonComponentQuery
+            {
+                ButtonComponentId = emailModule.NewEmailButtonComponentId
+            };
+            ButtonComponent buttonComponent = await _mediator.Send(getButtonQuery);
+            emailModule.NewEmailButtonComponent = buttonComponent;
+
+            foreach (var recipient in emailModule.Recipients)
             {
                 var getParagraphComponents = new GetNewEmailParagraphComponentsQuery
                 {

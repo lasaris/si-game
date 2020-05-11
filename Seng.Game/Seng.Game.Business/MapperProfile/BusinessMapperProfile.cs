@@ -40,14 +40,16 @@ namespace Seng.Game.Business.MapperProfile
                 .ForMember(dest => dest.IsVisible, opt => opt.MapFrom(src => src.Module.IsVisible));
             CreateMap<EmailModule, NewEmailComponentDto>()
                 .ForMember(dest => dest.Subject, opt => opt.MapFrom(src => src.NewEmailSubject))
-                .ForMember(dest => dest.Recipients, opt => opt.MapFrom(src => src.Recipients));
+                .ForMember(dest => dest.Recipients, opt => opt.MapFrom(src => src.Recipients))
+                .ForMember(dest => dest.SentButton, opt => opt.MapFrom(src => src.NewEmailButtonComponent));
             CreateMap<EmailComponent, EmailComponentDto>()
                 .ForMember(dest => dest.Paragraphs, opt => opt.MapFrom(src => src.Paragraphs.Select(c => c.Content)));
             CreateMap<RecipientComponent, RecipientComponentDto>();
             CreateMap<NewEmailParagraphComponent, ParagraphComponentDto>();
             CreateMap<BrowserModule, BrowserModuleDto>()
                 .ForMember(dest => dest.IsVisible, opt => opt.MapFrom(src => src.Module.IsVisible));
-            CreateMap<SearchingMinigameComponent, SearchingMinigameComponentDto>();
+            CreateMap<SearchingMinigameComponent, SearchingMinigameComponentDto>()
+                .ForMember(dest => dest.Words, opt => opt.MapFrom(src => src.Words.Select(c => c.Value)));
             CreateMap<Module, BasicModuleDto>();
         }
     }

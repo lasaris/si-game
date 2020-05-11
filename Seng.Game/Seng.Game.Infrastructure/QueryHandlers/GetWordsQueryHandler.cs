@@ -15,8 +15,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
         private const string SqlQuery = @"SELECT
                                     Id,
                                     Value,
-                                    SearchingMinigameComponentId,
-                                    ComponentId
+                                    SearchingMinigameComponentId
                                     FROM [component.WordComponent]
                                     WHERE SearchingMinigameComponentId = @SearchingMinigameComponentId;";
 
