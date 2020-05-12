@@ -6,7 +6,6 @@ using System.Linq;
 using Prism.Events;
 using Prism.Regions;
 using Seng.Game.Business.DTOs.Modules;
-using Seng.Game.Business.Requests;
 using Seng.Game.Desktop.Helpers.IntermissionModule;
 
 namespace Seng.Game.Desktop.ViewModels
@@ -89,16 +88,12 @@ namespace Seng.Game.Desktop.ViewModels
 			}
 		}
 
-		private void NextFrameOrCloseCommandExecute()
+		private async void NextFrameOrCloseCommandExecute()
 		{
+			
 			if (CanNextFrameOrCloseCommandExecute())
 			{
-				var request = new GetModuleRequest<IntermissionModuleDto>
-				{
-					Module = intermissionModule,
-					TriggeredComponentId = currentFrame.Button.ComponentId
-				};
-				GameState.IntermissionModule = GameState.Mediator.Send(request).Result;
+				await GameState.UpdateIntermissionModule(currentFrame.Button.ComponentId);
 				intermissionModule = GameState.IntermissionModule;
 				currentVisibleIntermissionFrameId = intermissionModule.CurrentVisibleIntermissionFrameId;
 

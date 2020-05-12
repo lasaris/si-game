@@ -9,7 +9,7 @@ using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop.ViewModels
 {
-	public class EmailModuleViewModel : BaseViewModel
+	public class EmailModuleViewModel : BaseViewModel, INavigationAware
 	{
 		private EmailModuleDto emailModule;
 
@@ -58,6 +58,16 @@ namespace Seng.Game.Desktop.ViewModels
 			}
 		}
 
+		private void UpdateInboxEmails()
+		{
+			emailModule = GameState.EmailModule;
+
+			if (ActiveEmailListName == "Inbox")
+			{
+				ShowInboxEmailsCommandExecute();
+			}
+		}
+
 		private void ViewEmailFromListCommandExecute(EmailComponentDto email)
 		{
 			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.DisplayEmailView,
@@ -84,5 +94,14 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.NewEmailView);
 		}
+
+		public void OnNavigatedTo(NavigationContext navigationContext)
+		{
+			UpdateInboxEmails();
+		}
+
+		public bool IsNavigationTarget(NavigationContext navigationContext) => true;
+
+		public void OnNavigatedFrom(NavigationContext navigationContext) { }
 	}
 }
