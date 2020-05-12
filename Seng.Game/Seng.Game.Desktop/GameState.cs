@@ -53,10 +53,7 @@ namespace Seng.Game.Desktop
 		{
 			var intermissionRequest = new GetModuleRequest<IntermissionModuleDto>
 			{
-				Module = new IntermissionModuleDto()
-				{
-					ModuleId = IntermissionModule.ModuleId
-				},
+				Module = IntermissionModule,
 				TriggeredComponentId = triggeredComponentId
 			};
 
@@ -71,10 +68,7 @@ namespace Seng.Game.Desktop
 		{
 			var emailRequest = new GetModuleRequest<EmailModuleDto>
 			{
-				Module = new EmailModuleDto()
-				{
-					ModuleId = EmailModule.ModuleId
-				},
+				Module = EmailModule,
 				TriggeredComponentId = triggeredComponentId
 			};
 
@@ -85,10 +79,7 @@ namespace Seng.Game.Desktop
 		{
 			var browserRequest = new GetModuleRequest<BrowserModuleDto>
 			{
-				Module = new BrowserModuleDto()
-				{
-					ModuleId = BrowserModule.ModuleId
-				},
+				Module = BrowserModule,
 				TriggeredComponentId = triggeredComponentId
 			};
 
