@@ -5,8 +5,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using Seng.Game.Business.DTOs.Components.EmailModule;
-using Seng.Game.Business.DTOs.Modules;
-using Seng.Game.Business.Requests;
 using Seng.Game.Desktop.Events;
 using Seng.Game.Desktop.Helpers.EmailModule;
 using Seng.Game.Desktop.ViewModels.Base;
@@ -18,8 +16,7 @@ namespace Seng.Game.Desktop.ViewModels
 		#region Fields
 
 		private bool isNavigationTarget = true;
-		private readonly EmailModuleDto emailModule;
-		private readonly NewEmailComponentDto newEmail;
+		private NewEmailComponentDto newEmail;
 		private RecipientComponentDto currentRecipient;
 		private List<ParagraphComponentDto> currentParagraphOptions;
 		private List<ParagraphComponentDto> nextParagraphOptions;
@@ -109,9 +106,7 @@ namespace Seng.Game.Desktop.ViewModels
 		public NewEmailViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
-			emailModule = GameState.EmailModule;
-			newEmail = emailModule.NewEmail;
-			
+			newEmail = GameState.EmailModule.NewEmail;
 
 			EventAggregator.GetEvent<ParagraphSelectionEvent>().Subscribe(HandleSelectedParagraph);
 			EventAggregator.GetEvent<RecipientSelectionEvent>().Subscribe(HandleSelectedRecipient);
@@ -201,6 +196,13 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void SelectRecipientCommandExecute()
 		{
+			newEmail = GameState.EmailModule.NewEmail;
+
+			if (!newEmail.Recipients.Any())
+			{
+				return;
+			}
+
 			SetInitialProperties();
 
 			Paragraphs.Clear();
@@ -259,7 +261,7 @@ namespace Seng.Game.Desktop.ViewModels
 			return isEmailCompleted && subject != string.Empty;
 		}
 
-		private void SendEmailCommandExecute()
+		private async void SendEmailCommandExecute()
 		{
 			isNavigationTarget = false;
 			newEmail.Subject = subject;
@@ -269,14 +271,7 @@ namespace Seng.Game.Desktop.ViewModels
 				paragraph.Selected = true;
 			}
 
-			emailModule.NewEmail = newEmail;
-			var request = new GetModuleRequest<EmailModuleDto>
-			{
-				Module = emailModule,
-				TriggeredComponentId = 200
-			};
-
-			GameState.EmailModule = GameState.Mediator.Send(request).Result;
+			await GameState.UpdateEmailModule(newEmail.SentButton.ComponentId);
 
 			UnsubscribeEvents();
 			EventAggregator.GetEvent<EmailSentEvent>().Publish();

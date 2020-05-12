@@ -4,9 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:desktop="clr-namespace:Seng.Game.Desktop"
              prism:ViewModelLocator.AutoWireViewModel="True">
-
     <UserControl.Resources>
-
         <Style x:Key="RibbonButtonStyle"
                TargetType="{x:Type ToggleButton}">
             <Setter Property="Template">
@@ -21,7 +19,7 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="FontSize"
-                    Value="20" />
+                    Value="22" />
             <Style.Triggers>
                 <Trigger Property="IsChecked"
                          Value="True">
@@ -39,9 +37,55 @@
         <Style TargetType="{x:Type RadioButton}"
                BasedOn="{StaticResource RibbonButtonStyle}">
             <Setter Property="Background"
-                    Value="#323232" />
+                    Value="#464646" />
             <Setter Property="BorderThickness"
                     Value="0" />
+        </Style>
+
+        <Style x:Key="EmailRibbonRadioButtonStyle"
+               TargetType="{x:Type RadioButton}"
+               BasedOn="{StaticResource {x:Type RadioButton}}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsEmailModuleTooltipEnabled}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Name="EmailModuleButtonBlinking">
+                            <Storyboard BeginTime="00:00:00"
+                                        RepeatBehavior="Forever"
+                                        Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
+                                <ColorAnimation From="#464646" To="Red" Duration="0:0:2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="EmailModuleButtonBlinking" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="NewIntermissionRibbonRadioButtonStyle"
+               TargetType="{x:Type RadioButton}"
+               BasedOn="{StaticResource {x:Type RadioButton}}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsIntermissionButtonShowed}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Name="NewIntermissionButtonBlinking">
+                            <Storyboard BeginTime="00:00:00"
+                                        RepeatBehavior="Forever"
+                                        Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
+                                <ColorAnimation From="#464646" To="Red" Duration="0:0:2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="NewIntermissionButtonBlinking" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type ToolTip}">
+            <Setter Property="FontSize" Value="32"/>
         </Style>
     </UserControl.Resources>
 
@@ -56,25 +100,39 @@
 
         <DockPanel Grid.Row="1"
                    LastChildFill="False"
-                   Background="#323232">
+                   Background="#464646">
             <RadioButton DockPanel.Dock="Right"
                          Content="Desktop"
-                         Width="120"
+                         Width="140"
                          Command="{Binding ModuleNavigateCommand, Mode=OneWay}"
                          CommandParameter="{x:Static desktop:Regions.DesktopModuleView}"
                          IsChecked="{Binding IsDesktopButtonChecked}"/>
             <RadioButton DockPanel.Dock="Left"
                          Visibility="{Binding IsBrowserModuleVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                          Content="Browser"
-                         Width="120"
+                         Width="140"
                          Command="{Binding ModuleNavigateCommand, Mode=OneWay}"
                          CommandParameter="{x:Static desktop:Regions.BrowserModuleView}" />
             <RadioButton DockPanel.Dock="Left"
+                         Style="{StaticResource EmailRibbonRadioButtonStyle}"
                          Visibility="{Binding IsEmailModuleVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                          Content="Email"
-                         Width="120"
+                         Width="140"
                          Command="{Binding ModuleNavigateCommand, Mode=OneWay}"
-                         CommandParameter="{x:Static desktop:Regions.EmailModuleView}" />
+                         CommandParameter="{x:Static desktop:Regions.EmailModuleView}"
+                         ToolTipService.InitialShowDelay="0"
+                         ToolTipService.ShowDuration="10000"
+                         ToolTipService.Placement="Top"
+                         ToolTipService.ToolTip="{Binding EmailModuleTooltipMessage}"
+                         ToolTipService.IsEnabled="{Binding IsEmailModuleTooltipEnabled}">
+            </RadioButton>
+            <RadioButton DockPanel.Dock="Right"
+                         Style="{StaticResource NewIntermissionRibbonRadioButtonStyle}"
+                         Visibility="{Binding IsIntermissionButtonShowed, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Content="Click here!"
+                         Width="300"
+                         Command="{Binding ShowIntermissionCommand, Mode=OneWay}">
+            </RadioButton>
         </DockPanel>
     </Grid>
 

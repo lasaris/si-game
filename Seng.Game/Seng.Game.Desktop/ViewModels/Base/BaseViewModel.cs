@@ -12,19 +12,15 @@ namespace Seng.Game.Desktop.ViewModels.Base
 
 		protected GameState GameState;
 
-		public DelegateCommand ShowIntermissionCommand { get; set; }
-
 		protected BaseViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 		{
 			RegionManager = regionManager;
 			EventAggregator = eventAggregator;
 
 			GameState = gameState;
-
-			ShowIntermissionCommand = new DelegateCommand(ShowIntermissionCommandExecute);
 		}
 
-		private void ShowIntermissionCommandExecute()
+		protected void ShowIntermission()
 		{
 			RegionManager.RequestNavigate(Regions.ApplicationRegion, Regions.IntermissionModuleView);
 		}
