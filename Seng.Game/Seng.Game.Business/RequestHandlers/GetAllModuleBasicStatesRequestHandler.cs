@@ -27,14 +27,15 @@ namespace Seng.Game.Business.RequestHandlers
         public async Task<AllGameModulesBasicInfoDto> Handle(GetAllModuleBasicStatesRequest request, CancellationToken cancellationToken)
         {
             var getIntermissionModuleQuery = new GetIntermissionModuleStateQuery();
-            IntermissionModule intermissionModule = await _mediator.Send(getIntermissionModuleQuery);
+            CommonGameData intermissionModule = await _mediator.Send(getIntermissionModuleQuery);
             var allGameModulesBasicInfo = new AllGameModulesBasicInfoDto();
             if (intermissionModule != null)
             {
                 allGameModulesBasicInfo.IntermissionModuleInfo = new BasicModuleDto
                 {
                     IsVisible = true,
-                    ModuleId = intermissionModule.ModuleId
+                    ModuleId = intermissionModule.MainVisibleModuleId,
+                    NewMainVisibleModuleId = intermissionModule.MainVisibleModuleId
                 };
             }
             var getEmailModuleQuery = new GetEmailModuleQuery() { ModuleId = 3 };

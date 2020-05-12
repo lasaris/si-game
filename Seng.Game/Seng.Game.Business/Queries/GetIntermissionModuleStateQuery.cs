@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Seng.Game.Business.Queries
 {
-    public class GetIntermissionModuleStateQuery : IQuery<IntermissionModule>
+    public class GetIntermissionModuleStateQuery : IQuery<CommonGameData>
     {
     }
 }

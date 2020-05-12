@@ -11,18 +11,13 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.QueryHandlers
 {
-    class GetIntermissionModuleStateQueryHandler : IQueryHandler<GetIntermissionModuleStateQuery, IntermissionModule>
+    class GetIntermissionModuleStateQueryHandler : IQueryHandler<GetIntermissionModuleStateQuery, CommonGameData>
     {
 
-        private const string SqlQuery = @"SELECT
-                                        im.Id,
-                                        im.ModuleId,
-                                        im.CurrentlyVisibleFrameId,
-                                        m.Id,
-                                        m.IsVisible
-                                        FROM [module.IntermissionModule] im
-                                        INNER JOIN [module.Module] m
-                                        LIMIT 1;";
+        private const string SqlQuery = @"SELECT Id,
+                                               MainVisibleModuleId
+                                          FROM [module.CommonGameData]
+                                          LIMIT 1;";
 
         private IDbConnectionCreator _dbConnectionCreator;
 
@@ -31,21 +26,12 @@ namespace Seng.Game.Infrastructure.QueryHandlers
             _dbConnectionCreator = dbConnectionCreator;
         }
 
-        public async Task<IntermissionModule> Handle(GetIntermissionModuleStateQuery query, CancellationToken cancellationToken)
+        public async Task<CommonGameData> Handle(GetIntermissionModuleStateQuery query, CancellationToken cancellationToken)
         {
             using (var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {
-                var result = await dbConnection.QueryAsync<IntermissionModule, Module, IntermissionModule>(
-                    SqlQuery,
-                    (intermissionModule, module) =>
-                    {
-                        intermissionModule.Module = module;
-                        return intermissionModule;
-                    },
-                    splitOn: "Id",
-                    param: query
-                    );
-                return result == null ? new IntermissionModule() : result.FirstOrDefault();
+                var result = await dbConnection.QueryAsync<CommonGameData>(SqlQuery, query);
+                return result == null ? new CommonGameData() : result.FirstOrDefault();
             }
         }
     }

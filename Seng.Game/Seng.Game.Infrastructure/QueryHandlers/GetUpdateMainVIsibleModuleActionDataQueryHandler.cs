@@ -16,7 +16,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
         private const string SqlQuery = @"SELECT Id,
                                                ActionId,
                                                NewMainVisibleModuleId
-                                          FROM [action.UpdateMainVisibleModuleAction];
+                                          FROM [action.UpdateMainVisibleModuleAction]
                                           WHERE ActionId = @ActionId";
 
         private IDbConnectionCreator _dbConnectionCreator;
