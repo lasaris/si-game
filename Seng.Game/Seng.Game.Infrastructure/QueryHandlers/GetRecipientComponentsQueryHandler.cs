@@ -19,7 +19,8 @@ namespace Seng.Game.Infrastructure.QueryHandlers
                                                Description,
                                                ContentHeader,
                                                ContentFooter,
-                                               EmailModuleId
+                                               EmailModuleId,
+                                               ButtonComponentId
                                           FROM [component.RecipientComponent]
                                           WHERE EmailModuleId = @EmailModuleId;";
 

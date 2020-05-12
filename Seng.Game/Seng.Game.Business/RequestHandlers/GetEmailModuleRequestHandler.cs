@@ -56,7 +56,7 @@ namespace Seng.Game.Business.RequestHandlers
                 email.Paragraphs = await _mediator.Send(getEmailParagraphsQuery);
             }
 
-            emailModule.RegularEmails = emailComponents.Where(email => !email.IsSentEmail);
+            emailModule.RegularEmails = emailComponents.Where(email => !email.IsSentEmail && email.Active);
             emailModule.SentEmails = emailComponents.Where(email => email.IsSentEmail);
 
             var getRecipientComponentsQuery = new GetRecipientComponentsQuery
@@ -66,13 +66,6 @@ namespace Seng.Game.Business.RequestHandlers
             IEnumerable<RecipientComponent> recipientComponents = await _mediator.Send(getRecipientComponentsQuery);
             emailModule.Recipients = recipientComponents;
 
-            var getButtonQuery = new GetButtonComponentQuery
-            {
-                ButtonComponentId = emailModule.NewEmailButtonComponentId
-            };
-            ButtonComponent buttonComponent = await _mediator.Send(getButtonQuery);
-            emailModule.NewEmailButtonComponent = buttonComponent;
-
             foreach (var recipient in emailModule.Recipients)
             {
                 var getParagraphComponents = new GetNewEmailParagraphComponentsQuery
@@ -81,6 +74,13 @@ namespace Seng.Game.Business.RequestHandlers
                 };
                 IEnumerable<NewEmailParagraphComponent> paragraphComponents = await _mediator.Send(getParagraphComponents);
                 recipient.FirstParagraphs = ComposeParagraphComponentsForest(paragraphComponents);
+
+                var getButtonQuery = new GetButtonComponentQuery
+                {
+                    ButtonComponentId = recipient.ButtonComponentId
+                };
+                ButtonComponent buttonComponent = await _mediator.Send(getButtonQuery);
+                recipient.ButtonComponent = buttonComponent;
             }
 
             return _mapper.Map<EmailModule, EmailModuleDto>(emailModule);

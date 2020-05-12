@@ -16,5 +16,7 @@ namespace Seng.Game.Business.DTOs.Components.EmailModule
 		public string ContentFooter { get; set; }
 
 		public bool Selected { get; set; }
-	}
+
+        public ButtonComponentDto SendButton { get; set; }
+    }
 }

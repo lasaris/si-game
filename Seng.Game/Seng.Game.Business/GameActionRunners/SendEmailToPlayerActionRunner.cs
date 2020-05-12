@@ -28,24 +28,11 @@ namespace Seng.Game.Business.GameActionRunners
             };
             SendEmailToPlayerAction actionData = await _mediator.Send(query);
 
-            var insertComponentCommand = new InsertNewComponentCommand
+            var command = new MakeEmailActiveCommand
             {
-                ComponentId = actionData.ComponentId
+                EmailComponentId = actionData.EmailComponentId
             };
-            await _mediator.Send(insertComponentCommand);
-
-            var command = new CreateNewEmailCommand
-            {
-                Sender = actionData.Sender,
-                Subject = actionData.Subject,
-                ContentFooter = actionData.ContentFooter,
-                ContentHeader = actionData.ContentHeader,
-                Date = actionData.Date,
-                EmailModuleId = actionData.EmailModuleId,
-                ComponentId = actionData.ComponentId,
-                IsSentEmail = false
-            };
-            return await _mediator.Send(command) != 0;
+            return await _mediator.Send(command);
         }
     }
 }

@@ -16,5 +16,8 @@ namespace Seng.Common.Entities.Components.EmailModule
 
 		public string ContentFooter { get; set; }
 
-	}
+        public int ButtonComponentId { get; set; }
+
+        public ButtonComponent ButtonComponent { get; set; }
+    }
 }

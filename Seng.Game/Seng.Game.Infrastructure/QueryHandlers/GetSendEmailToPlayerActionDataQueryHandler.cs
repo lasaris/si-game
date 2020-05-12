@@ -14,14 +14,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     class GetSendEmailToPlayerActionDataQueryHandler : IQueryHandler<GetSendEmailToPlayerActionDataQuery, SendEmailToPlayerAction>
     {
         private const string SqlQuery = @"SELECT Id,
-                                            ActionId,
-                                            Sender,
-                                            Subject,
-                                            Date,
-                                            ContentHeader,
-                                            ContentFooter,
-                                            Content,
-                                            EmailModuleId
+                                                 EmailComponentId
                                         FROM [action.SendEmailToPlayerAction]
                                         WHERE Id = @GameActionId;";
 

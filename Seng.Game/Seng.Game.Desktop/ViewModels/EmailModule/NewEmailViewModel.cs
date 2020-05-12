@@ -271,7 +271,7 @@ namespace Seng.Game.Desktop.ViewModels
 				paragraph.Selected = true;
 			}
 
-			await GameState.UpdateEmailModule(newEmail.SentButton.ComponentId);
+			await GameState.UpdateEmailModule(currentRecipient.SendButton.ComponentId);
 
 			UnsubscribeEvents();
 			EventAggregator.GetEvent<EmailSentEvent>().Publish();

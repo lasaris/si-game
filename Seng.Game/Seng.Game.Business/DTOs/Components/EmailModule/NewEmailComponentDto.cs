@@ -8,7 +8,5 @@ namespace Seng.Game.Business.DTOs.Components.EmailModule
 		public IEnumerable<RecipientComponentDto> Recipients { get; set; }
 
 		public string Subject { get; set; }
-
-		public ButtonComponentDto SentButton { get; set; }
 	}
 }
