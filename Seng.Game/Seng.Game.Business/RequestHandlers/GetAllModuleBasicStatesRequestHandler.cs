@@ -37,7 +37,7 @@ namespace Seng.Game.Business.RequestHandlers
                     ModuleId = intermissionModule.ModuleId
                 };
             }
-            var getEmailModuleQuery = new GetEmailModuleQuery() { ModuleId = 2 };
+            var getEmailModuleQuery = new GetEmailModuleQuery() { ModuleId = 3 };
             EmailModule emailModule = await _mediator.Send(getEmailModuleQuery);
             if(emailModule != null)
             {
@@ -48,7 +48,7 @@ namespace Seng.Game.Business.RequestHandlers
                 };
             }
 
-            var getBrowserModuleQuery = new GetBrowserModuleQuery() { ModuleId = 3 } ;
+            var getBrowserModuleQuery = new GetBrowserModuleQuery() { ModuleId = 4 } ;
             BrowserModule browserModule = await _mediator.Send(getBrowserModuleQuery);
             if (browserModule != null)
             {
