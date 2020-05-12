@@ -93,6 +93,7 @@ namespace Seng.Game.Desktop.ViewModels
 			
 			if (CanNextFrameOrCloseCommandExecute())
 			{
+				GameState.IntermissionModule = intermissionModule;
 				await GameState.UpdateIntermissionModule(currentFrame.Button.ComponentId);
 				intermissionModule = GameState.IntermissionModule;
 				currentVisibleIntermissionFrameId = intermissionModule.CurrentVisibleIntermissionFrameId;
