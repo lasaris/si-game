@@ -44,13 +44,15 @@
     <DockPanel HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Style="{StaticResource OpacityAnimationStyle}"
-               Effect="{Binding CurrentFrame, NotifyOnTargetUpdated=True}">
+               Effect="{Binding CurrentFrame, NotifyOnTargetUpdated=True}"
+               Margin="150 0">
 
         <TextBlock DockPanel.Dock="Top"
                    Visibility="{Binding CurrentFrameType,
                                 Converter={StaticResource FrameTypeToVisibilityConverter},
                                 ConverterParameter=Text}"
                    Text="{Binding CurrentFrame.TextParagraph}"
+                   TextWrapping="Wrap"
                    Style="{StaticResource TextStyle}">
         </TextBlock>
 
@@ -60,6 +62,7 @@
                                  ConverterParameter=Question}">
 
             <TextBlock Text="{Binding CurrentFrame.Question.Text}"
+                       TextWrapping="Wrap"
                        Style="{StaticResource TextStyle}" />
 
             <ItemsControl ItemsSource="{Binding CurrentFrame.Question.Options}"
@@ -73,6 +76,7 @@
                                  ConverterParameter=MultichoiceQuestion}">
 
             <TextBlock Text="{Binding CurrentFrame.Question.Text}"
+                       TextWrapping="Wrap"
                        Style="{StaticResource TextStyle}" />
 
             <ItemsControl ItemsSource="{Binding CurrentFrame.Question.Options}"
@@ -86,6 +90,7 @@
                                  ConverterParameter=UserInput}">
 
             <TextBlock Text="{Binding CurrentFrame.TextParagraph}"
+                       TextWrapping="Wrap"
                        Style="{StaticResource TextStyle}" />
 
             <Border Visibility="{Binding CurrentFrameType,
