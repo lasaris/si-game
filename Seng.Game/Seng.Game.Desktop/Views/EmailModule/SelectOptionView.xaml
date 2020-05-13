@@ -8,14 +8,13 @@
 
         <Style x:Key="Style" TargetType="{x:Type Button}">
             <Setter Property="FontSize"
-                    Value="60" />
+                    Value="40" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}">
                             <TextBlock Text="{TemplateBinding Content}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center">
                             </TextBlock>
-
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

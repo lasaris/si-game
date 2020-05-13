@@ -73,21 +73,28 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void ComputeRowsAndColumns()
 		{
-			if (Source.Count <= 2)
+			if (Source.Count <= 1)
 			{
 				Rows = 1;
+				Columns = 1;
+			}
+			if (Source.Count <= 2)
+			{
+				Rows = 2;
+				Columns = 1;
 			} else if (Source.Count <= 4)
 			{
 				Rows = 2;
+				Columns = 2;
 			} else if (Source.Count <= 6)
 			{
 				Rows = 3;
+				Columns = 2;
 			} else if (Source.Count <= 8)
 			{
 				Rows = 4;
+				Columns = 2;
 			}
-
-			Columns = 2;
 		}
 
 		public void OnNavigatedTo(NavigationContext navigationContext)

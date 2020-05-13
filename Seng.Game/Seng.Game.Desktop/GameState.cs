@@ -88,19 +88,21 @@ namespace Seng.Game.Desktop
 
 		private async void CheckingForNewIntermissionModule()
 		{
-			var timer = new Timer(5000);
+			int interval = 5000;
+			var timer = new Timer(interval);
 
 			timer.Elapsed += async (sender, e) =>
 			{
+				AllGameModulesBasicInfo = await GameInitialize.GetAllGameModulesBasicInfo(Mediator);
 				var newIntermissionModuleId = AllGameModulesBasicInfo.IntermissionModuleInfo.NewMainVisibleModuleId;
-				if (newIntermissionModuleId != 0)
+				if (newIntermissionModuleId != IntermissionModule.ModuleId)
 				{
 					IntermissionModule = await GameInitialize.InitializeIntermissionModule(Mediator, newIntermissionModuleId);
 					eventAggregator.GetEvent<NewIntermissionModuleEvent>().Publish();
 				}
 			};
-			timer.Enabled = true;
 
+			timer.Enabled = true;
 			AllGameModulesBasicInfo = await GameInitialize.GetAllGameModulesBasicInfo(Mediator);
 		}
 

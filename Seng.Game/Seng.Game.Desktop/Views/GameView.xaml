@@ -131,6 +131,7 @@
                          Visibility="{Binding IsIntermissionButtonShowed, Converter={StaticResource BooleanToVisibilityConverter}}"
                          Content="Click here!"
                          Width="300"
+                         GroupName="Disappearing"   
                          Command="{Binding ShowIntermissionCommand, Mode=OneWay}">
             </RadioButton>
         </DockPanel>

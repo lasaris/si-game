@@ -23,25 +23,38 @@
                                                    AncestorType={x:Type UserControl}}, Mode=OneWay}"
                                  CommandParameter="{Binding}">
                         <RadioButton.Content>
-                            <DockPanel>
-                                <TextBlock DockPanel.Dock="Bottom"
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                           Text="{Binding Sender}"
+                                           Margin="5 10 5 0"
+                                           FontSize="22"
+                                           TextTrimming="CharacterEllipsis"
+                                           VerticalAlignment="Center" />
+
+                                <TextBlock Grid.Row="0" Grid.Column="1"
+                                           Text="{Binding Date, StringFormat='dd/MM h:mm'}"
+                                           Margin="0 10 5 0"
+                                           FontSize="22"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                            Text="{Binding Subject}"
-                                           Margin="5 0 5 20"
+                                           Margin="5 0 5 10"
                                            FontSize="24"
                                            TextTrimming="CharacterEllipsis"
-                                           HorizontalAlignment="Left"/>
-                                <TextBlock DockPanel.Dock="Left"
-                                           Text="{Binding Sender}"
-                                           Margin="10 20 0 0"
-                                           FontSize="22"
-                                           TextTrimming="CharacterEllipsis"
-                                           HorizontalAlignment="left" />
-                                <TextBlock DockPanel.Dock="Right"
-                                           Text="{Binding Date, StringFormat='dd/MM h:mm'}"
-                                           Margin="0 20 10 0"
-                                           FontSize="22"
-                                           HorizontalAlignment="Right" />
-                            </DockPanel>
+                                           VerticalAlignment="Center"/>
+                            </Grid>
                         </RadioButton.Content>
                     </RadioButton>
                 </Border>

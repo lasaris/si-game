@@ -95,8 +95,9 @@ namespace Seng.Game.Desktop.ViewModels
 			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.NewEmailView);
 		}
 
-		public void OnNavigatedTo(NavigationContext navigationContext)
+		public async void OnNavigatedTo(NavigationContext navigationContext)
 		{
+			await GameState.UpdateEmailModule();
 			UpdateInboxEmails();
 		}
 

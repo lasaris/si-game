@@ -166,9 +166,9 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void HandleSelectedRecipient(RecipientComponentDto selectedRecipient)
 		{
-			if (currentRecipient != null)
+			foreach (var recipient in newEmail.Recipients)
 			{
-				newEmail.Recipients.First(x => x == currentRecipient).Selected = false;
+				recipient.Selected = false;
 			}
 
 			selectedRecipient.Selected = true;
