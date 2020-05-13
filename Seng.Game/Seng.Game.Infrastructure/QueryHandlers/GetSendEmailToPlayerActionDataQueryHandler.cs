@@ -16,7 +16,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
         private const string SqlQuery = @"SELECT Id,
                                                  EmailComponentId
                                         FROM [action.SendEmailToPlayerAction]
-                                        WHERE Id = @GameActionId;";
+                                        WHERE ActionId = @GameActionId;";
 
         private IDbConnectionCreator _dbConnectionCreator;
 
