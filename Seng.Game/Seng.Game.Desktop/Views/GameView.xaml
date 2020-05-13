@@ -130,7 +130,8 @@
                          Style="{StaticResource NewIntermissionRibbonRadioButtonStyle}"
                          Visibility="{Binding IsIntermissionButtonShowed, Converter={StaticResource BooleanToVisibilityConverter}}"
                          Content="Click here!"
-                         Width="300"
+                         FontSize="34"
+                         Width="500"
                          GroupName="Disappearing"   
                          Command="{Binding ShowIntermissionCommand, Mode=OneWay}">
             </RadioButton>
