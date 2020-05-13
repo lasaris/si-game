@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Seng.Game.Business;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -10,7 +11,7 @@ namespace Seng.Game.Infrastructure.Database
     {
         public IDbConnection CreateOpenConnection()
         {
-            IDbConnection connection = new SQLiteConnection("Data Source=" + "../../../../SengTestDb.db");
+            IDbConnection connection = new SQLiteConnection(Configurations.ConnectionString);
             connection.Open();
             return connection;
         }

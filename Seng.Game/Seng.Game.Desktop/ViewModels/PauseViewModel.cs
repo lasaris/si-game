@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
+using Seng.Game.Business;
 using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop.ViewModels
@@ -36,7 +38,11 @@ namespace Seng.Game.Desktop.ViewModels
 		}
 		private void ExitApplicationCommandExecute()
 		{
-			//Things to be done before shutdown
+            //Things to be done before shutdown
+
+            //TODO: Move to backend
+            File.Delete(Configurations.DbPath);
+            File.Copy(Configurations.StaticDbPath, Configurations.DbPath);
 
 			Application.Current.Shutdown();
 		}
