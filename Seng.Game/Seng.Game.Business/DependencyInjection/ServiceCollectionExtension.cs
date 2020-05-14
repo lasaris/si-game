@@ -24,9 +24,11 @@ namespace Seng.Game.Business.DependencyInjection
             services.AddScoped<NextIntermissionFrameActionRunner>();
             services.AddScoped<SendEmailToPlayerActionRunner>();
             services.AddScoped<UpdateMainVIsibleModuleActionRunner>();
+            services.AddScoped<AddRecipientToNewEmailACtionRunner>();
             services.AddScoped<IGameActionRunner, NextIntermissionFrameActionRunner>(s => s.GetService<NextIntermissionFrameActionRunner>());
             services.AddScoped<IGameActionRunner, SendEmailToPlayerActionRunner>(s => s.GetService<SendEmailToPlayerActionRunner>());
             services.AddScoped<IGameActionRunner, UpdateMainVIsibleModuleActionRunner>(s => s.GetService<UpdateMainVIsibleModuleActionRunner>());
+            services.AddScoped<IGameActionRunner, AddRecipientToNewEmailACtionRunner>(s => s.GetService<AddRecipientToNewEmailACtionRunner>());
         }
     }
 }

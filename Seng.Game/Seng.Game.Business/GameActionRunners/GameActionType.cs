@@ -8,6 +8,7 @@ namespace Seng.Game.Business.GameActionRunners
     {
         SwitchIntermissionFrame,
         SendEmailToPlayer,
-        UpdateMainVisibleModuleId
+        UpdateMainVisibleModuleId,
+        AddRecipientToNewEmail
     }
 }

@@ -26,6 +26,7 @@ namespace Seng.Game.Business.RequestHandlers
             _mediator = mediator;
             _mapper = mapper;
             gameActionFactory.Register(GameActionType.SendEmailToPlayer, typeof(SendEmailToPlayerActionRunner));
+            gameActionFactory.Register(GameActionType.AddRecipientToNewEmail, typeof(AddRecipientToNewEmailACtionRunner));
         }
 
         protected override IEnumerable<int> GetClickedComponentIds(EmailModuleDto moduleDto)
@@ -64,7 +65,7 @@ namespace Seng.Game.Business.RequestHandlers
                 EmailModuleId = emailModule.Id
             };
             IEnumerable<RecipientComponent> recipientComponents = await _mediator.Send(getRecipientComponentsQuery);
-            emailModule.Recipients = recipientComponents;
+            emailModule.Recipients = recipientComponents.Where(c => c.Active);
 
             foreach (var recipient in emailModule.Recipients)
             {

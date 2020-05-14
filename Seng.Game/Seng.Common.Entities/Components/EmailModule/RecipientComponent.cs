@@ -19,5 +19,7 @@ namespace Seng.Common.Entities.Components.EmailModule
         public int ButtonComponentId { get; set; }
 
         public ButtonComponent ButtonComponent { get; set; }
+
+        public bool Active { get; set; }
     }
 }

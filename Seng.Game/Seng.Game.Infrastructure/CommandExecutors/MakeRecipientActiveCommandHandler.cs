@@ -10,21 +10,20 @@ using System.Threading.Tasks;
 
 namespace Seng.Game.Infrastructure.CommandExecutors
 {
-    class MakeEmailActiveCommandHandler : ICommandHandler<MakeEmailActiveCommand, bool>
+    class MakeRecipientActiveCommandHandler : ICommandHandler<MakeRecipientActiveCommand, bool>
     {
-        private const string SqlQuery = @"UPDATE [component.EmailComponent]
-                                           SET Active = 1,
-                                           Date = @Date
-                                         WHERE Id = @EmailComponentId";
+        private const string SqlQuery = @"UPDATE [component.RecipientComponent]
+                                           SET Active = 1
+                                         WHERE Id = @RecipientId";
 
         private IDbConnectionCreator _dbConnectionCreator;
 
-        public MakeEmailActiveCommandHandler(IDbConnectionCreator dbConnectionCreator)
+        public MakeRecipientActiveCommandHandler(IDbConnectionCreator dbConnectionCreator)
         {
             _dbConnectionCreator = dbConnectionCreator;
         }
 
-        public async Task<bool> Handle(MakeEmailActiveCommand command, CancellationToken cancellationToken)
+        public async Task<bool> Handle(MakeRecipientActiveCommand command, CancellationToken cancellationToken)
         {
             using (var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {

@@ -26,7 +26,9 @@ namespace Seng.Game.Business.RequestHandlers
             {
                 { GameActionType.SendEmailToPlayer, new List<ModuleType>{ ModuleType.EmailModule } },
                 { GameActionType.SwitchIntermissionFrame, new List<ModuleType>{ ModuleType.IntermissionModule } },
-                { GameActionType.UpdateMainVisibleModuleId, new List<ModuleType>{ ModuleType.IntermissionModule } }
+                { GameActionType.UpdateMainVisibleModuleId, new List<ModuleType>{ ModuleType.IntermissionModule } },
+                { GameActionType.AddRecipientToNewEmail, new List<ModuleType>{ ModuleType.EmailModule} }
+                
 
             };
 
