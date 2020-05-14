@@ -13,4 +13,5 @@
                                              True="Collapsed"
                                              False="Visible" />
     <converters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+    <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
 </ResourceDictionary>

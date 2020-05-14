@@ -42,7 +42,7 @@
         <Setter Property="BorderThickness"
                 Value="1 0 0 0" />
         <Setter Property="Width"
-                Value="200" />
+                Value="300" />
     </Style>
 
     <Style x:Key="RoundedButtonStyle"

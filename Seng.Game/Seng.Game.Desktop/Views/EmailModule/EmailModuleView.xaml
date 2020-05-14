@@ -93,7 +93,7 @@
                         Height="70"
                         BorderThickness="0 0 0 1"
                         BorderBrush="Black">
-                    <TextBlock Text="{Binding ActiveEmailListName}"
+                    <TextBlock Text="{Binding ActiveEmailList, Converter={StaticResource EnumToStringConverter}}"
                                FontSize="30"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center" />

@@ -106,14 +106,10 @@ namespace Seng.Game.Desktop.ViewModels
 		public NewEmailViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
-			newEmail = GameState.EmailModule.NewEmail;
-
 			EventAggregator.GetEvent<ParagraphSelectionEvent>().Subscribe(HandleSelectedParagraph);
 			EventAggregator.GetEvent<RecipientSelectionEvent>().Subscribe(HandleSelectedRecipient);
 
 			InitializeDelegateCommands();
-
-			SetInitialProperties();
 		}
 
 		#region Private Methods
@@ -183,9 +179,9 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void DiscardEmailCommandExecute()
 		{
-			if (currentRecipient != null)
+			foreach (var recipient in newEmail.Recipients)
 			{
-				newEmail.Recipients.First(x => x == currentRecipient).Selected = false;
+				recipient.Selected = false;
 			}
 
 			isNavigationTarget = false;
@@ -286,7 +282,17 @@ namespace Seng.Game.Desktop.ViewModels
 
 		#endregion
 
-		public void OnNavigatedTo(NavigationContext navigationContext) { }
+		public void OnNavigatedTo(NavigationContext navigationContext)
+		{
+			newEmail = GameState.EmailModule.NewEmail;
+
+			if (navigationContext.Parameters.Count > 0)
+			{
+				var recipientToReply = (RecipientComponentDto) navigationContext.Parameters["Reply"];
+				SetInitialProperties();
+				HandleSelectedRecipient(recipientToReply);
+			}
+		}
 
 		public bool IsNavigationTarget(NavigationContext navigationContext) => isNavigationTarget;
 

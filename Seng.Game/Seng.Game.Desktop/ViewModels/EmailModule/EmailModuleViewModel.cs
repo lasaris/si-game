@@ -5,6 +5,7 @@ using Prism.Regions;
 using Seng.Game.Business.DTOs.Components.EmailModule;
 using Seng.Game.Business.DTOs.Modules;
 using Seng.Game.Desktop.Events;
+using Seng.Game.Desktop.Helpers.EmailModule;
 using Seng.Game.Desktop.ViewModels.Base;
 
 namespace Seng.Game.Desktop.ViewModels
@@ -14,7 +15,7 @@ namespace Seng.Game.Desktop.ViewModels
 		private EmailModuleDto emailModule;
 
 		private ObservableCollection<EmailComponentDto> emailList = new ObservableCollection<EmailComponentDto>();
-		private string activeEmailListName;
+		private EmailListType activeEmailList;
 
 		public ObservableCollection<EmailComponentDto> EmailList
 		{
@@ -22,10 +23,10 @@ namespace Seng.Game.Desktop.ViewModels
 			set => SetProperty(ref emailList, value);
 		}
 
-		public string ActiveEmailListName
+		public EmailListType ActiveEmailList
 		{
-			get => activeEmailListName;
-			set => SetProperty(ref activeEmailListName, value);
+			get => activeEmailList;
+			set => SetProperty(ref activeEmailList, value);
 		}
 
 		public DelegateCommand NewEmailCommand { get; set; }
@@ -45,6 +46,7 @@ namespace Seng.Game.Desktop.ViewModels
 
 			EventAggregator.GetEvent<EmailSentEvent>().Subscribe(UpdateSentEmails);
 
+			ShowInboxEmailsCommandExecute();
 			regionManager.RegisterViewWithRegion(Regions.EmailRegion, Regions.EmptyEmailViewType);
 		}
 
@@ -52,7 +54,7 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			emailModule = GameState.EmailModule;
 
-			if (ActiveEmailListName == "Sent")
+			if (ActiveEmailList == EmailListType.Sent)
 			{
 				ShowSentEmailsCommandExecute();
 			}
@@ -62,7 +64,7 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			emailModule = GameState.EmailModule;
 
-			if (ActiveEmailListName == "Inbox")
+			if (ActiveEmailList == EmailListType.Inbox)
 			{
 				ShowInboxEmailsCommandExecute();
 			}
@@ -71,14 +73,14 @@ namespace Seng.Game.Desktop.ViewModels
 		private void ViewEmailFromListCommandExecute(EmailComponentDto email)
 		{
 			RegionManager.RequestNavigate(Regions.EmailRegion, Regions.DisplayEmailView,
-				new NavigationParameters { {"Email", email} });
+				new NavigationParameters { {"Email", email}, {"EmailListType", ActiveEmailList} });
 		}
 
 		private void ShowInboxEmailsCommandExecute()
 		{
 			EmailList.Clear();
 
-			ActiveEmailListName = "Inbox";
+			ActiveEmailList = EmailListType.Inbox;
 			EmailList.AddRange(emailModule.RegularEmails);
 		}
 
@@ -86,7 +88,7 @@ namespace Seng.Game.Desktop.ViewModels
 		{
 			EmailList.Clear();
 
-			ActiveEmailListName = "Sent";
+			ActiveEmailList = EmailListType.Sent;
 			EmailList.AddRange(emailModule.SentEmails);
 		}
 

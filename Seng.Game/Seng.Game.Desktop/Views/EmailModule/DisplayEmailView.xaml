@@ -19,7 +19,11 @@
                 BorderBrush="Black"
                 BorderThickness="0 0 0 1">
             <DockPanel LastChildFill="False">
-
+                <Button DockPanel.Dock="Right"
+                        Visibility="{Binding IsReplyButtonDisplayed, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Style="{StaticResource UpperMenuButtonStyle}"
+                        Content="REPLY"
+                        Command="{Binding ReplyOnEmailCommand, Mode=OneWay}" />
             </DockPanel>
         </Border>
 
