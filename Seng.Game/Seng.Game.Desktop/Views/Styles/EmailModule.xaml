@@ -106,7 +106,9 @@
         <Setter Property="MaxLength"
                 Value="64" />
         <Setter Property="BorderThickness"
-                Value="0" />
+                Value="3" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource ThemeColor}" />
         <Setter Property="FontSize"
                 Value="30" />
         <Setter Property="Background"

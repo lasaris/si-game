@@ -100,8 +100,10 @@
                     BorderThickness="3"
                     HorizontalAlignment="Center"
                     Margin="0 25 0 0">
+                <!--TODO: Remove FontFamily after testing scenario-->
                 <TextBox Text="{Binding CurrentFrame.UserInput}"
-                         Style="{StaticResource UserInputTextBoxStyle}" />
+                         Style="{StaticResource UserInputTextBoxStyle}"
+                         FontFamily="pack://application:,,,/Resources/#password" />
             </Border>
         </StackPanel>
 

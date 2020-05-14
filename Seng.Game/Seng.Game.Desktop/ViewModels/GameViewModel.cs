@@ -99,7 +99,7 @@ namespace Seng.Game.Desktop.ViewModels
 				case ModuleType.EmailModule:
 				{
 					IsEmailModuleTooltipEnabled = true;
-					EmailModuleTooltipMessage = alertMessage;
+					EmailModuleTooltipMessage = "New email in the inbox!";
 					break;
 				}
 			}

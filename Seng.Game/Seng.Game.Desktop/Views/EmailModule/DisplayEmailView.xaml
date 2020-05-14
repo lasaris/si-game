@@ -37,7 +37,7 @@
                 BorderThickness="0 0 0 1">
             <DockPanel LastChildFill="False">
                 <TextBlock DockPanel.Dock="Left"
-                           Text="{Binding Sender, StringFormat={}From {0} on}"
+                           Text="{Binding Sender, StringFormat={}{0} on}"
                            Margin="15 0 0 0"
                            FontSize="22"
                            VerticalAlignment="Top" />

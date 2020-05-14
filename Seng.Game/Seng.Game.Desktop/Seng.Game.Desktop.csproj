@@ -11,6 +11,7 @@
     <None Remove="Resources\Images\maintenance.png" />
     <None Remove="Resources\Images\return.png" />
     <None Remove="Resources\Images\wallpaper.jpg" />
+    <None Remove="Resources\password.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Images\check-mark.png">
@@ -37,5 +38,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Seng.Game.Business\Seng.Game.Business.csproj" />
     <ProjectReference Include="..\Seng.Game.Infrastructure\Seng.Game.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\password.ttf" />
   </ItemGroup>
 </Project>

@@ -31,6 +31,8 @@
     <Style x:Key="OptionStyle"
            TargetType="{x:Type TextBlock}"
            BasedOn="{StaticResource TextStyle}">
+        <Setter Property="Foreground"
+                Value="#bbbbbb" />
         <Setter Property="HorizontalAlignment"
                 Value="Center" />
         <Style.Triggers>
