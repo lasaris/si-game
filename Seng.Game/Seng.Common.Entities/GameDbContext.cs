@@ -22,5 +22,6 @@ namespace Seng.Common.Entities
         public List<Module> Modules { get; set; }
         public List<QuestionComponent> QuestionComponents { get; set; }
         public List<OptionComponent> OptionComponents { get; set; }
+        public List<CommonGameData> CommonGameData { get; set; }
     }
 }
