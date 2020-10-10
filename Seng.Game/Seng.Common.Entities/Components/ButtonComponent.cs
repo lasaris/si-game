@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Seng.Common.Entities.Components
 {
-    public class ButtonComponent : BasicEntity
+    public class ButtonComponent
     {
         public string Text { get; set; }
 

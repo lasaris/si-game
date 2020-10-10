@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Seng.Common.Entities.Actions.EmailModule
 {
-    public class AddRecipientToNewEmailAction : BasicEntity
+    public class AddRecipientToNewEmailAction
     {
         public int ActionId { get; set; }
 

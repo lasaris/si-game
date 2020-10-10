@@ -13,7 +13,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     class GetRecipientComponentsQueryHandler : IQueryHandler<GetRecipientComponentsQuery, IEnumerable<RecipientComponent>>
     {
-        private const string SqlQuery = @"SELECT Id,
+        private const string SqlQuery = @"SELECT
                                                ComponentId,
                                                Address,
                                                Description,

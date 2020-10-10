@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Seng.Common.Entities.Modules
 {
-    public class EmailModule : BasicEntity
+    public class EmailModule
     {
         public int ModuleId { get; set; }
 

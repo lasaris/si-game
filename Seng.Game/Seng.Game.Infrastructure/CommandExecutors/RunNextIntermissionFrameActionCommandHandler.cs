@@ -19,7 +19,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                             CurrentlyVisibleFrameId = (SELECT NewIntermissionFrameComponentId 
                                                                         FROM [action.SwitchIntermissionFramesAction] a 
                                                                         WHERE a.GameActionId = @GameActionId)
-                                        WHERE EXISTS (SELECT Id 
+                                        WHERE EXISTS (SELECT a.GameActionId 
                                                         FROM [action.SwitchIntermissionFramesAction] a 
                                                         WHERE a.GameActionId = @GameActionId
                                                         AND [module.IntermissionModule].Id = a.IntermissionModuleId);";

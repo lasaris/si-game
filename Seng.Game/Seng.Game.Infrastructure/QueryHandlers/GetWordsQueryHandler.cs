@@ -13,7 +13,6 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     class GetWordsQueryHandler : IQueryHandler<GetWordsQuery, IEnumerable<WordComponent>>
     {
         private const string SqlQuery = @"SELECT
-                                    Id,
                                     Value,
                                     SearchingMinigameComponentId
                                     FROM [component.WordComponent]

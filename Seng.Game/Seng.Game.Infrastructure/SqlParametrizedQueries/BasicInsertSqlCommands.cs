@@ -8,12 +8,10 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
     {
         public const string SwitchIntermissionFrameActionCommand = @"INSERT INTO [action.SwitchIntermissionFramesAction] 
                                                                     (
-                                                                        Id,
                                                                         GameActionId,
                                                                         NewIntermissionFrameComponentId
                                                                     )
                                                                     VALUES (
-                                                                        @Id,
                                                                         @GameActionId,
                                                                         @NewIntermissionFrameComponentId
                                                                     );";
@@ -60,7 +58,6 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
 
         public const string IntermissionFrameComponentCommand = @"INSERT INTO [component.IntermissionFrameComponent] 
                                                     (
-                                                        Id,
                                                         IntermissionModuleId,
                                                         ButtonComponentId,
                                                         TextParagraph,
@@ -68,7 +65,6 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
                                                         QuestionComponentId
                                                     )
                                                     VALUES (
-                                                        @Id,
                                                         @IntermissionModuleId,
                                                         @ButtonComponentId,
                                                         @TextParagraph,
@@ -78,12 +74,10 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
 
         public const string ButtonComponentCommand = @"INSERT INTO [component.ButtonComponent] 
                                                         (
-                                                            Id,
                                                             Text,
                                                             ComponentId
                                                         )
                                                         VALUES (
-                                                            @Id,
                                                             @Text,
                                                             @ComponentId
                                                         );";
@@ -98,12 +92,10 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
 
         public const string IntermissionModuleCommand = @"INSERT INTO [module.IntermissionModule] 
                                                     (
-                                                        Id,
                                                         ModuleId,
                                                         CurrentlyVisibleFrameId
                                                     )
                                                     VALUES (
-                                                        @Id,
                                                         @ModuleId,
                                                         @CurrentlyVisibleFrameId
                                                     );";
@@ -120,29 +112,172 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
 
         public const string OptionComponentCommand = @"INSERT INTO [component.OptionComponent] 
                                             (
-                                                Id,
                                                 ComponentId,
                                                 Text,
                                                 QuestionComponentId
                                             )
                                             VALUES (
-                                                @Id,
                                                 @ComponentId,
                                                 @Text,
                                                 @QuestionComponentId
                                             );";
 
+        public const string CommonGameDataCommand = @"INSERT INTO [module.CommonGameData] (
+                                        Id,
+                                        MainVisibleModuleId
+                                    )
+                                    VALUES (
+                                        @Id,
+                                        @MainVisibleModuleId
+                                    );";
+
         public const string QuestionComponentCommand = @"INSERT INTO [component.QuestionComponent] (
-                                                            Id,
                                                             ComponentId,
                                                             Text,
                                                             Multichoice
                                                         )
                                                         VALUES (
-                                                            @Id,
                                                             @ComponentId,
                                                             @Text,
                                                             @Multichoice
                                                         );";
+
+        public const string EmailModuleCommand = @"INSERT INTO [module.EmailModule] (
+                                     ModuleId,
+                                     NewEmailSubject,
+                                     NewEmailButtonComponentId
+                                 )
+                                 VALUES (
+                                     @ModuleId,
+                                     @NewEmailSubject,
+                                     @NewEmailButtonComponentId
+                                 );";
+
+        public const string BrowserModuleCommand = @"INSERT INTO [module.BrowserModule] (
+                                       SearchingMinigameComponentId,
+                                       ModuleId
+                                   )
+                                   VALUES (
+                                       @SearchingMinigameComponentId,
+                                       @ModuleId
+                                   );";
+
+        public const string SearchingMinigameComponentCommand = @"INSERT INTO [component.SearchingMinigameComponent] (                                                       Solution,
+                                                       IsCompleted,
+                                                       Height,
+                                                       Width,
+                                                       ComponentId
+                                                   )
+                                                   VALUES (
+                                                       @Solution,
+                                                       @IsCompleted,
+                                                       @Height,
+                                                       @Width,
+                                                       @ComponentId
+                                                   );";
+
+        public const string WordComponentCommand = @"INSERT INTO [component.WordComponent] (
+                                          Value,
+                                          SearchingMinigameComponentId
+                                      )
+                                      VALUES (
+                                          @Value,
+                                          @SearchingMinigameComponentId
+                                      );";
+
+        public const string EmailComponentCommand = @"INSERT INTO [component.EmailComponent] (
+                                           Sender,
+                                           Subject,
+                                           Date,
+                                           ContentHeader,
+                                           ContentFooter,
+                                           ComponentId,
+                                           IsSentEmail,
+                                           EmailModuleId,
+                                           Active
+                                       )
+                                       VALUES (
+                                           @Sender,
+                                           @Subject,
+                                           @Date,
+                                           @ContentHeader,
+                                           @ContentFooter,
+                                           @ComponentId,
+                                           @IsSentEmail,
+                                           @EmailModuleId,
+                                           @Active
+                                       );";
+
+        public const string EmailComponentParagraphCommand = @"INSERT INTO [component.EmailComponentParagraph] (
+                                                    Id,
+                                                    Content,
+                                                    EmailComponentId
+                                                )
+                                                VALUES (
+                                                    @Id,
+                                                    @Content,
+                                                    @EmailComponentId
+                                                );";
+
+        public const string NewEmailParagraphComponentCommand = @"INSERT INTO [component.NewEmailParagraphComponent] (
+                                                       Text,
+                                                       ParentParagraphId,
+                                                       ComponentId,
+                                                       RecipientComponentId
+                                                   )
+                                                       @Id,
+                                                       @Text,
+                                                       @ParentParagraphId,
+                                                       @ComponentId,
+                                                       @RecipientComponentId'
+                                                   );";
+
+        public const string RecipientComponentCommand = @"INSERT INTO [component.RecipientComponent] (
+                                               ComponentId,
+                                               Address,
+                                               Description,
+                                               ContentHeader,
+                                               ContentFooter,
+                                               EmailModuleId,
+                                               ButtonComponentId,
+                                               Active
+                                           )
+                                           VALUES (
+                                               @ComponentId,
+                                               @Address,
+                                               @Description,
+                                               @ContentHeader,
+                                               @ContentFooter,
+                                               @EmailModuleId,
+                                               @ButtonComponentId,
+                                               @Active
+                                           );";
+
+        public const string UpdateMainVisibleModuleActionCommand = @"INSERT INTO [action.UpdateMainVisibleModuleAction] (
+                                                       ActionId,
+                                                       NewMainVisibleModuleId
+                                                   )
+                                                   VALUES (
+                                                       @ActionId,
+                                                       @NewMainVisibleModuleId
+                                                   );";
+
+        public const string AddRecipientToNewEmailActionCommand = @"INSERT INTO [action.AddRecipientToNewEmailAction] (
+                                                      ActionId,
+                                                      RecipientComponentId
+                                                  )
+                                                  VALUES (
+                                                      @ActionId,
+                                                      @RecipientComponentId
+                                                  );";
+
+        public const string SendEmailToPlayerActionCommand = @"INSERT INTO [action.SendEmailToPlayerAction] (
+                                                 ActionId,
+                                                 EmailComponentId
+                                             )
+                                             VALUES (
+                                                 @ActionId,
+                                                 @EmailComponentId
+                                             );";
     }
 }

@@ -15,7 +15,6 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     class GetEmailModuleQueryHandler : IQueryHandler<GetEmailModuleQuery, EmailModule>
     {
         private const string SqlQuery = @"SELECT
-                                        em.Id,
                                         em.ModuleId,
                                         em.NewEmailSubject,
                                         m.Id,

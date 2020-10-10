@@ -14,7 +14,6 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     class GetIntermissionFrameComponentsQueryHandler : IQueryHandler<GetIntermissionFrameComponentsQuery, IEnumerable<IntermissionFrameComponent>>
     {
         private const string SqlQuery = @"SELECT
-                                    Id,
                                     IntermissionModuleId,
                                     ButtonComponentId,
                                     TextParagraph,

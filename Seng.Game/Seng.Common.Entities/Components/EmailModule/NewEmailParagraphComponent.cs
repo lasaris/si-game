@@ -2,7 +2,7 @@
 
 namespace Seng.Common.Entities.Components.EmailModule
 {
-    public class NewEmailParagraphComponent : BasicEntity
+    public class NewEmailParagraphComponent
 	{
         public int ComponentId { get; set; }
 

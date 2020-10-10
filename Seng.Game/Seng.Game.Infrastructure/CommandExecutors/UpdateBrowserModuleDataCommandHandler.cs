@@ -14,10 +14,10 @@ namespace Seng.Game.Infrastructure.CommandExecutors
         private const string SqlQuery = @"UPDATE [component.SearchingMinigameComponent]
                                         SET 
                                             IsCompleted = @IsCompleted
-                                        WHERE EXISTS (SELECT bm.Id 
+                                        WHERE EXISTS (SELECT bm.ModuleId 
                                                         FROM [module.BrowserModule] bm
                                                         INNER JOIN [component.SearchingMinigameComponent] smc 
-                                                        ON smc.Id = bm.SearchingMinigameComponentId
+                                                        ON smc.ComponentId = bm.SearchingMinigameComponentId
                                                         WHERE bm.ModuleId = @ModuleId);";
 
         private IDbConnectionCreator _dbConnectionCreator;

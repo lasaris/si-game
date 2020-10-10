@@ -67,7 +67,7 @@ namespace Seng.Game.Business.RequestHandlers
 
             var getIntermissionFramesQuery = new GetIntermissionFrameComponentsQuery
             {
-                IntermissionModuleId = intermissionModule.Id
+                IntermissionModuleId = intermissionModule.ModuleId
             };
             IEnumerable<IntermissionFrameComponent> intermissionFrames = await _mediator.Send(getIntermissionFramesQuery);
             intermissionModule.IntermissionFrameComponents = intermissionFrames;

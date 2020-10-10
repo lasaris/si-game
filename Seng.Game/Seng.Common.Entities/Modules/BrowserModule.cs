@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Seng.Common.Entities.Modules
 {
-    public class BrowserModule : BasicEntity
+    public class BrowserModule
     {
         public int SearchingMinigameComponentId { get; set; }
 

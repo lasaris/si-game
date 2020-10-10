@@ -12,8 +12,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     class GetEmailComponentsQueryHandler : IQueryHandler<GetEmailComponentsQuery, IEnumerable<EmailComponent>>
     {
-        private const string SqlQuery = @"SELECT Id,
-                                            Sender,
+        private const string SqlQuery = @"SELECT Sender,
                                             Subject,
                                             Date,
                                             ContentHeader,

@@ -13,7 +13,7 @@ namespace Seng.Web.Business.DTOs
         public DateTime Date { get; set; }
         public string ContentHeader { get; set; }
         public string ContentFooter { get; set; }
-        public bool Actiove { get; set; }
+        public bool Active { get; set; }
         public IEnumerable<string> EmailParagraphs { get; set; } = new List<string>();
     }
 }

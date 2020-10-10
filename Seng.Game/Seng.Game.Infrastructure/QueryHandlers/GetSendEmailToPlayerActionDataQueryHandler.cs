@@ -13,7 +13,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     class GetSendEmailToPlayerActionDataQueryHandler : IQueryHandler<GetSendEmailToPlayerActionDataQuery, SendEmailToPlayerAction>
     {
-        private const string SqlQuery = @"SELECT Id,
+        private const string SqlQuery = @"SELECT ActionId,
                                                  EmailComponentId
                                         FROM [action.SendEmailToPlayerAction]
                                         WHERE ActionId = @GameActionId;";

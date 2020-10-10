@@ -13,7 +13,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     class GetUpdateMainVIsibleModuleActionDataQueryHandler : IQueryHandler<GetUpdateMainVIsibleModuleActionDataQuery, UpdateMainVIsibleModuleAction>
     {
-        private const string SqlQuery = @"SELECT Id,
+        private const string SqlQuery = @"SELECT 
                                                ActionId,
                                                NewMainVisibleModuleId
                                           FROM [action.UpdateMainVisibleModuleAction]

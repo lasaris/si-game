@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Seng.Common.Entities.Actions
 {
-    public class GameAction : BasicEntity
+    public class GameAction
     {
+        public int Id { get; set; }
+
         public string Type { get; set; }
 
         public int TimeFromTrigger { get; set; }

@@ -12,8 +12,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
 {
     class GetNewEmailParagraphComponentsQueryHandler : IQueryHandler<GetNewEmailParagraphComponentsQuery, IEnumerable<NewEmailParagraphComponent>>
     {
-        private const string SqlQuery = @"SELECT Id,
-                                            Text,
+        private const string SqlQuery = @"SELECT Text,
                                             ParentParagraphId,
                                             ComponentId,
                                             RecipientComponentId

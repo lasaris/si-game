@@ -14,7 +14,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
     {
         private const string SqlQuery = @"UPDATE [component.RecipientComponent]
                                            SET Active = 1
-                                         WHERE Id = @RecipientId";
+                                         WHERE ComponentId = @RecipientId";
 
         private IDbConnectionCreator _dbConnectionCreator;
 

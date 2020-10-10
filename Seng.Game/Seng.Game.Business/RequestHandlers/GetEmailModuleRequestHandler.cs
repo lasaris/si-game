@@ -44,7 +44,7 @@ namespace Seng.Game.Business.RequestHandlers
 
             var getEmailComponentsQuery = new GetEmailComponentsQuery
             {
-                EmailModuleId = emailModule.Id
+                EmailModuleId = emailModule.ModuleId
             };
             IEnumerable<EmailComponent> emailComponents = await _mediator.Send(getEmailComponentsQuery);
 
@@ -52,7 +52,7 @@ namespace Seng.Game.Business.RequestHandlers
             {
                 var getEmailParagraphsQuery = new GetEmailComponentParagraphsQuery
                 {
-                    EmailComponentId = email.Id
+                    EmailComponentId = email.ComponentId
                 };
                 email.Paragraphs = await _mediator.Send(getEmailParagraphsQuery);
             }
@@ -62,7 +62,7 @@ namespace Seng.Game.Business.RequestHandlers
 
             var getRecipientComponentsQuery = new GetRecipientComponentsQuery
             {
-                EmailModuleId = emailModule.Id
+                EmailModuleId = emailModule.ModuleId
             };
             IEnumerable<RecipientComponent> recipientComponents = await _mediator.Send(getRecipientComponentsQuery);
             emailModule.Recipients = recipientComponents.Where(c => c.Active);
@@ -71,7 +71,7 @@ namespace Seng.Game.Business.RequestHandlers
             {
                 var getParagraphComponents = new GetNewEmailParagraphComponentsQuery
                 {
-                    RecipientComponentId = recipient.Id
+                    RecipientComponentId = recipient.ComponentId
                 };
                 IEnumerable<NewEmailParagraphComponent> paragraphComponents = await _mediator.Send(getParagraphComponents);
                 recipient.FirstParagraphs = ComposeParagraphComponentsForest(paragraphComponents);
@@ -166,7 +166,7 @@ namespace Seng.Game.Business.RequestHandlers
 
             foreach (var paragraphComponent in paragraphComponents)
             {
-                bool hasChildren = childrenParagraphDict.TryGetValue(paragraphComponent.Id, out var children);
+                bool hasChildren = childrenParagraphDict.TryGetValue(paragraphComponent.ComponentId, out var children);
                 if (hasChildren)
                 {
                     paragraphComponent.ChildrenParagraphs = children;

@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Seng.Game.Business\Seng.Game.Business.csproj" />
     <ProjectReference Include="..\Seng.Common.Entities\Seng.Common.Entities.csproj" />
+    <ProjectReference Include="..\Seng.Web.Business\Seng.Web.Business.csproj" />
   </ItemGroup>
 
 </Project>

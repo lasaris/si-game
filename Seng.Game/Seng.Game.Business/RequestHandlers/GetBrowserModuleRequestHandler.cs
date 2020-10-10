@@ -41,7 +41,7 @@ namespace Seng.Game.Business.RequestHandlers
             {
                 var getWordsQuery = new GetWordsQuery
                 {
-                    SearchingMinigameComponentId = browserModule.SearchingMinigame.Id
+                    SearchingMinigameComponentId = browserModule.SearchingMinigame.ComponentId
                 };
                 browserModule.SearchingMinigame.Words = await _mediator.Send(getWordsQuery);
             }

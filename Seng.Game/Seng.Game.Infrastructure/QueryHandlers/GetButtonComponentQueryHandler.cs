@@ -14,11 +14,10 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     class GetButtonComponentQueryHandler : IQueryHandler<GetButtonComponentQuery, ButtonComponent>
     {
         private const string SqlQuery = @"SELECT
-                                    Id,
                                     Text,
                                     ComponentId
                                     FROM [component.ButtonComponent]
-                                    WHERE Id = @ButtonComponentId;";
+                                    WHERE ComponentId = @ButtonComponentId;";
 
         private IDbConnectionCreator _dbConnectionCreator;
 

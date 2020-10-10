@@ -13,7 +13,6 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     class GetOptionComponentQueryHandler : IQueryHandler<GetOptionComponentQuery, IEnumerable<OptionComponent>>
     {
         private const string SqlQuery = @"SELECT
-                                        Id,
                                         ComponentId,
                                         Text,
                                         QuestionComponentId

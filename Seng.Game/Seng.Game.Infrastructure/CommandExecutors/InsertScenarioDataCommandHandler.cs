@@ -39,6 +39,18 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                 await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.SwitchIntermissionFrameActionCommand, command.GameDbContext.SwitchIntermissionFrameActions, dbConnection);
                 await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.QuestionComponentCommand, command.GameDbContext.QuestionComponents, dbConnection);
                 await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.OptionComponentCommand, command.GameDbContext.OptionComponents, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.CommonGameDataCommand, command.GameDbContext.CommonGameData, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.EmailModuleCommand, command.GameDbContext.EmailModules, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.BrowserModuleCommand, command.GameDbContext.BrowserModules, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.SearchingMinigameComponentCommand, command.GameDbContext.SearchingMinigameComponents, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.WordComponentCommand, command.GameDbContext.WordComponents, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.EmailComponentCommand, command.GameDbContext.EmailComponents, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.EmailComponentParagraphCommand, command.GameDbContext.EmailComponentParagraphs, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.NewEmailParagraphComponentCommand, command.GameDbContext.NewEmailParagraphComponents, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.RecipientComponentCommand, command.GameDbContext.RecipientComponents, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.UpdateMainVisibleModuleActionCommand, command.GameDbContext.UpdateMainVisibleModuleActions, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.AddRecipientToNewEmailActionCommand, command.GameDbContext.AddRecipientToNewEmailActions, dbConnection);
+                await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.SendEmailToPlayerActionCommand, command.GameDbContext.SendEmailToPlayerActions, dbConnection);
             }
             return new CommandBasicResult();
         }

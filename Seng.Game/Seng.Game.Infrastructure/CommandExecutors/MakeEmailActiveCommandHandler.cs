@@ -15,7 +15,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
         private const string SqlQuery = @"UPDATE [component.EmailComponent]
                                            SET Active = 1,
                                            Date = @Date
-                                         WHERE Id = @EmailComponentId";
+                                         WHERE ComponentId = @EmailComponentId";
 
         private IDbConnectionCreator _dbConnectionCreator;
 

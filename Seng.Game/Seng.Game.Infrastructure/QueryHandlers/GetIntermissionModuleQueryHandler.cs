@@ -16,7 +16,6 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     class GetIntermissionModuleQueryHandler : IQueryHandler<GetIntermissionModuleQuery, IntermissionModule>
     {
         private const string SqlQuery = @"SELECT
-                                        im.Id,
                                         im.ModuleId,
                                         im.CurrentlyVisibleFrameId,
                                         m.Id,

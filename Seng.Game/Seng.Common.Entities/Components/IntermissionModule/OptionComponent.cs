@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Seng.Common.Entities.Components.IntermissionModule
 {
-    public class OptionComponent : BasicEntity
+    public class OptionComponent
     {
         public int ComponentId { get; set; }
         public string Text { get; set; }

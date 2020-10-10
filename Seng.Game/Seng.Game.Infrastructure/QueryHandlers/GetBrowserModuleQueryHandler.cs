@@ -16,12 +16,10 @@ namespace Seng.Game.Infrastructure.QueryHandlers
     class GetBrowserModuleQueryHandler : IQueryHandler<GetBrowserModuleQuery, BrowserModule>
     {
         private const string SqlQuery = @"SELECT
-                                        bm.Id,
                                         bm.SearchingMinigameComponentId,
                                         bm.ModuleId,
                                         m.Id,
                                         m.IsVisible,
-                                        smc.Id,
                                         smc.Solution,
                                         smc.IsCompleted,
                                         smc.Height,
@@ -51,7 +49,7 @@ namespace Seng.Game.Infrastructure.QueryHandlers
                         browserModule.Module = module;
                         return browserModule;
                     },
-                    splitOn: "Id",
+                    splitOn: "Id,Solution",
                     param: query
                     );
                 return result == null ? new BrowserModule() : result.FirstOrDefault();

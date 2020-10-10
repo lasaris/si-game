@@ -35,7 +35,6 @@ namespace Seng.Game.Business.MapperProfile
                 .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.OptionComponents));
             CreateMap<OptionComponent, OptionComponentDto>();
             CreateMap<EmailModule, EmailModuleDto>()
-                .ForMember(dest => dest.EmailModuleId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.NewEmail, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.IsVisible, opt => opt.MapFrom(src => src.Module.IsVisible));
             CreateMap<EmailModule, NewEmailComponentDto>()

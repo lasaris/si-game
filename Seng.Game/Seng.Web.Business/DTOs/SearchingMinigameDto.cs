@@ -11,6 +11,6 @@ namespace Seng.Web.Business.DTOs
         public string Solution { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-        public IEnumerable<string> Words { get; set; } = new List<string>();
+        public IEnumerable<WordDto> Words { get; set; } = new List<WordDto>();
     }
 }
