@@ -10,5 +10,7 @@ namespace Seng.Web.Business.DTOs
     public class ActionBaseDto : IActionDto
     {
         public int ActionId { get; set; }
+
+        public int TimeFromTriggerMiliseconds { get; set; }
     }
 }

@@ -279,14 +279,6 @@ class ScenarioBuilder extends Component {
                   type: "string",
                   title: "New email subject"
                 },
-                newEmailButtons: {
-                  type: "array",
-                  title: "Button",
-                  maxItems: 1,
-                  items:{
-                    $ref: "#/definitions/button"
-                  }
-                },
                 sentEmails: {
                   type: "array",
                   items: {
@@ -383,8 +375,17 @@ class ScenarioBuilder extends Component {
                   type: "array",
                   title: "Words",
                   items: {
-                    type: "string",
-                    title: "Value"
+                    type: "object",
+                    title: "Word",
+                    properties: {
+                      value: {
+                        type: "string",
+                        title: "Value"
+                      },
+                      componentId: {
+                        $ref: "#/definitions/componentId"
+                      }
+                    }
                   }
                 }
               }
@@ -416,6 +417,12 @@ class ScenarioBuilder extends Component {
                   type: "array",
                   items: {
                     "$ref": "#/definitions/updateMainVisibleModuleAction"
+                  }
+                },
+                addRecipientToNewEmailActions: {
+                  type: "array",
+                  items: {
+                    "$ref": "#/definitions/addRecipientToNewEmailAction"
                   }
                 }
               }
@@ -456,13 +463,27 @@ class ScenarioBuilder extends Component {
             updateMainVisibleModuleAction: {
               type: "object",
               title: "Update main visible module action",
-              actionId: {
-                $ref: "#/definitions/actionId"
-              },
               properties: {
+                actionId: {
+                  $ref: "#/definitions/actionId"
+                },
                 newMainVisibleModuleId: {
                   type: "number",
                   title: "New main visible module id",
+                  enum: [""]
+                }
+              }
+            },
+            addRecipientToNewEmailAction: {
+              type: "object",
+              title: "Add recipient to new email",
+              properties: {
+                actionId: {
+                  $ref: "#/definitions/actionId"
+                },
+                RecipientComponentId: {
+                  type: "number",
+                  title: "Recipient component id",
                   enum: [""]
                 }
               }
@@ -536,6 +557,7 @@ class ScenarioBuilder extends Component {
         this.assignComponentIdToComponentList(this.findValues(formData, "sentEmails").flat(1));
         this.assignComponentIdToComponentList(this.findValues(formData, "receivedEmails").flat(1));
         this.assignComponentIdToComponentList(this.findValues(formData, "searchingMinigames").flat(1));
+        this.assignComponentIdToComponentList(this.findValues(formData, "words").flat(1));
 
         if(formData.intermissionModules !== undefined && formData.intermissionModules.length > 0){
           this.assignModuleIdToModule(formData.intermissionModules[0]);

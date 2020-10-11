@@ -8,11 +8,11 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
     {
         public const string SwitchIntermissionFrameActionCommand = @"INSERT INTO [action.SwitchIntermissionFramesAction] 
                                                                     (
-                                                                        GameActionId,
+                                                                        ActionId,
                                                                         NewIntermissionFrameComponentId
                                                                     )
                                                                     VALUES (
-                                                                        @GameActionId,
+                                                                        @ActionId,
                                                                         @NewIntermissionFrameComponentId
                                                                     );";
 

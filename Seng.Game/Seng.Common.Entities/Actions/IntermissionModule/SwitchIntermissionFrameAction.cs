@@ -6,7 +6,7 @@ namespace Seng.Common.Entities.Actions.IntermissionModule
 {
     public class SwitchIntermissionFrameAction
     {
-        public int GameActionId { get; set; }
+        public int ActionId { get; set; }
         public int NewIntermissionFrameComponentId { get; set; }
         public int IntermissionModuleId { get; set; }
     }

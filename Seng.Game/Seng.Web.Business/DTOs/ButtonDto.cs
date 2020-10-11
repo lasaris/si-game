@@ -12,5 +12,6 @@ namespace Seng.Web.Business.DTOs
         public IEnumerable<SendEmailToPlayerActionDto> SendEmailToPlayerActions { get; set; } = new List<SendEmailToPlayerActionDto>();
         public IEnumerable<SwitchIntermissionFrameActionDto> SwitchIntermissionFrameActions { get; set; } = new List<SwitchIntermissionFrameActionDto>();
         public IEnumerable<UpdateMainVisibleModuleActionDto> UpdateMainVisibleModuleActions { get; set; } = new List<UpdateMainVisibleModuleActionDto>();
+        public IEnumerable<AddRecipientToNewEmailActionDto> AddRecipientToNewEmailActions { get; set; } = new List<AddRecipientToNewEmailActionDto>();
     }
 }

@@ -1,0 +1,410 @@
+﻿
+using Seng.Common.Entities;
+using Seng.Common.Entities.Actions;
+using Seng.Common.Entities.Actions.EmailModule;
+using Seng.Common.Entities.Actions.IntermissionModule;
+using Seng.Common.Entities.Components;
+using Seng.Common.Entities.Components.BrowserModule;
+using Seng.Common.Entities.Components.EmailModule;
+using Seng.Common.Entities.Components.IntermissionModule;
+using Seng.Common.Entities.Modules;
+using Seng.Game.Business.DTOs.Components.IntermissionModule;
+using Seng.Web.Business.DTOs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Text;
+
+namespace Seng.Game.Infrastructure
+{
+    class WebToDesktopDataConverter
+    {
+        private ScenarioDataDto _scenarioDataDto;
+        private GameDbContext _gameDbContext { get; }
+
+        public WebToDesktopDataConverter(ScenarioDataDto scenarioDataDto)
+        {
+            _scenarioDataDto = scenarioDataDto;
+            _gameDbContext = new GameDbContext();
+            _gameDbContext.SwitchIntermissionFrameActions = new List<SwitchIntermissionFrameAction>();
+            _gameDbContext.Contexts = new List<Context>();
+            _gameDbContext.GameActions = new List<GameAction>();
+            _gameDbContext.OnClickOptions = new List<OnClickOption>();
+            _gameDbContext.IntermissionFrameComponents = new List<IntermissionFrameComponent>();
+            _gameDbContext.ButtonComponents = new List<ButtonComponent>();
+            _gameDbContext.Components = new List<Component>();
+            _gameDbContext.IntermissionModules = new List<IntermissionModule>();
+            _gameDbContext.Modules = new List<Module>();
+            _gameDbContext.QuestionComponents = new List<QuestionComponent>();
+            _gameDbContext.OptionComponents = new List<OptionComponent>();
+            _gameDbContext.CommonGameData = new List<CommonGameData>();
+            _gameDbContext.EmailModules = new List<EmailModule>();
+            _gameDbContext.BrowserModules = new List<BrowserModule>();
+            _gameDbContext.SearchingMinigameComponents = new List<SearchingMinigameComponent>();
+            _gameDbContext.WordComponents = new List<WordComponent>();
+            _gameDbContext.EmailComponents = new List<EmailComponent>();
+            _gameDbContext.EmailComponentParagraphs = new List<EmailComponentParagraph>();
+            _gameDbContext.NewEmailParagraphComponents = new List<NewEmailParagraphComponent>();
+            _gameDbContext.RecipientComponents = new List<RecipientComponent>();
+            _gameDbContext.UpdateMainVisibleModuleActions = new List<UpdateMainVIsibleModuleAction>();
+            _gameDbContext.AddRecipientToNewEmailActions = new List<AddRecipientToNewEmailAction>();
+            _gameDbContext.SendEmailToPlayerActions = new List<SendEmailToPlayerAction>();
+        }
+
+        public GameDbContext Convert()
+        {
+            _gameDbContext.CommonGameData = new List<CommonGameData>
+            {
+                new CommonGameData
+                {
+                    Id = 1,
+                    MainVisibleModuleId = _scenarioDataDto.VisibleModuleIdStart
+                }
+            };
+            foreach (var intermissionModule in _scenarioDataDto.IntermissionModules)
+            {
+                ConvertAndSaveIntermissionModule(intermissionModule);
+            }
+            foreach (var emailModule in _scenarioDataDto.EmailModules)
+            {
+                ConvertAndSaveEmailModule(emailModule);
+            }
+            foreach (var browserModule in _scenarioDataDto.BrowserModules)
+            {
+                ConvertAndSaveBrowserModule(browserModule);
+            }
+            return _gameDbContext;
+        }
+
+        private IntermissionModule ConvertAndSaveIntermissionModule(IntermissionModuleDto intermissionModuleDto)
+        {
+            var resultIntermissionModule = new IntermissionModule
+            {
+                CurrentlyVisibleFrameId = intermissionModuleDto.CurrentIntermissionFrameId,
+                ModuleId = intermissionModuleDto.ModuleId,
+                IntermissionFrameComponents = intermissionModuleDto.IntermissionFrames?.Select(intermissionFrame =>
+                    ConvertAndSaveIntermissionFrame(intermissionFrame, intermissionModuleDto.ModuleId))
+            };
+            _gameDbContext.IntermissionModules.Add(resultIntermissionModule);
+            _gameDbContext.Modules.Add(new Module
+            {
+                Id = resultIntermissionModule.ModuleId,
+                IsVisible = true
+            });
+            return resultIntermissionModule;
+        }
+
+        private EmailModule ConvertAndSaveEmailModule(EmailModuleDto emailModuleDto)
+        {
+            var resultEmailModule = new EmailModule
+            {
+                NewEmailSubject = emailModuleDto.NewEmailSubject,
+                ModuleId = emailModuleDto.ModuleId,
+                SentEmails = emailModuleDto.SentEmails?.Select(sentEmail => ConvertAndSaveEmailComponent(sentEmail, true)),
+                RegularEmails = emailModuleDto.ReceivedEmails?.Select(receivedEmail => ConvertAndSaveEmailComponent(receivedEmail, false)),
+                Recipients = emailModuleDto.Recipients?.Select(recipient => ConvertAndSaveRecipientComponent(recipient))
+            };
+            _gameDbContext.EmailModules.Add(resultEmailModule);
+            _gameDbContext.Modules.Add(new Module
+            {
+                Id = resultEmailModule.ModuleId,
+                IsVisible = true
+            });
+            return resultEmailModule;
+        }
+
+        private BrowserModule ConvertAndSaveBrowserModule(BrowserModuleDto browserModuleDto)
+        {
+            var resultBrowserModule = new BrowserModule
+            {
+                SearchingMinigame = browserModuleDto.SearchingMinigames.Select(searchingMinigame =>
+                    ConvertAndSaveSearchingMinigameComponent(searchingMinigame))
+                    .FirstOrDefault(),
+                SearchingMinigameComponentId = browserModuleDto.SearchingMinigames?.Select(searchingMinigame => searchingMinigame.ComponentId)
+                    .FirstOrDefault() ?? default,
+                ModuleId = browserModuleDto.ModuleId
+            };
+            _gameDbContext.BrowserModules.Add(resultBrowserModule);
+            _gameDbContext.Modules.Add(new Module
+            {
+                Id = resultBrowserModule.ModuleId,
+                IsVisible = true
+            });
+            return resultBrowserModule;
+        }
+
+        private IntermissionFrameComponent ConvertAndSaveIntermissionFrame(IntermissionFrameDto intermissionFrameDto, int parentModuleId)
+        {
+            var resultIntermissionFrame = new IntermissionFrameComponent
+            {
+                TextParagraph = intermissionFrameDto.Text,
+                ButtonComponent = intermissionFrameDto.Buttons?.Select(button => ConvertAndSaveButtonComponentWithActions(button))
+                    .FirstOrDefault(),
+                ButtonComponentId = intermissionFrameDto.Buttons?.Select(button => button.ComponentId).FirstOrDefault() ?? default,
+                ComponentId = intermissionFrameDto.ComponentId,
+                FrameType = intermissionFrameDto.FrameType,
+                IntermissionModuleId = parentModuleId,
+                QuestionComponent = intermissionFrameDto.Questions?.Select(question => ConvertAndSaveQuestionComponent(question)).FirstOrDefault(),
+                QuestionComponentId = intermissionFrameDto.Questions?.Select(question => question.ComponentId)
+                         .FirstOrDefault() ?? default
+            };
+
+            _gameDbContext.IntermissionFrameComponents.Add(resultIntermissionFrame);
+            _gameDbContext.Components.Add(new Component
+            {
+                Id = resultIntermissionFrame.ComponentId
+            });
+            return resultIntermissionFrame;
+        }
+
+        private QuestionComponent ConvertAndSaveQuestionComponent(QuestionDto questionDto)
+        {
+            if(questionDto == null)
+            {
+                return null;
+            };
+            Func<OptionDto, OptionComponent> convertAndSaveOptionComponent = option => 
+            {
+                var optionResult = new OptionComponent
+                {
+                    ComponentId = option.ComponentId,
+                    QuestionComponentId = questionDto.ComponentId
+                };
+                _gameDbContext.OptionComponents.Add(optionResult);
+                _gameDbContext.Components.Add(new Component 
+                {
+                    Id = optionResult.ComponentId
+                });
+                return optionResult;
+            };
+
+            var resultQuestion = new QuestionComponent
+            {
+                ComponentId = questionDto.ComponentId,
+                OptionComponents = questionDto.Options?.Select(option => convertAndSaveOptionComponent(option))
+            };
+
+            _gameDbContext.QuestionComponents.Add(resultQuestion);
+            _gameDbContext.Components.Add(new Component
+            {
+                Id = resultQuestion.ComponentId
+            });
+            return resultQuestion;
+        }
+
+        private EmailComponent ConvertAndSaveEmailComponent(EmailComponentDto emailDto, bool isSentEmail)
+        {
+            var resultEmail = new EmailComponent
+            {
+                Sender = emailDto.Sender,
+                Subject = emailDto.Subject,
+                IsSentEmail = isSentEmail,
+                Active = emailDto.Active,
+                ComponentId = emailDto.ComponentId,
+                ContentFooter = emailDto.ContentFooter,
+                ContentHeader = emailDto.ContentHeader,
+                Date = emailDto.Date,
+                Paragraphs = emailDto.EmailParagraphs?.Select(paragraph => new EmailComponentParagraph
+                {
+                    Content = paragraph,
+                    EmailComponentId = emailDto.ComponentId
+                })
+            };
+
+            _gameDbContext.EmailComponentParagraphs.AddRange(resultEmail.Paragraphs);
+            _gameDbContext.EmailComponents.Add(resultEmail);
+            _gameDbContext.Components.Add(new Component
+            {
+                Id = resultEmail.ComponentId
+            });
+            return resultEmail;
+        }
+
+        private RecipientComponent ConvertAndSaveRecipientComponent(RecipientComponentDto recipientDto)
+        {
+            var recipientResult = new RecipientComponent
+            {
+                Active = recipientDto.Active,
+                Address = recipientDto.Address,
+                ComponentId = recipientDto.ComponentId,
+                ContentFooter = recipientDto.ContentFooter,
+                ContentHeader = recipientDto.ContentHeader,
+                Description = recipientDto.Description,
+                ButtonComponent = recipientDto.Buttons?.Select(button => ConvertAndSaveButtonComponentWithActions(button)).FirstOrDefault(),
+                ButtonComponentId = recipientDto.Buttons?.Select(button => button.ComponentId)
+                        .FirstOrDefault() ?? default,
+                FirstParagraphs = recipientDto.FirstParagraphs?.Select(firstParagraph => ConvertNewEmailParagraph(firstParagraph, null, recipientDto.ComponentId))
+            };
+            _gameDbContext.RecipientComponents.Add(recipientResult);
+            _gameDbContext.Components.Add(new Component
+            {
+                Id = recipientResult.ComponentId
+            });
+            return recipientResult;
+        }
+
+        private NewEmailParagraphComponent ConvertNewEmailParagraph(NewEmailParagraphComponentDto webParagraph, int? parentParagraphId, int recipientParagraphId)
+        {
+            var resultEmailParagraph = new NewEmailParagraphComponent
+            {
+                ChildrenParagraphs = webParagraph?.ChildrenParagraphs?
+                    .Select(childrenParagraph => ConvertNewEmailParagraph(childrenParagraph, webParagraph.ComponentId, recipientParagraphId)),
+                ComponentId = webParagraph.ComponentId,
+                ParentParagraphId = parentParagraphId,
+                RecipientComponentId = recipientParagraphId,
+                Text = webParagraph.Text
+            };
+            _gameDbContext.NewEmailParagraphComponents.Add(resultEmailParagraph);
+            _gameDbContext.Components.Add(new Component
+            {
+                Id = resultEmailParagraph.ComponentId
+            });
+            return resultEmailParagraph;
+        }
+
+        private SearchingMinigameComponent ConvertAndSaveSearchingMinigameComponent(SearchingMinigameDto searchingMinigameDto)
+        {
+            Func<WordDto, WordComponent> convertAndSaveWordComponent = wordComponentDto =>
+            {
+                var resultWord = new WordComponent
+                {
+                    SearchingMinigameComponentId = searchingMinigameDto.ComponentId,
+                    ComponentId = wordComponentDto.ComponentId,
+                    Value = wordComponentDto.Value
+                };
+                _gameDbContext.WordComponents.Add(resultWord);
+                _gameDbContext.Components.Add(new Component
+                {
+                    Id = resultWord.ComponentId
+                });
+                return resultWord;
+            };
+
+            var resultSearchingMinigame = new SearchingMinigameComponent
+            {
+                Solution = searchingMinigameDto.Solution,
+                ComponentId = searchingMinigameDto.ComponentId,
+                Height = searchingMinigameDto.Height,
+                IsCompleted = false,
+                Width = searchingMinigameDto.Width,
+                Words = searchingMinigameDto.Words.Select(word => convertAndSaveWordComponent(word))
+            };
+
+            _gameDbContext.SearchingMinigameComponents.Add(resultSearchingMinigame);
+            _gameDbContext.Components.Add(new Component
+            {
+                Id = resultSearchingMinigame.ComponentId
+            });
+            return resultSearchingMinigame;
+        }
+
+        private ButtonComponent ConvertAndSaveButtonComponentWithActions(ButtonDto buttonDto)
+        {
+            if(buttonDto == null)
+            {
+                return null;
+            }
+            var resultButton = new ButtonComponent
+            {
+                ComponentId = buttonDto.ComponentId,
+                Text = buttonDto.ButtonText
+            };
+            _gameDbContext.ButtonComponents.Add(resultButton);
+            _gameDbContext.Components.Add(new Component
+            {
+                Id = buttonDto.ComponentId
+            });
+            ConvertAndSaveSwitchIntermissionFrameActions(buttonDto);
+            ConvertAndSaveUpdateMainVisibleModuleActions(buttonDto);
+            ConvertAndSaveAddRecipientToNewEmailActions(buttonDto);
+            ConvertAndSaveSendEmailToPlayerActions(buttonDto);
+            return resultButton;
+        }
+
+        private IEnumerable<SwitchIntermissionFrameAction> ConvertAndSaveSwitchIntermissionFrameActions(ButtonDto buttonDto)
+        {
+            if(buttonDto == null || buttonDto.SwitchIntermissionFrameActions == null)
+            {
+                return null;
+            }
+            var resultActions = buttonDto.SwitchIntermissionFrameActions.Select(action => new SwitchIntermissionFrameAction
+            {
+                ActionId = action.ActionId,
+                IntermissionModuleId = action.IntermissionModuleId,
+                NewIntermissionFrameComponentId = action.NewIntermissionFrame
+            });
+            _gameDbContext.SwitchIntermissionFrameActions.AddRange(resultActions);
+            _gameDbContext.GameActions.AddRange(buttonDto.SwitchIntermissionFrameActions.Select(action => new GameAction
+            {
+                Id = action.ActionId,
+                TimeFromTrigger = action.ActionId,
+                Type = "SwitchIntermissionFrame"
+            }));
+            return resultActions;
+        }
+
+        private IEnumerable<UpdateMainVIsibleModuleAction> ConvertAndSaveUpdateMainVisibleModuleActions(ButtonDto buttonDto)
+        {
+            if (buttonDto == null || buttonDto.UpdateMainVisibleModuleActions == null)
+            {
+                return null;
+            }
+            var resultActions = buttonDto.UpdateMainVisibleModuleActions.Select(action => new UpdateMainVIsibleModuleAction
+            {
+                ActionId = action.ActionId,
+                NewMainVisibleModuleId = action.NewMainVisibleModuleId
+            });
+            _gameDbContext.UpdateMainVisibleModuleActions.AddRange(resultActions);
+            _gameDbContext.GameActions.AddRange(buttonDto.UpdateMainVisibleModuleActions.Select(action => new GameAction
+            {
+                Id = action.ActionId,
+                TimeFromTrigger = action.ActionId,
+                Type = "UpdateMainVisibleModuleId"
+            }));
+            return resultActions;
+        }
+
+        private IEnumerable<AddRecipientToNewEmailAction> ConvertAndSaveAddRecipientToNewEmailActions(ButtonDto buttonDto)
+        {
+            if (buttonDto == null || buttonDto.AddRecipientToNewEmailActions == null)
+            {
+                return null;
+            }
+            var resultActions = buttonDto.AddRecipientToNewEmailActions.Select(action => new AddRecipientToNewEmailAction
+            {
+                ActionId = action.ActionId,
+                RecipientComponentId = action.RecipientComponentId
+            });
+            _gameDbContext.AddRecipientToNewEmailActions.AddRange(resultActions);
+            _gameDbContext.GameActions.AddRange(buttonDto.AddRecipientToNewEmailActions.Select(action => new GameAction
+            {
+                Id = action.ActionId,
+                TimeFromTrigger = action.ActionId,
+                Type = "AddRecipientToNewEmail"
+            }));
+            return resultActions;
+        }
+
+        private IEnumerable<SendEmailToPlayerAction> ConvertAndSaveSendEmailToPlayerActions(ButtonDto buttonDto)
+        {
+            if (buttonDto == null || buttonDto.SendEmailToPlayerActions == null)
+            {
+                return null;
+            }
+            var resultActions = buttonDto.SendEmailToPlayerActions.Select(action => new SendEmailToPlayerAction
+            {
+                ActionId = action.ActionId,
+                EmailComponentId = action.EmailComponentId
+            });
+            _gameDbContext.SendEmailToPlayerActions.AddRange(resultActions);
+            _gameDbContext.GameActions.AddRange(buttonDto.SendEmailToPlayerActions.Select(action => new GameAction
+            {
+                Id = action.ActionId,
+                TimeFromTrigger = action.ActionId,
+                Type = "SendEmailToPlayer"
+            }));
+            return resultActions;
+        }
+    }
+}

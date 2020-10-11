@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Seng.Web.Business.DTOs
 {
-    public class EmailDto : ComponentBaseDto
+    public class EmailComponentDto : ComponentBaseDto
     {
         public string Sender { get; set; }
         public string Subject { get; set; }
