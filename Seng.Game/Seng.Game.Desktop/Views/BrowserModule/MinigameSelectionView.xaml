@@ -52,12 +52,13 @@
 
         <Button Grid.Row="3"
                 Grid.Column="1"
-                Style="{StaticResource MinigameButtonStyle}">
+                Style="{StaticResource MinigameButtonStyle}"
+                Command="{Binding OpenUnlockManafloidsMinigameCommand, Mode=OneWay}">
             <Button.Content>
                 <DockPanel>
                     <Image DockPanel.Dock="Left"
-                           Source="pack://application:,,,/Resources/Images/maintenance.png" />
-                    <TextBlock Text="In production"
+                           Source="pack://application:,,,/Resources/Images/loupe.png" />
+                    <TextBlock Text="Unlock Manafloids"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center" />
                 </DockPanel>

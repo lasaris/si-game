@@ -31,6 +31,7 @@ namespace Seng.Game.Desktop
 			containerRegistry.RegisterForNavigation<BrowserModuleView>();
 			containerRegistry.RegisterForNavigation<MinigameSelectionView>();
 			containerRegistry.RegisterForNavigation<SearchingMinigameView>();
+			containerRegistry.RegisterForNavigation<UnllockManafloidsMinigameView>();
 		}
 
 		/// <summary>
