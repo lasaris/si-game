@@ -335,12 +335,8 @@ namespace Seng.Game.Infrastructure
                 NewIntermissionFrameComponentId = action.NewIntermissionFrame
             });
             _gameDbContext.SwitchIntermissionFrameActions.AddRange(resultActions);
-            _gameDbContext.GameActions.AddRange(buttonDto.SwitchIntermissionFrameActions.Select(action => new GameAction
-            {
-                Id = action.ActionId,
-                TimeFromTrigger = action.ActionId,
-                Type = "SwitchIntermissionFrame"
-            }));
+
+            SaveGameAdditionalData("SwitchIntermissionFrame", buttonDto.ComponentId, buttonDto.SwitchIntermissionFrameActions);
             return resultActions;
         }
 
@@ -356,12 +352,9 @@ namespace Seng.Game.Infrastructure
                 NewMainVisibleModuleId = action.NewMainVisibleModuleId
             });
             _gameDbContext.UpdateMainVisibleModuleActions.AddRange(resultActions);
-            _gameDbContext.GameActions.AddRange(buttonDto.UpdateMainVisibleModuleActions.Select(action => new GameAction
-            {
-                Id = action.ActionId,
-                TimeFromTrigger = action.ActionId,
-                Type = "UpdateMainVisibleModuleId"
-            }));
+
+            SaveGameAdditionalData("UpdateMainVisibleModuleId", buttonDto.ComponentId, buttonDto.SwitchIntermissionFrameActions);
+
             return resultActions;
         }
 
@@ -377,12 +370,9 @@ namespace Seng.Game.Infrastructure
                 RecipientComponentId = action.RecipientComponentId
             });
             _gameDbContext.AddRecipientToNewEmailActions.AddRange(resultActions);
-            _gameDbContext.GameActions.AddRange(buttonDto.AddRecipientToNewEmailActions.Select(action => new GameAction
-            {
-                Id = action.ActionId,
-                TimeFromTrigger = action.ActionId,
-                Type = "AddRecipientToNewEmail"
-            }));
+
+            SaveGameAdditionalData("AddRecipientToNewEmail", buttonDto.ComponentId, buttonDto.SwitchIntermissionFrameActions);
+
             return resultActions;
         }
 
@@ -398,13 +388,49 @@ namespace Seng.Game.Infrastructure
                 EmailComponentId = action.EmailComponentId
             });
             _gameDbContext.SendEmailToPlayerActions.AddRange(resultActions);
-            _gameDbContext.GameActions.AddRange(buttonDto.SendEmailToPlayerActions.Select(action => new GameAction
+
+            SaveGameAdditionalData("SendEmailToPlayer", buttonDto.ComponentId, buttonDto.SwitchIntermissionFrameActions);
+
+            return resultActions;
+        }
+
+        private void SaveGameAdditionalData(string actionType, int buttonComponentId, IEnumerable<ActionBaseDto> actions)
+        {
+            _gameDbContext.GameActions.AddRange(actions.Select(action => new GameAction
             {
                 Id = action.ActionId,
-                TimeFromTrigger = action.ActionId,
-                Type = "SendEmailToPlayer"
+                TimeFromTrigger = action.TimeFromTriggerMiliseconds,
+                Type = actionType
             }));
-            return resultActions;
+
+            var currentOnClickOptionId = 1;
+            foreach (var action in actions)
+            {
+                _gameDbContext.OnClickOptions.Add(new OnClickOption
+                {
+                    Id = currentOnClickOptionId,
+                    ComponentId = buttonComponentId,
+                    ResultActionId = action.ActionId,
+                    UseClickComponentConstraint = action.ClickedOtherComponents != null || action.ClickedOtherComponents.Any()
+                });
+
+                _gameDbContext.Contexts.AddRange(
+                    actions
+                    .SelectMany(action => action.ClickedOtherComponents.Select(clickedComponent => new Context
+                    {
+                        ClickedComponentId = clickedComponent,
+                        OnClickOptionId = currentOnClickOptionId
+                    })));
+                _gameDbContext.Contexts.AddRange(
+                    actions
+                    .SelectMany(action => action.AlreadyRunActionId.Select(alreadyRunActionId => new Context
+                    {
+                        AlreadyRunActionId = alreadyRunActionId,
+                        OnClickOptionId = currentOnClickOptionId
+                    })));
+
+                currentOnClickOptionId++;
+            }
         }
     }
 }

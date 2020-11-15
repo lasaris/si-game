@@ -6,8 +6,8 @@ namespace Seng.Game.Business
 {
     public class Configurations
     {
-        public const string ConnectionString = "Data Source=" + "SengTestDb.db";
-        public const string DbPath = "SengTestDb.db";
-        public const string StaticDbPath = "SengTestStaticDb.db";
+        public const string ConnectionString = "Data Source=" + @"./../../../../SengDb.db";
+        public const string DbPath = "./../../../../SengDb.db";
+        public const string StaticDbPath = "./../../../../SengStaticDb.db";
     }
 }

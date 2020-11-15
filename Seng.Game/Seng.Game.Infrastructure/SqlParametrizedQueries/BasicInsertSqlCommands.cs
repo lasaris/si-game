@@ -48,12 +48,14 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
                                                 (
                                                     Id,
                                                     ComponentId,
-                                                    ResultActionId
+                                                    ResultActionId,
+                                                    UseClickedComponentConstraint
                                                 )
                                                 VALUES (
                                                     @Id,
                                                     @ComponentId,
-                                                    @ResultActionId
+                                                    @ResultActionId,
+                                                    @UseClickedComponentConstraint
                                                 );";
 
         public const string IntermissionFrameComponentCommand = @"INSERT INTO [component.IntermissionFrameComponent] 

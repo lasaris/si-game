@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Seng.Common.Entities.Actions;
+using Seng.Game.Business.Commands;
 using Seng.Game.Business.Commands.ActionCommands;
 using Seng.Game.Business.DTOs.Modules;
 using Seng.Game.Business.GameActionRunners;
@@ -28,8 +29,6 @@ namespace Seng.Game.Business.RequestHandlers
                 { GameActionType.SwitchIntermissionFrame, new List<ModuleType>{ ModuleType.IntermissionModule } },
                 { GameActionType.UpdateMainVisibleModuleId, new List<ModuleType>{ ModuleType.IntermissionModule } },
                 { GameActionType.AddRecipientToNewEmail, new List<ModuleType>{ ModuleType.EmailModule} }
-                
-
             };
 
         public GetModuleRequestHandler(IMediator mediator, IGameActionFactory gameActionFactory)
@@ -51,6 +50,7 @@ namespace Seng.Game.Business.RequestHandlers
                     ClickedComponentIds = GetClickedComponentIds(request.Module).ToArray(),
                     ComponentId = request.TriggeredComponentId.Value
                 };
+
                 IEnumerable<GameAction> gameActionsToRun = await _mediator.Send(getActionQuery);
 
                 foreach (var gameAction in gameActionsToRun)
@@ -66,6 +66,13 @@ namespace Seng.Game.Business.RequestHandlers
                         await RunAction(gameAction, gameAction.TimeFromTrigger);
                     }
                 }
+
+                var logCommand = new InsertLogCommand()
+                {
+                    ClickedComponents = getActionQuery.ClickedComponentIds,
+                    ComponentId = getActionQuery.ComponentId
+                };
+                await _mediator.Send(logCommand);
             }
 
             await UpdateDataBasedOnModuleState(request.Module);

@@ -12,5 +12,9 @@ namespace Seng.Web.Business.DTOs
         public int ActionId { get; set; }
 
         public int TimeFromTriggerMiliseconds { get; set; }
+
+        public List<int> ClickedOtherComponents { get; set; }
+
+        public List<int> AlreadyRunActionId { get; set; }
     }
 }

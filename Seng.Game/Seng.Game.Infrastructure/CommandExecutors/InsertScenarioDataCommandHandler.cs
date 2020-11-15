@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Seng.Game.Business;
 using Seng.Game.Business.Commands;
 using Seng.Game.Infrastructure.BulkInsert;
 using Seng.Game.Infrastructure.Database;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;

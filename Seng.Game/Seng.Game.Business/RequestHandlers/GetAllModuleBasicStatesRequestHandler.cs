@@ -26,7 +26,9 @@ namespace Seng.Game.Business.RequestHandlers
 
         public async Task<AllGameModulesBasicInfoDto> Handle(GetAllModuleBasicStatesRequest request, CancellationToken cancellationToken)
         {
-            var getIntermissionModuleQuery = new GetIntermissionModuleStateQuery();
+            var getIntermissionModuleQuery = new GetIntermissionModuleStateQuery() 
+            {
+            };
             CommonGameData intermissionModule = await _mediator.Send(getIntermissionModuleQuery);
             var allGameModulesBasicInfo = new AllGameModulesBasicInfoDto();
             if (intermissionModule != null)
@@ -35,10 +37,10 @@ namespace Seng.Game.Business.RequestHandlers
                 {
                     IsVisible = true,
                     ModuleId = intermissionModule.MainVisibleModuleId,
-                    NewMainVisibleModuleId = intermissionModule.MainVisibleModuleId
+                    NewMainVisibleModuleId = intermissionModule.MainVisibleModuleId//TODO
                 };
             }
-            var getEmailModuleQuery = new GetEmailModuleQuery() { ModuleId = 3 };
+            var getEmailModuleQuery = new GetEmailModuleQuery() { ModuleId = 3 };//TODO
             EmailModule emailModule = await _mediator.Send(getEmailModuleQuery);
             if(emailModule != null)
             {
@@ -49,7 +51,7 @@ namespace Seng.Game.Business.RequestHandlers
                 };
             }
 
-            var getBrowserModuleQuery = new GetBrowserModuleQuery() { ModuleId = 4 } ;
+            var getBrowserModuleQuery = new GetBrowserModuleQuery() { ModuleId = 4 } ;//TODO
             BrowserModule browserModule = await _mediator.Send(getBrowserModuleQuery);
             if (browserModule != null)
             {

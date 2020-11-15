@@ -434,10 +434,19 @@ class ScenarioBuilder extends Component {
                 actionId: {
                   $ref: "#/definitions/actionId"
                 },
+                timeFromTriggerMiliseconds:{
+                  type: "number",
+                  Title: "Time from trigger in miliseconds"
+                },
                 emailComponentId: {
                   type: "number",
-                  title: "Email component id",
-                  enum: [""]
+                  title: "Email component id"
+                },
+                clickedOtherComponents:{
+                  $ref: "#/definitions/clickedOtherComponents"
+                },
+                alreadyRunActions:{
+                  $ref: "#/definitions/alreadyRunActionId"
                 }
               }
             },
@@ -448,15 +457,23 @@ class ScenarioBuilder extends Component {
                 actionId: {
                   $ref: "#/definitions/actionId"
                 },
+                timeFromTriggerMiliseconds:{
+                  type: "number",
+                  Title: "Time from trigger in miliseconds"
+                },
                 newIntermissionFrameId: {
                   type: "number",
                   title: "New intermission frame id",
-                  enum: [""]
                 },
                 intermissionModuleId: {
                   type: "number",
                   title: "Intermission module id",
-                  enum: [""]
+                },
+                clickedOtherComponents:{
+                  $ref: "#/definitions/clickedOtherComponents"
+                },
+                alreadyRunActions:{
+                  $ref: "#/definitions/alreadyRunActionId"
                 }
               }
             },
@@ -467,10 +484,19 @@ class ScenarioBuilder extends Component {
                 actionId: {
                   $ref: "#/definitions/actionId"
                 },
+                timeFromTriggerMiliseconds:{
+                  type: "number",
+                  Title: "Time from trigger in miliseconds"
+                },
                 newMainVisibleModuleId: {
                   type: "number",
                   title: "New main visible module id",
-                  enum: [""]
+                },
+                clickedOtherComponents:{
+                  $ref: "#/definitions/clickedOtherComponents"
+                },
+                alreadyRunActions:{
+                  $ref: "#/definitions/alreadyRunActionId"
                 }
               }
             },
@@ -481,11 +507,34 @@ class ScenarioBuilder extends Component {
                 actionId: {
                   $ref: "#/definitions/actionId"
                 },
-                RecipientComponentId: {
+                timeFromTriggerMiliseconds:{
+                  type: "number",
+                  Title: "Time from trigger in miliseconds"
+                },
+                recipientComponentId: {
                   type: "number",
                   title: "Recipient component id",
-                  enum: [""]
+                },
+                clickedOtherComponents:{
+                  $ref: "#/definitions/clickedOtherComponents"
+                },
+                alreadyRunActions:{
+                  $ref: "#/definitions/alreadyRunActionId"
                 }
+              }
+            },
+            clickedOtherComponents:{
+              type: "array",
+              items: {
+                type: "number",
+                title: "Clicked other components"
+              }
+            },
+            alreadyRunActionId:{
+              type: "array",
+              items: {
+                type: "number",
+                title: "Already run actions"
               }
             }
           }
@@ -545,6 +594,26 @@ class ScenarioBuilder extends Component {
         }
       }
 
+      assignActionIdToAction(action){
+        if(action === undefined || action === null){
+          return;
+        }
+        if(action.actionId === null || action.actionId === undefined){
+          action.actionId = this.state.currentIdData.currentFreeActionId;
+          this.state.currentIdData.currentFreeActionId++;
+        }
+      }
+
+      assignActionIdToActionList(listOfActions){
+        if(listOfActions === undefined || listOfActions === null){
+          return;
+        }
+        console.log(listOfActions);
+        for(let action of listOfActions){
+          this.assignActionIdToAction(action);
+        }
+      }
+
       onChange = (e) => {
         const formData = JSON.parse(JSON.stringify(e.formData));
         let schema = JSON.parse(JSON.stringify(this.state.schema));
@@ -558,6 +627,13 @@ class ScenarioBuilder extends Component {
         this.assignComponentIdToComponentList(this.findValues(formData, "receivedEmails").flat(1));
         this.assignComponentIdToComponentList(this.findValues(formData, "searchingMinigames").flat(1));
         this.assignComponentIdToComponentList(this.findValues(formData, "words").flat(1));
+
+        console.log("formData");
+        console.log(formData);
+        this.assignActionIdToActionList(this.findValues(formData, "sendEmailToPlayerActions").flat(1));
+        this.assignActionIdToActionList(this.findValues(formData, "updateMainVisibleModuleActions").flat(1));
+        this.assignActionIdToActionList(this.findValues(formData, "switchIntermissionFramesActions").flat(1));
+        this.assignActionIdToActionList(this.findValues(formData, "addRecipientToNewEmailActions").flat(1));
 
         if(formData.intermissionModules !== undefined && formData.intermissionModules.length > 0){
           this.assignModuleIdToModule(formData.intermissionModules[0]);
@@ -624,41 +700,29 @@ class ScenarioBuilder extends Component {
         const log = (type) => console.log.bind(console, type);
         const onSubmit = ({formData}, e) => 
         {
-          var xhr = new XMLHttpRequest();
-          xhr.addEventListener('load', () => {
-            this.setState({gameId: xhr.response})
-          })
-          xhr.open('POST', 'https://localhost:44316/scenario/add?password=' + this.state.password + '&gameId=' + this.state.gameId);
-          xhr.setRequestHeader("Content-Type", "application/json");
-          xhr.send(JSON.stringify({formData, schema: this.state.schema, currentIdData: this.state.currentIdData }));
+          console.log(formData);
+          const fileName = "file";
+          const json = JSON.stringify(formData);
+          console.log(json);
+          const blob = new Blob([json],{type:'application/json'});
+          const href = URL.createObjectURL(blob);
+          console.log(href);
+          const link = document.createElement('a');
+          link.href = href;
+          link.download = fileName + ".json";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         }
         
         return (
           <div style={{margin:128}}>
-            {this.state.firstScreen ? 
-              <div>
-                <div>
-                  <Form schema={this.state.loadGameSchema}
-                        uiSchema={this.state.uiPasswordSchema}
-                        onSubmit={this.submitGameLoadingForm.bind(this)}>
-                  </Form>
-                </div>
-                <div style={{"margin-top": 128}}>
-                  <Form schema={this.state.createNewGameSchema}
-                        uiSchema={this.state.uiPasswordSchema}
-                        onSubmit={this.submitGamePassword.bind(this)}>
-                  </Form>
-                </div>
-              </div>
-              : <Form schema={this.state.schema}
-              formData={this.state.formData}o
+              <Form schema={this.state.schema}
+              formData={this.state.formData}
               onChange={this.onChange.bind(this)}
               onSubmit={onSubmit.bind(this)}
               onError={log("errors")}
-              showErrorList={false}></Form>}
-              <div>
-                {this.state.gameId}
-              </div>
+              showErrorList={false}></Form>
           </div>
         );
     }
