@@ -51,7 +51,7 @@ namespace Seng.Game.Business.RequestHandlers
                 };
             }
 
-            var getBrowserModuleQuery = new GetBrowserModuleQuery() { ModuleId = 4 } ;//TODO
+            var getBrowserModuleQuery = new GetBrowserModuleQuery() { ModuleId = 2 } ;//TODO
             BrowserModule browserModule = await _mediator.Send(getBrowserModuleQuery);
             if (browserModule != null)
             {

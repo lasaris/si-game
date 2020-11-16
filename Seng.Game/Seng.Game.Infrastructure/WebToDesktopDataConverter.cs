@@ -22,6 +22,9 @@ namespace Seng.Game.Infrastructure
     {
         private ScenarioDataDto _scenarioDataDto;
         private GameDbContext _gameDbContext { get; }
+        private int currentOnClickOptionId = 1;
+        private int currentContextId = 1;
+        private int emailComponentParagraphId = 1;
 
         public WebToDesktopDataConverter(ScenarioDataDto scenarioDataDto)
         {
@@ -84,7 +87,7 @@ namespace Seng.Game.Infrastructure
                 CurrentlyVisibleFrameId = intermissionModuleDto.CurrentIntermissionFrameId,
                 ModuleId = intermissionModuleDto.ModuleId,
                 IntermissionFrameComponents = intermissionModuleDto.IntermissionFrames?.Select(intermissionFrame =>
-                    ConvertAndSaveIntermissionFrame(intermissionFrame, intermissionModuleDto.ModuleId))
+                    ConvertAndSaveIntermissionFrame(intermissionFrame, intermissionModuleDto.ModuleId)).ToList()
             };
             _gameDbContext.IntermissionModules.Add(resultIntermissionModule);
             _gameDbContext.Modules.Add(new Module
@@ -101,8 +104,8 @@ namespace Seng.Game.Infrastructure
             {
                 NewEmailSubject = emailModuleDto.NewEmailSubject,
                 ModuleId = emailModuleDto.ModuleId,
-                SentEmails = emailModuleDto.SentEmails?.Select(sentEmail => ConvertAndSaveEmailComponent(sentEmail, true)),
-                RegularEmails = emailModuleDto.ReceivedEmails?.Select(receivedEmail => ConvertAndSaveEmailComponent(receivedEmail, false)),
+                SentEmails = emailModuleDto.SentEmails?.Select(sentEmail => ConvertAndSaveEmailComponent(sentEmail, true)).ToList(),
+                RegularEmails = emailModuleDto.ReceivedEmails?.Select(receivedEmail => ConvertAndSaveEmailComponent(receivedEmail, false)).ToList(),
                 Recipients = emailModuleDto.Recipients?.Select(recipient => ConvertAndSaveRecipientComponent(recipient))
             };
             _gameDbContext.EmailModules.Add(resultEmailModule);
@@ -146,8 +149,8 @@ namespace Seng.Game.Infrastructure
                 FrameType = intermissionFrameDto.FrameType,
                 IntermissionModuleId = parentModuleId,
                 QuestionComponent = intermissionFrameDto.Questions?.Select(question => ConvertAndSaveQuestionComponent(question)).FirstOrDefault(),
-                QuestionComponentId = intermissionFrameDto.Questions?.Select(question => question.ComponentId)
-                         .FirstOrDefault() ?? default
+                QuestionComponentId = intermissionFrameDto.Questions?.Select(question => (int?)question.ComponentId)
+                         .FirstOrDefault()
             };
 
             _gameDbContext.IntermissionFrameComponents.Add(resultIntermissionFrame);
@@ -183,6 +186,7 @@ namespace Seng.Game.Infrastructure
             {
                 ComponentId = questionDto.ComponentId,
                 OptionComponents = questionDto.Options?.Select(option => convertAndSaveOptionComponent(option))
+                    .ToList()
             };
 
             _gameDbContext.QuestionComponents.Add(resultQuestion);
@@ -207,9 +211,11 @@ namespace Seng.Game.Infrastructure
                 Date = emailDto.Date,
                 Paragraphs = emailDto.EmailParagraphs?.Select(paragraph => new EmailComponentParagraph
                 {
+                    Id = emailComponentParagraphId++,
                     Content = paragraph,
                     EmailComponentId = emailDto.ComponentId
-                })
+                }).ToList(),
+                EmailModuleId = emailDto.ComponentId
             };
 
             _gameDbContext.EmailComponentParagraphs.AddRange(resultEmail.Paragraphs);
@@ -235,6 +241,7 @@ namespace Seng.Game.Infrastructure
                 ButtonComponentId = recipientDto.Buttons?.Select(button => button.ComponentId)
                         .FirstOrDefault() ?? default,
                 FirstParagraphs = recipientDto.FirstParagraphs?.Select(firstParagraph => ConvertNewEmailParagraph(firstParagraph, null, recipientDto.ComponentId))
+                    .ToList()
             };
             _gameDbContext.RecipientComponents.Add(recipientResult);
             _gameDbContext.Components.Add(new Component
@@ -249,7 +256,8 @@ namespace Seng.Game.Infrastructure
             var resultEmailParagraph = new NewEmailParagraphComponent
             {
                 ChildrenParagraphs = webParagraph?.ChildrenParagraphs?
-                    .Select(childrenParagraph => ConvertNewEmailParagraph(childrenParagraph, webParagraph.ComponentId, recipientParagraphId)),
+                    .Select(childrenParagraph => ConvertNewEmailParagraph(childrenParagraph, webParagraph.ComponentId, recipientParagraphId))
+                    .ToList(),
                 ComponentId = webParagraph.ComponentId,
                 ParentParagraphId = parentParagraphId,
                 RecipientComponentId = recipientParagraphId,
@@ -324,19 +332,20 @@ namespace Seng.Game.Infrastructure
 
         private IEnumerable<SwitchIntermissionFrameAction> ConvertAndSaveSwitchIntermissionFrameActions(ButtonDto buttonDto)
         {
-            if(buttonDto == null || buttonDto.SwitchIntermissionFrameActions == null)
+            if(buttonDto == null || buttonDto.SwitchIntermissionFramesActions == null)
             {
                 return null;
             }
-            var resultActions = buttonDto.SwitchIntermissionFrameActions.Select(action => new SwitchIntermissionFrameAction
+            var resultActions = buttonDto.SwitchIntermissionFramesActions.Select(action => new SwitchIntermissionFrameAction
             {
                 ActionId = action.ActionId,
                 IntermissionModuleId = action.IntermissionModuleId,
+
                 NewIntermissionFrameComponentId = action.NewIntermissionFrame
-            });
+            }).ToList();
             _gameDbContext.SwitchIntermissionFrameActions.AddRange(resultActions);
 
-            SaveGameAdditionalData("SwitchIntermissionFrame", buttonDto.ComponentId, buttonDto.SwitchIntermissionFrameActions);
+            SaveGameAdditionalData("SwitchIntermissionFrame", buttonDto.ComponentId, buttonDto.SwitchIntermissionFramesActions);
             return resultActions;
         }
 
@@ -350,10 +359,10 @@ namespace Seng.Game.Infrastructure
             {
                 ActionId = action.ActionId,
                 NewMainVisibleModuleId = action.NewMainVisibleModuleId
-            });
+            }).ToList();
             _gameDbContext.UpdateMainVisibleModuleActions.AddRange(resultActions);
 
-            SaveGameAdditionalData("UpdateMainVisibleModuleId", buttonDto.ComponentId, buttonDto.SwitchIntermissionFrameActions);
+            SaveGameAdditionalData("UpdateMainVisibleModuleId", buttonDto.ComponentId, buttonDto.UpdateMainVisibleModuleActions);
 
             return resultActions;
         }
@@ -368,10 +377,10 @@ namespace Seng.Game.Infrastructure
             {
                 ActionId = action.ActionId,
                 RecipientComponentId = action.RecipientComponentId
-            });
+            }).ToList();
             _gameDbContext.AddRecipientToNewEmailActions.AddRange(resultActions);
 
-            SaveGameAdditionalData("AddRecipientToNewEmail", buttonDto.ComponentId, buttonDto.SwitchIntermissionFrameActions);
+            SaveGameAdditionalData("AddRecipientToNewEmail", buttonDto.ComponentId, buttonDto.AddRecipientToNewEmailActions);
 
             return resultActions;
         }
@@ -389,7 +398,7 @@ namespace Seng.Game.Infrastructure
             });
             _gameDbContext.SendEmailToPlayerActions.AddRange(resultActions);
 
-            SaveGameAdditionalData("SendEmailToPlayer", buttonDto.ComponentId, buttonDto.SwitchIntermissionFrameActions);
+            SaveGameAdditionalData("SendEmailToPlayer", buttonDto.ComponentId, buttonDto.SendEmailToPlayerActions);
 
             return resultActions;
         }
@@ -401,9 +410,8 @@ namespace Seng.Game.Infrastructure
                 Id = action.ActionId,
                 TimeFromTrigger = action.TimeFromTriggerMiliseconds,
                 Type = actionType
-            }));
+            }).ToList());
 
-            var currentOnClickOptionId = 1;
             foreach (var action in actions)
             {
                 _gameDbContext.OnClickOptions.Add(new OnClickOption
@@ -411,23 +419,29 @@ namespace Seng.Game.Infrastructure
                     Id = currentOnClickOptionId,
                     ComponentId = buttonComponentId,
                     ResultActionId = action.ActionId,
-                    UseClickComponentConstraint = action.ClickedOtherComponents != null || action.ClickedOtherComponents.Any()
+                    UseClickedComponentConstraint = action.ClickedOtherComponents != null && action.ClickedOtherComponents.Any()
                 });
 
-                _gameDbContext.Contexts.AddRange(
-                    actions
-                    .SelectMany(action => action.ClickedOtherComponents.Select(clickedComponent => new Context
-                    {
-                        ClickedComponentId = clickedComponent,
-                        OnClickOptionId = currentOnClickOptionId
-                    })));
-                _gameDbContext.Contexts.AddRange(
-                    actions
-                    .SelectMany(action => action.AlreadyRunActionId.Select(alreadyRunActionId => new Context
-                    {
-                        AlreadyRunActionId = alreadyRunActionId,
-                        OnClickOptionId = currentOnClickOptionId
-                    })));
+                if(action.ClickedOtherComponents != null)
+                {
+                    _gameDbContext.Contexts.AddRange(
+                        action.ClickedOtherComponents.Select(clickedComponent => new Context
+                        {
+                            Id = currentContextId++,
+                            ClickedComponentId = clickedComponent,
+                            OnClickOptionId = currentOnClickOptionId
+                        }).ToList());
+                }
+
+                if(action.AlreadyRunActionId != null)
+                {
+                    _gameDbContext.Contexts.AddRange(
+                        action.AlreadyRunActionId.Select(alreadyRunActionId => new Context
+                        {
+                            AlreadyRunActionId = alreadyRunActionId,
+                            OnClickOptionId = currentOnClickOptionId
+                        }).ToList());
+                }
 
                 currentOnClickOptionId++;
             }

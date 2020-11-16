@@ -38,10 +38,11 @@ namespace Seng.Game.Desktop.ViewModels
 		}
 		private void ExitApplicationCommandExecute()
 		{
-            //Things to be done before shutdown
+			//Things to be done before shutdown
 
-            //TODO: Move to backend
-            File.Delete(Configurations.DbPath);
+			//TODO: Move to backend
+			File.Copy(Configurations.DbPath, Configurations.DbResultsPath);
+			File.Delete(Configurations.DbPath);
             File.Copy(Configurations.StaticDbPath, Configurations.DbPath);
 
 			Application.Current.Shutdown();

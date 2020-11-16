@@ -134,15 +134,13 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
                                     );";
 
         public const string QuestionComponentCommand = @"INSERT INTO [component.QuestionComponent] (
-                                                            ComponentId,
-                                                            Text,
-                                                            Multichoice
-                                                        )
-                                                        VALUES (
-                                                            @ComponentId,
-                                                            @Text,
-                                                            @Multichoice
-                                                        );";
+                                                              ComponentId,
+                                                              Text
+                                                          )
+                                                          VALUES (
+                                                              @ComponentId,
+                                                              @Text
+                                                          );";
 
         public const string EmailModuleCommand = @"INSERT INTO [module.EmailModule] (
                                      ModuleId,

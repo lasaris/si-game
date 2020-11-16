@@ -8,6 +8,7 @@ using Seng.Common.Entities.Components.BrowserModule;
 using Seng.Common.Entities.Components.EmailModule;
 using Seng.Common.Entities.Components.IntermissionModule;
 using Seng.Common.Entities.Modules;
+using Seng.Game.Business;
 using Seng.Game.Business.DTOs.Components;
 using Seng.Game.Business.Queries;
 using Seng.Web.Business.DTOs;
@@ -27,7 +28,7 @@ namespace Seng.Game.Infrastructure.ApiClients
     {
         public async Task<GameDbContext> GetScenario(RetrieveScenarioFromServerQuery query, CancellationToken cancellationToken)
         {
-            const string fileScenario = "scenario.json";
+            const string fileScenario = Configurations.ScenarioConfigPath;
             var readedFileContent = await File.ReadAllTextAsync(fileScenario);
             return MapWebDataToContext(JsonConvert.DeserializeObject<ScenarioDataDto>(readedFileContent));
         }

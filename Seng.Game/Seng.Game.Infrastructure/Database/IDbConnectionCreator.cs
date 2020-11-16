@@ -10,6 +10,8 @@ namespace Seng.Game.Infrastructure.Database
     {
         IDbConnection CreateOpenConnection();
 
+        IDbConnection CreateOpenConnection(string connectionString);
+
         long GetLastInsertedRowId(IDbConnection dbConnection);
     }
 }

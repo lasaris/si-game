@@ -22,5 +22,7 @@ namespace Seng.Common.Entities.Components.EmailModule
         public bool IsSentEmail { get; set; }
 
         public bool Active { get; set; }
+
+        public int EmailModuleId { get; set; }
     }
 }

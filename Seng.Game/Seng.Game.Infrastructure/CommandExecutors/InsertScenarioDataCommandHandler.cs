@@ -28,7 +28,8 @@ namespace Seng.Game.Infrastructure.CommandExecutors
 
         public async Task<CommandBasicResult> Handle(InsertScenarioDataCommand command, CancellationToken cancellationToken)
         {
-            using(var dbConnection = _dbConnectionCreator.CreateOpenConnection())
+            File.Copy(Configurations.EmptyDbPath, Configurations.StaticDbPath, overwrite: true);
+            using(var dbConnection = _dbConnectionCreator.CreateOpenConnection(Configurations.StaticConnectionString))
             {
                 await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.ModuleCommand, command.GameDbContext.Modules, dbConnection);
                 await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.IntermissionModuleCommand, command.GameDbContext.IntermissionModules, dbConnection);
@@ -54,6 +55,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                 await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.AddRecipientToNewEmailActionCommand, command.GameDbContext.AddRecipientToNewEmailActions, dbConnection);
                 await _bulkInsertExecutor.ExecuteAsync(BasicInsertSqlCommands.SendEmailToPlayerActionCommand, command.GameDbContext.SendEmailToPlayerActions, dbConnection);
             }
+            File.Copy(Configurations.StaticDbPath, Configurations.DbPath, overwrite: true);
             return new CommandBasicResult();
         }
     }

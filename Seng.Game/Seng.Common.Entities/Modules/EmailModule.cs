@@ -19,5 +19,7 @@ namespace Seng.Common.Entities.Modules
         public IEnumerable<RecipientComponent> Recipients { get; set; }
 
         public string NewEmailSubject { get; set; }
+
+        public int? NewEmailButtonComponentId { get; set; }
     }
 }

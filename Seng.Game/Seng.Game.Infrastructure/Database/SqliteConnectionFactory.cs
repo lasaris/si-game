@@ -11,7 +11,12 @@ namespace Seng.Game.Infrastructure.Database
     {
         public IDbConnection CreateOpenConnection()
         {
-            IDbConnection connection = new SQLiteConnection(Configurations.ConnectionString);
+            return CreateOpenConnection(Configurations.ConnectionString);
+        }
+
+        public IDbConnection CreateOpenConnection(string connectionString)
+        {
+            IDbConnection connection = new SQLiteConnection(connectionString);
             connection.Open();
             return connection;
         }
