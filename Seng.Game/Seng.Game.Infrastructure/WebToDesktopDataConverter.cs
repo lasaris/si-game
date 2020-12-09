@@ -104,8 +104,8 @@ namespace Seng.Game.Infrastructure
             {
                 NewEmailSubject = emailModuleDto.NewEmailSubject,
                 ModuleId = emailModuleDto.ModuleId,
-                SentEmails = emailModuleDto.SentEmails?.Select(sentEmail => ConvertAndSaveEmailComponent(sentEmail, true)).ToList(),
-                RegularEmails = emailModuleDto.ReceivedEmails?.Select(receivedEmail => ConvertAndSaveEmailComponent(receivedEmail, false)).ToList(),
+                SentEmails = emailModuleDto.SentEmails?.Select(sentEmail => ConvertAndSaveEmailComponent(sentEmail, true, emailModuleDto.ModuleId)).ToList(),
+                RegularEmails = emailModuleDto.ReceivedEmails?.Select(receivedEmail => ConvertAndSaveEmailComponent(receivedEmail, false, emailModuleDto.ModuleId)).ToList(),
                 Recipients = emailModuleDto.Recipients?.Select(recipient => ConvertAndSaveRecipientComponent(recipient))
             };
             _gameDbContext.EmailModules.Add(resultEmailModule);
@@ -144,7 +144,7 @@ namespace Seng.Game.Infrastructure
                 TextParagraph = intermissionFrameDto.Text,
                 ButtonComponent = intermissionFrameDto.Buttons?.Select(button => ConvertAndSaveButtonComponentWithActions(button))
                     .FirstOrDefault(),
-                ButtonComponentId = intermissionFrameDto.Buttons?.Select(button => button.ComponentId).FirstOrDefault() ?? default,
+                ButtonComponentId = intermissionFrameDto.Buttons?.Select(button => (int?)button.ComponentId).FirstOrDefault(),
                 ComponentId = intermissionFrameDto.ComponentId,
                 FrameType = intermissionFrameDto.FrameType,
                 IntermissionModuleId = parentModuleId,
@@ -172,7 +172,8 @@ namespace Seng.Game.Infrastructure
                 var optionResult = new OptionComponent
                 {
                     ComponentId = option.ComponentId,
-                    QuestionComponentId = questionDto.ComponentId
+                    QuestionComponentId = questionDto.ComponentId,
+                    Text = option.Text
                 };
                 _gameDbContext.OptionComponents.Add(optionResult);
                 _gameDbContext.Components.Add(new Component 
@@ -185,6 +186,7 @@ namespace Seng.Game.Infrastructure
             var resultQuestion = new QuestionComponent
             {
                 ComponentId = questionDto.ComponentId,
+                Text = questionDto.Text,
                 OptionComponents = questionDto.Options?.Select(option => convertAndSaveOptionComponent(option))
                     .ToList()
             };
@@ -197,7 +199,7 @@ namespace Seng.Game.Infrastructure
             return resultQuestion;
         }
 
-        private EmailComponent ConvertAndSaveEmailComponent(EmailComponentDto emailDto, bool isSentEmail)
+        private EmailComponent ConvertAndSaveEmailComponent(EmailComponentDto emailDto, bool isSentEmail, int moduleId)
         {
             var resultEmail = new EmailComponent
             {
@@ -215,7 +217,7 @@ namespace Seng.Game.Infrastructure
                     Content = paragraph,
                     EmailComponentId = emailDto.ComponentId
                 }).ToList(),
-                EmailModuleId = emailDto.ComponentId
+                EmailModuleId = moduleId
             };
 
             _gameDbContext.EmailComponentParagraphs.AddRange(resultEmail.Paragraphs);
@@ -341,7 +343,7 @@ namespace Seng.Game.Infrastructure
                 ActionId = action.ActionId,
                 IntermissionModuleId = action.IntermissionModuleId,
 
-                NewIntermissionFrameComponentId = action.NewIntermissionFrame
+                NewIntermissionFrameComponentId = action.NewIntermissionFrameId
             }).ToList();
             _gameDbContext.SwitchIntermissionFrameActions.AddRange(resultActions);
 

@@ -12,7 +12,6 @@ namespace Seng.Game.Infrastructure.CommandExecutors
     class InsertLogCommandHandler : ICommandHandler<InsertLogCommand, bool>
     {
         private const string SqlQueryInsertLog = @"INSERT INTO [history.Log] (
-                                                      Id,
                                                       ComponentId
                                                   )
                                                   VALUES (
@@ -20,12 +19,10 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                                   );";
 
         private const string SqlQueryInsertClickedComponentsLog = @"INSERT INTO [history.ClickedComponentLog] (
-                                                                          Id,
                                                                           ClickedComponentId
                                                                       )
                                                                       VALUES (
-                                                                          @Id,
-                                                                          @ClickedComponentId
+                                                                          @ClickedComponents
                                                                       );";
         private readonly IDbConnectionCreator _dbConnectionCreator;
 
@@ -38,8 +35,8 @@ namespace Seng.Game.Infrastructure.CommandExecutors
         {
             using (var dbConnection = _dbConnectionCreator.CreateOpenConnection())
             {
-                int updateLogsNumber = await dbConnection.ExecuteAsync(SqlQueryInsertLog, command.ComponentId);
-                await dbConnection.ExecuteAsync(SqlQueryInsertClickedComponentsLog, command.ClickedComponents);
+                int updateLogsNumber = await dbConnection.ExecuteAsync(SqlQueryInsertLog, command);
+                await dbConnection.ExecuteAsync(SqlQueryInsertClickedComponentsLog, command);
                 return updateLogsNumber > 0;
             }
         }

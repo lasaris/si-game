@@ -22,7 +22,7 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                         WHERE EXISTS (SELECT a.ActionId 
                                                         FROM [action.SwitchIntermissionFramesAction] a 
                                                         WHERE a.ActionId = @GameActionId
-                                                        AND [module.IntermissionModule].Id = a.IntermissionModuleId);";
+                                                        AND [module.IntermissionModule].ModuleId = a.IntermissionModuleId);";
 
         private IDbConnectionCreator _dbConnectionCreator;
 

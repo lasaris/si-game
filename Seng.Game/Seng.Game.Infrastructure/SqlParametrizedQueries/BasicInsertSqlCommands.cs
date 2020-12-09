@@ -9,11 +9,13 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
         public const string SwitchIntermissionFrameActionCommand = @"INSERT INTO [action.SwitchIntermissionFramesAction] 
                                                                     (
                                                                         ActionId,
-                                                                        NewIntermissionFrameComponentId
+                                                                        NewIntermissionFrameComponentId,
+                                                                        IntermissionModuleId
                                                                     )
                                                                     VALUES (
                                                                         @ActionId,
-                                                                        @NewIntermissionFrameComponentId
+                                                                        @NewIntermissionFrameComponentId,
+                                                                        @IntermissionModuleId
                                                                     );";
 
         public const string ContextCommand = @"INSERT INTO [action.Context] 
@@ -44,19 +46,22 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
                                                 @Type
                                             );";
 
-        public const string OnClickOptionCommand = @"INSERT INTO [action.OnClickOption] 
-                                                (
-                                                    Id,
-                                                    ComponentId,
-                                                    ResultActionId,
-                                                    UseClickedComponentConstraint
-                                                )
-                                                VALUES (
-                                                    @Id,
-                                                    @ComponentId,
-                                                    @ResultActionId,
-                                                    @UseClickedComponentConstraint
-                                                );";
+        public const string OnClickOptionCommand = @"INSERT INTO [action.OnClickOption] (
+                                       Id,
+                                       ComponentId,
+                                       ResultActionId,
+                                       UseClickedComponentConstraint,
+                                       UseInLastConstraint,
+                                       UseInFirstConstraint
+                                   )
+                                   VALUES (
+                                       @Id,
+                                       @ComponentId,
+                                       @ResultActionId,
+                                       @UseClickedComponentConstraint,
+                                       @UseInLastConstraint,
+                                       @UseInFirstConstraint
+                                   );";
 
         public const string IntermissionFrameComponentCommand = @"INSERT INTO [component.IntermissionFrameComponent] 
                                                     (
@@ -64,14 +69,16 @@ namespace Seng.Game.Infrastructure.SqlParametrizedQueries
                                                         ButtonComponentId,
                                                         TextParagraph,
                                                         ComponentId,
-                                                        QuestionComponentId
+                                                        QuestionComponentId,
+                                                        FrameType
                                                     )
                                                     VALUES (
                                                         @IntermissionModuleId,
                                                         @ButtonComponentId,
                                                         @TextParagraph,
                                                         @ComponentId,
-                                                        @QuestionComponentId
+                                                        @QuestionComponentId,
+                                                        @FrameType
                                                     );";
 
         public const string ButtonComponentCommand = @"INSERT INTO [component.ButtonComponent] 

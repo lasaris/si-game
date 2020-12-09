@@ -8,7 +8,7 @@ namespace Seng.Web.Business.DTOs
 {
     public class SwitchIntermissionFrameActionDto : ActionBaseDto
     {
-        public int NewIntermissionFrame { get; set; }
+        public int NewIntermissionFrameId { get; set; }
         public int IntermissionModuleId { get; set; }
     }
 }

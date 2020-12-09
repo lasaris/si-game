@@ -111,7 +111,7 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void UpdateFrameContent()
 		{
-			CurrentFrame = intermissionModule.Frames.First(x => x.Id == currentVisibleIntermissionFrameId);
+			CurrentFrame = intermissionModule.Frames.First(x => x.ComponentId == currentVisibleIntermissionFrameId);
 			CurrentFrameType = (FrameType) Enum.Parse(typeof(FrameType), currentFrame.FrameType);
 		}
 

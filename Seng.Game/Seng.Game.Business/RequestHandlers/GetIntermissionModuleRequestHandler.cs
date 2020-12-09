@@ -65,6 +65,11 @@ namespace Seng.Game.Business.RequestHandlers
             };
             IntermissionModule intermissionModule = await _mediator.Send(getModuleQuery);
 
+            if (intermissionModule == null)
+            {
+                return null;
+            }
+
             var getIntermissionFramesQuery = new GetIntermissionFrameComponentsQuery
             {
                 IntermissionModuleId = intermissionModule.ModuleId
@@ -74,12 +79,15 @@ namespace Seng.Game.Business.RequestHandlers
 
             foreach (var intermissionFrame in intermissionFrames)
             {
-                var getButtonQuery = new GetButtonComponentQuery
+                if(intermissionFrame.ButtonComponentId != null)
                 {
-                    ButtonComponentId = intermissionFrame.ButtonComponentId
-                };
-                ButtonComponent buttonComponent = await _mediator.Send(getButtonQuery);
-                intermissionFrame.ButtonComponent = buttonComponent;
+                    var getButtonQuery = new GetButtonComponentQuery
+                    {
+                        ButtonComponentId = intermissionFrame.ButtonComponentId ?? default
+                    };
+                    ButtonComponent buttonComponent = await _mediator.Send(getButtonQuery);
+                    intermissionFrame.ButtonComponent = buttonComponent;
+                }
 
                 if (intermissionFrame.QuestionComponentId != null)
                 {

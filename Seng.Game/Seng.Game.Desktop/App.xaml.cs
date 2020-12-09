@@ -1,5 +1,7 @@
 ﻿using Prism.Ioc;
+using Seng.Game.Business;
 using Seng.Game.Desktop.Views;
+using System.IO;
 using System.Windows;
 
 namespace Seng.Game.Desktop
@@ -42,6 +44,10 @@ namespace Seng.Game.Desktop
 		{
 			Current.Resources["ThemeColor"] = GameTheme.GetBaseThemeColor();
 			Current.Resources["ThemeBackgroundColor"] = GameTheme.GetBaseThemeBackgroundColor();
+
+			//File.Copy(Configurations.DbPath, Configurations.DbResultsPath);
+			File.Delete(Configurations.DbPath);
+			File.Copy(Configurations.StaticDbPath, Configurations.DbPath);
 		}
 	}
 }
