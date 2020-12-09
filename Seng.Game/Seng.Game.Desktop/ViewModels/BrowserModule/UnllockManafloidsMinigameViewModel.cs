@@ -51,10 +51,18 @@ namespace Seng.Game.Desktop.ViewModels
 
         public DelegateCommand<Button> Number1OnButtonClick { get; set; }
 
+        public DelegateCommand ReturnFromSearchingCommand { get; set; }
+
+        private void ReturnFromSearchingCommandExecute()
+        {
+            RegionManager.RequestNavigate(Regions.BrowserRegion, Regions.MinigameSelectionView);
+        }
+
 
         public UnllockManafloidsMinigameViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
             : base(regionManager, eventAggregator, gameState)
         {
+            ReturnFromSearchingCommand = new DelegateCommand(ReturnFromSearchingCommandExecute);
 
             BrushList = new List<Brush> { Number1Brush, Number2Brush, Number3Brush, Number4Brush, Number5Brush,
                 Number6Brush, Number7Brush, Number8Brush, Number9Brush, Number10Brush };
@@ -102,6 +110,7 @@ namespace Seng.Game.Desktop.ViewModels
                 if (currentlyPressed == 10)
                 {
                     isFinishedSuccessfully = true;
+                    ReturnFromSearchingCommandExecute();
                 }
             }
         }
