@@ -21,7 +21,7 @@ using System.ComponentModel;
 
 namespace Seng.Game.Desktop.ViewModels
 {
-    public class UnllockManafloidsMinigameViewModel : BaseViewModel, INavigationAware, INotifyPropertyChanged
+    public class NumbersMinigameViewModel : BaseViewModel, INavigationAware, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
@@ -59,7 +59,7 @@ namespace Seng.Game.Desktop.ViewModels
         }
 
 
-        public UnllockManafloidsMinigameViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
+        public NumbersMinigameViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
             : base(regionManager, eventAggregator, gameState)
         {
             ReturnFromSearchingCommand = new DelegateCommand(ReturnFromSearchingCommandExecute);

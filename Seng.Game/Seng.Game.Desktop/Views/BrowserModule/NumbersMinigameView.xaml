@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Seng.Game.Desktop.Views.UnllockManafloidsMinigameView"
+﻿<UserControl x:Class="Seng.Game.Desktop.Views.NumbersMinigameView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
@@ -40,10 +40,10 @@
                 Style="{StaticResource ReturnBackButtonStyle}"
                 Command="{Binding ReturnFromSearchingCommand, Mode=OneWay}" />
 
-        <TextBlock Grid.Row="1" Grid.Column="2"
-                   Grid.ColumnSpan="3"
-                   Text="Unlock manafloid"
-                   FontSize="20"
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Grid.ColumnSpan="5"
+                   Text="Click numbers in order"
+                   FontSize="48"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />
 

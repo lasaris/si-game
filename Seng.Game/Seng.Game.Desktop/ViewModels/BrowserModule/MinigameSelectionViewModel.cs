@@ -24,7 +24,7 @@ namespace Seng.Game.Desktop.ViewModels
 
 		private void OpenUnlockManafloidsMinigameCommandExecute()
 		{
-			RegionManager.RequestNavigate(Regions.BrowserRegion, Regions.UnclockManaFloidsMinigameView);
+			RegionManager.RequestNavigate(Regions.BrowserRegion, Regions.NumbersMinigameView);
 		}
 	}
 }
