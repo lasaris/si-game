@@ -19,10 +19,12 @@ namespace Seng.Game.Infrastructure.CommandExecutors
                                                   );";
 
         private const string SqlQueryInsertClickedComponentsLog = @"INSERT INTO [history.ClickedComponentLog] (
-                                                                          ClickedComponentId
+                                                                          ClickedComponentId,
+                                                                          ComponentId
                                                                       )
                                                                       VALUES (
-                                                                          @ClickedComponents
+                                                                          @ClickedComponents,
+                                                                          @ComponentId
                                                                       );";
         private readonly IDbConnectionCreator _dbConnectionCreator;
 

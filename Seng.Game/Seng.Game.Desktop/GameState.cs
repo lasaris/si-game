@@ -75,6 +75,8 @@ namespace Seng.Game.Desktop
 			};
 
 			EmailModule = await Mediator.Send(emailRequest);
+
+			CheckAlertCollection(EmailModule);
 		}
 
 		public async Task UpdateBrowserModule(int? triggeredComponentId = null)
