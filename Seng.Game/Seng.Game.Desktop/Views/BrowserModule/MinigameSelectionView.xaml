@@ -67,14 +67,15 @@
 
         <Button Grid.Row="5"
                 Grid.Column="1"
-                Style="{StaticResource MinigameButtonStyle}">
+                Style="{StaticResource MinigameButtonStyle}"
+                Command="{Binding BubblesMinigameCommand, Mode=OneWay}">
             <Button.Content>
                 <DockPanel>
                     <Image DockPanel.Dock="Left"
-                           Source="pack://application:,,,/Resources/Images/maintenance.png" />
-                    <TextBlock Text="In production"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
+                           Source="pack://application:,,,/Resources/Images/loupe.png" />
+                    <TextBlock Text="Hello to bubbleeez"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
                 </DockPanel>
             </Button.Content>
         </Button>

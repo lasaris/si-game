@@ -9,12 +9,15 @@ namespace Seng.Game.Desktop.ViewModels
 	{
 		public DelegateCommand OpenSearchingMinigameCommand { get; set; }
 		public DelegateCommand OpenUnlockManafloidsMinigameCommand { get; set; }
+		public DelegateCommand BubblesMinigameCommand { get; set; }
+
 
 		public MinigameSelectionViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
 			: base(regionManager, eventAggregator, gameState)
 		{
 			OpenSearchingMinigameCommand = new DelegateCommand(OpenSearchingMinigameCommandExecute);
 			OpenUnlockManafloidsMinigameCommand = new DelegateCommand(OpenUnlockManafloidsMinigameCommandExecute);
+			BubblesMinigameCommand = new DelegateCommand(BubblesMinigameCommandExecute);
 		}
 
 		private void OpenSearchingMinigameCommandExecute()
@@ -25,6 +28,11 @@ namespace Seng.Game.Desktop.ViewModels
 		private void OpenUnlockManafloidsMinigameCommandExecute()
 		{
 			RegionManager.RequestNavigate(Regions.BrowserRegion, Regions.NumbersMinigameView);
+		}
+
+		private void BubblesMinigameCommandExecute()
+		{
+			RegionManager.RequestNavigate(Regions.BrowserRegion, Regions.BubleClickerView);
 		}
 	}
 }
