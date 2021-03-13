@@ -35,7 +35,7 @@
                 Command="{Binding ReturnFromSearchingCommand, Mode=OneWay}" />
 
         <TextBlock Grid.Row="1" Grid.Column="1"
-                   Text="Hello from the mudgressive side"
+                   Text="Click bellow to start the Game"
                    FontSize="48"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />

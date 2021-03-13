@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows.Threading;
+using System.Linq;
 
 namespace Seng.Game.Desktop.ViewModels
 {
@@ -28,19 +29,21 @@ namespace Seng.Game.Desktop.ViewModels
         public int RequiredScore { get; set; } = 20;
         public double growRate { get; set; } = 0.6;
         public Brush Brush { get; set; }
+        public int HP { get; set; } = 100;
 
         private Canvas MyCanvas { get; set; }
+        private const int Damage = 10;
+        private const int MaxCirleRadius = 70;
+        private const double Multiplier = 3.5;
 
         public Random Rand => new Random();
 
         public DelegateCommand ReturnFromSearchingCommand { get; set; }
-        public DelegateCommand ClickOnCanvas { get; set; }
 
         public BubleClickerViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
             : base(regionManager, eventAggregator, gameState)
         {
             ReturnFromSearchingCommand = new DelegateCommand(ReturnFromSearchingCommandExecute);
-            ClickOnCanvas = new DelegateCommand(ClickOnCanvasExecute);
 
             gameTimer.Tick += GameLoop;
             gameTimer.Interval = TimeSpan.FromMilliseconds(20);
@@ -55,20 +58,21 @@ namespace Seng.Game.Desktop.ViewModels
             if (MyCanvas != null)
                 GameLoop2();
         }
+        
+        private void GameLoopBreaker()
+        {
+            gameTimer.Stop();
+        }
 
         private void ReturnFromSearchingCommandExecute()
         {
+            GameLoopBreaker();
             RegionManager.RequestNavigate(Regions.BrowserRegion, Regions.MinigameSelectionView);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext) => false;
         public void OnNavigatedTo(NavigationContext navigationContext) { }
         public void OnNavigatedFrom(NavigationContext navigationContext) { }
-
-        public void ClickOnCanvasExecute()
-        {
-            MessageBox.Show("Hello, world!");
-        }
 
         private void GameLoop2()
         {
@@ -78,50 +82,83 @@ namespace Seng.Game.Desktop.ViewModels
             SpawnRate -= 2;
 
             if (SpawnRate < 1)
+                CreateNewBubble();
+
+            foreach (var child in MyCanvas.Children.OfType<Ellipse>())
             {
-                SpawnRate = CurrentSpawnRate;
+                child.Height += growRate;
+                child.Width += growRate;
+                child.RenderTransformOrigin = new Point(0.5, 0.5);
 
-                PosX = Rand.Next(50, (int) MyCanvas.ActualWidth - 50);
-                PosY = Rand.Next(50, (int) MyCanvas.ActualHeight - 50);
-
-                Ellipse circle = new Ellipse
+                if (child.Width >= MaxCirleRadius)
                 {
-                    Tag = "circle",
-                    Height = 10,
-                    Width = 10,
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 1,
-                    Fill = new SolidColorBrush(Color.FromRgb(
-                        (byte)Rand.Next(1, 255),
-                        (byte)Rand.Next(1, 255),
-                        (byte)Rand.Next(1, 255)
-                    ))
-                };
-
-                Canvas.SetLeft(circle, PosX);
-                Canvas.SetTop(circle, PosY);
-
-                MyCanvas.Children.Add(circle);
+                    removeElements.Add(child);
+                    HP -= Damage;
+                }
             }
+
+            if (HP > 1)
+                ((Rectangle)MyCanvas.Children[2]).Width = HP * Multiplier;
+            else
+            {
+                GameLoopBreaker();
+                MessageBox.Show("You have died!!!");
+            }
+
+            foreach (var ellipse in removeElements)
+                MyCanvas.Children.Remove(ellipse);
+            
+            
+        }
+        
+        private void CreateNewBubble()
+        {
+            SpawnRate = CurrentSpawnRate;
+
+            PosX = Rand.Next(MaxCirleRadius, (int) MyCanvas.ActualWidth - MaxCirleRadius);
+            PosY = Rand.Next(MaxCirleRadius, (int) MyCanvas.ActualHeight - MaxCirleRadius);
+
+            Ellipse circle = new Ellipse
+            {
+                Tag = "circle",
+                Height = 10,
+                Width = 10,
+                Stroke = Brushes.Black,
+                StrokeThickness = 1,
+                Fill = new SolidColorBrush(Color.FromRgb(
+                    (byte) Rand.Next(1, 255),
+                    (byte) Rand.Next(1, 255),
+                    (byte) Rand.Next(1, 255)
+                ))
+            };
+
+            Canvas.SetLeft(circle, PosX);
+            Canvas.SetTop(circle, PosY);
+
+            MyCanvas.Children.Add(circle);
         }
 
         public void OnLeftButtonClicked(object s, MouseButtonEventArgs e)
         {
             if (MyCanvas is null)
                 MyCanvas = (Canvas)s;
+
             // MessageBox.Show($" => {s} ");
+
             if (e.OriginalSource is Ellipse)
             {
-                // var sa mu nepaci viac ako toto :whatcat: ....
                 Ellipse circle = (Ellipse)e.OriginalSource;
 
                 ((Canvas)s).Children.Remove(circle);
 
                 Score += 1;
 
-                // GameLoop((Canvas)s);
+                if (Score == RequiredScore)
+                {
+                    GameLoopBreaker();
+                    MessageBox.Show("Congratulations, you have won! You can now leave from this app :)");
+                }
             }
-            // GameLoop2();
         }
     }
 }
