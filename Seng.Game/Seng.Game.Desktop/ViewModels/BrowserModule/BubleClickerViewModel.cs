@@ -106,9 +106,7 @@ namespace Seng.Game.Desktop.ViewModels
             }
 
             foreach (var ellipse in removeElements)
-                MyCanvas.Children.Remove(ellipse);
-            
-            
+                MyCanvas.Children.Remove(ellipse); 
         }
         
         private void CreateNewBubble()

@@ -35,6 +35,7 @@ namespace Seng.Game.Desktop
 			containerRegistry.RegisterForNavigation<SearchingMinigameView>();
 			containerRegistry.RegisterForNavigation<NumbersMinigameView>();
 			containerRegistry.RegisterForNavigation<BubleClickerView>();
+			containerRegistry.RegisterForNavigation<SneakMinigameView>();
 		}
 
 		/// <summary>

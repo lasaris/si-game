@@ -10,6 +10,7 @@ namespace Seng.Game.Desktop.ViewModels
 		public DelegateCommand OpenSearchingMinigameCommand { get; set; }
 		public DelegateCommand OpenUnlockManafloidsMinigameCommand { get; set; }
 		public DelegateCommand BubblesMinigameCommand { get; set; }
+		public DelegateCommand SneakMinigameCommand { get; set; }
 
 
 		public MinigameSelectionViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, GameState gameState)
@@ -18,6 +19,7 @@ namespace Seng.Game.Desktop.ViewModels
 			OpenSearchingMinigameCommand = new DelegateCommand(OpenSearchingMinigameCommandExecute);
 			OpenUnlockManafloidsMinigameCommand = new DelegateCommand(OpenUnlockManafloidsMinigameCommandExecute);
 			BubblesMinigameCommand = new DelegateCommand(BubblesMinigameCommandExecute);
+			SneakMinigameCommand = new DelegateCommand(SneakMinigameCommandExecute);
 		}
 
 		private void OpenSearchingMinigameCommandExecute()
@@ -33,6 +35,11 @@ namespace Seng.Game.Desktop.ViewModels
 		private void BubblesMinigameCommandExecute()
 		{
 			RegionManager.RequestNavigate(Regions.BrowserRegion, Regions.BubleClickerView);
+		}
+
+		private void SneakMinigameCommandExecute()
+		{
+			RegionManager.RequestNavigate(Regions.BrowserRegion, Regions.SneakMinigameView);
 		}
 	}
 }

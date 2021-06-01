@@ -46,6 +46,8 @@ namespace Seng.Game.Desktop
 		public static readonly Type NumbersMinigameType = typeof(NumbersMinigameView);
 		public static readonly string BubleClickerView = nameof(Views.BubleClickerView);
 		public static readonly Type BubleClickerType = typeof(BubleClickerView);
+		public static readonly string SneakMinigameView = nameof(Views.SneakMinigameView);
+		public static readonly Type SneakMinigameType = typeof(SneakMinigameView);
 
 
 		public static readonly string EmailModuleView = nameof(Views.EmailModuleView);
