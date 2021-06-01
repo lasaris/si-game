@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="Seng.Game.Desktop.Views.NumbersMinigameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:unlockManaFloidsminigame="clr-namespace:Seng.Game.Desktop.Helpers.BrowserModule.SearchingMinigame"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="{DynamicResource ThemeBackgroundColor}">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="../Styles/BrowserModule.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*" />
+            <RowDefinition Height="200*" />
+            <RowDefinition Height="200*" />
+            <RowDefinition Height="200*" />
+            <RowDefinition Height="200*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="200*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="0" Grid.Column="0"
+                Style="{StaticResource ReturnBackButtonStyle}"
+                Command="{Binding ReturnFromSearchingCommand, Mode=OneWay}" />
+
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Grid.ColumnSpan="5"
+                   Text="Click numbers in order"
+                   FontSize="48"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="2" Grid.Column="1">
+            <Button  x:Name="a1" FontSize="30.0"
+                Background="{Binding Number1Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                1
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="2" Grid.Column="2">
+            <Button  x:Name="a2" FontSize="30.0"
+                Background="{Binding Number2Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                2
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="2" Grid.Column="3">
+            <Button  x:Name="a3" FontSize="30.0"
+                Background="{Binding Number3Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                3
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="2" Grid.Column="4">
+
+            <Button x:Name="a4" FontSize="30.0"
+                Background="{Binding Number4Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                4
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="2" Grid.Column="5">
+
+            <Button  x:Name="a5" FontSize="30.0"
+                Background="{Binding Number5Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                5
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="3" Grid.Column="1">
+
+            <Button  x:Name="a6" FontSize="30.0"
+                Background="{Binding Number6Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                6
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="3" Grid.Column="2">
+            <Button  x:Name="a7" FontSize="30.0"
+                Background="{Binding Number7Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                7
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="3" Grid.Column="3">
+            <Button  x:Name="a8" FontSize="30.0"
+                Background="{Binding Number8Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                8
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="3" Grid.Column="4">
+            <Button  x:Name="a9" FontSize="30.0"
+                Background="{Binding Number9Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                9
+            </Button>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="3" Grid.Column="5">
+            <Button  x:Name="a10" FontSize="30.0"
+                Background="{Binding Number10Brush}"
+                Command="{Binding Number1OnButtonClick, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                10
+            </Button>
+        </Border>
+
+
+    </Grid>
+</UserControl>
